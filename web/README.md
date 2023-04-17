@@ -14,7 +14,7 @@
 - [] edição informações loja
 - [x] lista de universos ADM
 - [x] criação univeso
-- [] craição universo
+- [x] deletar universo
 - [] criação colaborador
 - [] edição colaborador
 - [x] lista colaboradores ADM

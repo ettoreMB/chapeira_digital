@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Layout from '@/layout'
 import { useRouter } from 'next/router'
 
@@ -12,18 +12,29 @@ import toast from '@/utils/toast'
 export default function Colaborador() {
   const router = useRouter()
   const { id } = router.query
-
+  const [carregando, setCarregando] = useState(true)
   const colaboradorRef = useRef<any>(null)
 
   const carregarColaborador = useCallback(async () => {
-    const colaborador = await ColaboradorService.buscarColaborador(id)
+    try {
+      const colaborador = await ColaboradorService.buscarColaborador(id)
 
-    colaboradorRef.current.setValoresInput(colaborador)
+      colaboradorRef.current.setValoresInput(colaborador)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setCarregando(false)
+    }
   }, [id])
 
   async function handleSubmit(colaborador: ColaboradorInputProps) {
     try {
       await ColaboradorService.editar(id, colaborador)
+      toast({
+        type: 'success',
+        text: `Colaborador ${colaborador.nome} editado com sucesso`,
+      })
+      router.back()
     } catch (error) {
       toast({ type: 'danger', text: 'Erro ao editar colaborador' })
     }
@@ -38,7 +49,7 @@ export default function Colaborador() {
   }, [carregarColaborador, router.isReady])
 
   return (
-    <Layout botaoVoltar>
+    <Layout botaoVoltar admin carregando={carregando}>
       <ColaboradorForm
         titulo="Editar Colaborador"
         ref={colaboradorRef}
