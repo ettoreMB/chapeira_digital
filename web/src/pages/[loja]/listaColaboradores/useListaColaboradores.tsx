@@ -52,7 +52,6 @@ export default function UseListaColaboradores() {
 
   const loadColaboradores = useCallback(async () => {
     try {
-      // setCarregando(true)
       const colaboradores = await ColaboradorService.listarColaboradores(
         loja,
         universoId,
@@ -112,7 +111,12 @@ export default function UseListaColaboradores() {
     setModalVisivel(false)
   }
   async function handleDelete() {
-    await ColaboradorService.deletar(idParadeletar)
+    try {
+      await ColaboradorService.deletar(idParadeletar)
+      toast({ type: 'success', text: 'Colaborador desativado com sucesso' })
+    } catch (error) {
+      toast({ type: 'danger', text: 'Erro ao desativar colaborador' })
+    }
   }
 
   useEffect(() => {

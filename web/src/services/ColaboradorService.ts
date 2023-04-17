@@ -9,6 +9,7 @@ export interface ColaboradorInputProps {
   endereco: string
   telefone: string
   universo: number
+  universoId: number
   funcao: string
   empresa: string
   administrador: 'Sim' | 'Nao'
@@ -59,7 +60,7 @@ class UniversoService {
       tipo: colaborador.tipo,
       endereco: colaborador.endereco,
       telefone: colaborador.telefone,
-      universoId: colaborador.universo,
+      universoId: colaborador.universoId,
       funcao: colaborador.funcao,
       empresa: colaborador.empresa,
       administrador: colaborador.administrador,
@@ -74,14 +75,13 @@ class UniversoService {
     id: string | string[] | undefined,
     colaborador: ColaboradorInputProps,
   ) {
-    await api.put('/colaboradores/criar', {
-      id,
+    await this.httpClient.put(`/colaboradores/editar/${id}`, {
       nome: colaborador.nome,
       email: colaborador.email,
       tipo: colaborador.tipo,
       endereco: colaborador.endereco,
       telefone: colaborador.telefone,
-      universoId: colaborador.universo,
+      universoId: colaborador.universoId,
       funcao: colaborador.funcao,
       empresa: colaborador.empresa,
       administrador: colaborador.administrador,
@@ -97,7 +97,7 @@ class UniversoService {
   }
 
   async deletar(id: number) {
-    await this.httpClient.delete(`/colaboradores/${id}`)
+    await this.httpClient.put(`/colaboradores/desativar/${id}`)
   }
 
   async auth(email: string, senha: string) {

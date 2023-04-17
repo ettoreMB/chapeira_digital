@@ -13,14 +13,25 @@ import { randomUUID } from 'crypto'
 
 export class ColaboradoresRepositoryInMemory implements IColaboradorRepository {
   items: tb_Colaboradores[] = []
-  async buscarPorId(id: number) {
+  async buscarPorId(id: number): Promise<
+    | (tb_Colaboradores & {
+        tb_universos: { Id: number; Universo: string } | null
+      })
+    | null
+  > {
     const colaborador = this.items.find((colaborador) => colaborador.Id === id)
 
     if (!colaborador) {
       return null
     }
-
-    return colaborador
+    const newColaborador = {
+      ...colaborador,
+      tb_universos: {
+        Id: 0,
+        Universo: '',
+      },
+    }
+    return newColaborador
   }
 
   async buscarPorEmail(email: string): Promise<tb_Colaboradores | null> {

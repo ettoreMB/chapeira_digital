@@ -30,10 +30,12 @@ export default function Colaborador() {
   async function handleSubmit(colaborador: ColaboradorInputProps) {
     try {
       await ColaboradorService.editar(id, colaborador)
+
       toast({
         type: 'success',
         text: `Colaborador ${colaborador.nome} editado com sucesso`,
       })
+
       router.back()
     } catch (error) {
       toast({ type: 'danger', text: 'Erro ao editar colaborador' })

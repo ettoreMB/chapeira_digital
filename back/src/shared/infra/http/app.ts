@@ -66,7 +66,7 @@ app.setErrorHandler((error: any, _, reply) => {
       .send({ message: 'Validation erorr.', issue: error.format() })
   }
   if (env.NODE_ENV === 'production') {
-    console.log(error)
+    // logger
   } else {
     console.log(error)
   }

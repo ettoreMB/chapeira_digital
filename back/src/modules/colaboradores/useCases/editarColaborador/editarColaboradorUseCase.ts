@@ -7,15 +7,14 @@ interface ColaboradorRequestProps {
   admin: string
   universoId: number
   brigadista: string
-  formacao: string
-  admissao: string
+  formacao: string | null
+  admissao: string | null
   email: string
-  telefone: string
-  funcao: string
-  endereco: string
-  cidade: string
-  uf: string
-  observacao: string
+  telefone: string | null
+  funcao: string | null
+  endereco: string | null
+  empresa: string | null
+  observacao: string | null
 }
 
 export class EditarColaboradorUseCase {
@@ -38,10 +37,15 @@ export class EditarColaboradorUseCase {
     colaborador.Telefone = data.telefone
     colaborador.Funcao = data.funcao
     colaborador.Endereco = data.endereco
-    colaborador.Cidade = data.cidade
-    colaborador.UF = data.uf
     colaborador.Observacao = data.observacao
+    colaborador.Empresa = data.empresa
 
-    await this.colabotadoresRepository.editar(colaborador)
+    try {
+      await this.colabotadoresRepository.editar(colaborador)
+
+      return colaborador
+    } catch (error) {
+      throw new AppErrors('Erro ao editar usuário')
+    }
   }
 }

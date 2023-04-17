@@ -1,5 +1,5 @@
 //pages
-- [] login
+- [x] login
 - [] recuperar senha
 - [x] Home
 - [x] lista universos
@@ -11,21 +11,21 @@
 
 //pages -admin
 
-- [] edição informações loja
+- [x] edição informações loja
 - [x] lista de universos ADM
 - [x] criação univeso
 - [x] deletar universo
-- [] criação colaborador
-- [] edição colaborador
+- [x] criação colaborador
+- [x] edição colaborador
 - [x] lista colaboradores ADM
-- [] criacao contato de emergencia
-- [] edição contato de emergencia
+- [x] criacao contato de emergencia
+- [x] edição contato de emergencia
 - [] cadastro planta da loja
 - [] edição planta da loja
 
 // componentes
 - [] aviso checkIn
-- [] aviso criação
-- [] toast avisos
+- [x] aviso criação
+- [x] toast avisos
 - [] report
-- [] loading nas paginas
+- [x] loading nas paginas

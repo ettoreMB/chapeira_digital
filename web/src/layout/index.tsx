@@ -28,7 +28,6 @@ export default function Layout({
   const { loja } = router.query
   const { nomeUsuario } = useContext(AuthContext)
   const { '@chapeiraDigital_token': token } = parseCookies()
-  console.log(nomeUsuario)
 
   useEffect(() => {
     if (router.isReady) {

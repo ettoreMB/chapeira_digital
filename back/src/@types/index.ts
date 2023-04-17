@@ -8,6 +8,7 @@ import { CheckInOutUsecase } from '@modules/colaboradores/useCases/CheckInChecko
 import { CriarColaboradorController } from '@modules/colaboradores/useCases/criarColaborador/criarColaboradorController'
 import { CriarColaboradorUsecase } from '@modules/colaboradores/useCases/criarColaborador/criarColaboradorUsecase'
 import { DesativarColaboradorUsecase } from '@modules/colaboradores/useCases/desativarColaborador/DesativarColaboradorUsecase'
+import { EditarColaboradorUseCase } from '@modules/colaboradores/useCases/editarColaborador/editarColaboradorUseCase'
 import { InformacoesColaboradoresUsecase } from '@modules/colaboradores/useCases/informacoesColaboradores/informacoesColaboradoresUseCase'
 import { ListarColaboradoresUseCase } from '@modules/colaboradores/useCases/listarColaboradoresPorLoja/listarColaboradoresUseCase'
 import { ContatosEmergenciaRepository } from '@modules/contatosDeEmergencia/infra/prisma/EmergenciContactsRepository'
@@ -68,6 +69,7 @@ declare module '@fastify/awilix' {
     deletarContatoDeEmergencia: DeletarContatoUseCase
     editarContatoDeEmergencia: EditarContatoDeEmergenciaUsecase
     authUsecase: AuthUsecase
+    editarColaboradorUsecase: EditarColaboradorUseCase
   }
   interface RequestCradle {
     contatosEmergenciaRepository: ContatosEmergenciaRepository

@@ -25,13 +25,17 @@ describe('Editar Colaborador Usecase', () => {
       Nome: 'testeNome',
       Senha: '123',
       Tipo: 'Colaborador',
+      Admissao_Data: '',
+      Empresa: 'decathlon',
+      Endereco: '',
+      Observacao: '',
+      Telefone: '',
     })
     await sut.execute({
       id: colaborador.Id,
       admin: 'Nao',
       admissao: '',
       brigadista: 'Sim',
-      cidade: 'sao paulo',
       email: 'teste@teste.com',
       endereco: 'rua teste',
       formacao: '',
@@ -39,8 +43,8 @@ describe('Editar Colaborador Usecase', () => {
       nome: 'testeNome',
       observacao: 'observacao',
       telefone: '1234',
-      uf: 'uf',
       universoId: 2,
+      empresa: '',
     })
 
     expect(colaborador.Email).toEqual('teste@teste.com')
@@ -53,7 +57,6 @@ describe('Editar Colaborador Usecase', () => {
         admin: 'Nao',
         admissao: '',
         brigadista: 'Sim',
-        cidade: 'sao paulo',
         email: 'teste@teste.com',
         endereco: 'rua teste',
         formacao: '',
@@ -61,7 +64,7 @@ describe('Editar Colaborador Usecase', () => {
         nome: 'testeNome',
         observacao: 'observacao',
         telefone: '1234',
-        uf: 'uf',
+        empresa: '',
         universoId: 2,
       }),
     ).rejects.toBeInstanceOf(AppErrors)

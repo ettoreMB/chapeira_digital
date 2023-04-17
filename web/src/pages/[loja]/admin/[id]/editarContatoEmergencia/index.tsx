@@ -37,7 +37,6 @@ export default function EditarContatoDeEmergencia() {
       carregarContato()
       toast({ text: 'Contato editado com sucesso', type: 'success' })
     } catch (error) {
-      console.log(error)
       toast({ text: 'Erro ao editar contato', type: 'danger' })
     }
   }

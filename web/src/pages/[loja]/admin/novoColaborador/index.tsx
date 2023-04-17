@@ -21,7 +21,7 @@ export default function NovoColaborador() {
         text: `Colaborador ${colaborador.nome} registrado com sucesso`,
       })
       colaboradorFormRef.current.resetarCampos()
-    } catch {
+    } catch (error) {
       toast({
         type: 'danger',
         text: `Erro ao cadastrar o colaborador`,

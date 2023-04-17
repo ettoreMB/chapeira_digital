@@ -53,14 +53,13 @@ export default function UseColaboradorForm({
   const [tipo, setTipo] = useState('Colaborador')
   const [endereco, setEndereco] = useState('')
   const [telefone, setTelefone] = useState('')
-  const [universo, setUniverso] = useState('')
+  const [universoId, setUniversoId] = useState<any>()
   const [brigadista, setBrigadista] = useState('Nao')
   const [formacaoData, setFormacaoData] = useState('')
   const [empresa, setEmpresa] = useState('Decathlon')
   const [admissaoData, setAdmissaoData] = useState('')
   const [observacao, setObservacao] = useState('')
   const [universos, setUniversos] = useState<UniversoProps[]>([])
-
   const { lojaSigla } = useContext(lojaSiglaContext)
 
   const carregarUniversos = useCallback(async () => {
@@ -86,7 +85,7 @@ export default function UseColaboradorForm({
     setTelefone(e.currentTarget.value)
   }
   function handleUniverso(e: FormEvent<HTMLSelectElement>) {
-    setUniverso(e.currentTarget.value)
+    setUniversoId(Number(e.currentTarget.value))
   }
   function handleBrigadista(e: FormEvent<HTMLSelectElement>) {
     setBrigadista(e.currentTarget.value)
@@ -112,7 +111,7 @@ export default function UseColaboradorForm({
       lojaSigla,
       nome,
       email,
-      universo,
+      universoId,
       tipo,
       funcao,
       administrador,
@@ -135,7 +134,7 @@ export default function UseColaboradorForm({
         setTipo(colaborador.tipo ?? '')
         setEndereco(colaborador.endereco ?? '')
         setTelefone(colaborador.telefone ?? '')
-        setUniverso(colaborador.universo ?? '')
+        setUniversoId(colaborador.idUniverso ?? undefined)
         setBrigadista(colaborador.brigadista ?? '')
         setFormacaoData(colaborador.formacaoData ?? '')
         setEmpresa(colaborador.empresa ?? '')
@@ -149,7 +148,7 @@ export default function UseColaboradorForm({
         setTipo('')
         setEndereco('')
         setTelefone('')
-        setUniverso('')
+        setUniversoId(0)
         setBrigadista('')
         setFormacaoData('')
         setEmpresa('')
@@ -174,7 +173,7 @@ export default function UseColaboradorForm({
     tipo,
     endereco,
     telefone,
-    universo,
+    universoId,
     brigadista,
     formacaoData,
     empresa,
@@ -182,6 +181,7 @@ export default function UseColaboradorForm({
     observacao,
     universos,
     funcao,
+    setUniversoId,
     handleFuncao,
     handleSubmit,
     handleAdministrador,

@@ -20,7 +20,7 @@ const ColaboradorForm = forwardRef(({ titulo, onSubmit }: Props, ref) => {
     tipo,
     endereco,
     telefone,
-    universo,
+    universoId,
     brigadista,
     formacaoData,
     empresa,
@@ -28,6 +28,7 @@ const ColaboradorForm = forwardRef(({ titulo, onSubmit }: Props, ref) => {
     observacao,
     universos,
     funcao,
+    setUniversoId,
     handleSubmit,
     handleAdministrador,
     handleNome,
@@ -35,7 +36,6 @@ const ColaboradorForm = forwardRef(({ titulo, onSubmit }: Props, ref) => {
     handleTipo,
     handleEndereco,
     handleTelefone,
-    handleUniverso,
     handleBrigadista,
     handleFormacaoData,
     handleEmpresa,
@@ -76,8 +76,13 @@ const ColaboradorForm = forwardRef(({ titulo, onSubmit }: Props, ref) => {
         </FormGroup>
       </div>
       <FormGroup label="Universo">
-        <Select onChange={handleUniverso} value={universo}>
-          <option value={''}>Selecione Um Universo</option>
+        <Select
+          onChange={(e) => setUniversoId(e.target.value)}
+          value={universoId}
+        >
+          {!universoId && (
+            <option value={undefined}>Selecione Um Universo</option>
+          )}
           {universos.map((universo) => (
             <option key={universo.Id} value={universo.Id}>
               {universo.Universo}

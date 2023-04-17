@@ -9,8 +9,8 @@ export default function AdminHome() {
   const { loja } = useRouter().query
 
   return (
-    <Layout botaoVoltar admin>
-      <h1>adminn</h1>
+    <Layout admin>
+      <h1>Administração Chapeira Digital</h1>
       <Link
         href={{
           pathname: `/[loja]/admin/listaUniversos`,
@@ -41,7 +41,7 @@ export default function AdminHome() {
           query: { loja },
         }}
       >
-        CONTATOs EMERGENCIA
+        Contatos de emergência
       </Link>
     </Layout>
   )

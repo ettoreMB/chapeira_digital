@@ -26,10 +26,8 @@ export default function NovoContatoDeEmergencia() {
         descricao: contatoData.descricao,
       })
       contatoFormRef.current.resetarCampos()
-      console.log('foi')
     } catch (error) {
       toast({ text: 'Erro ao cadastrar Contato de emergência', type: 'danger' })
-      console.log(error)
     }
   }
   return (

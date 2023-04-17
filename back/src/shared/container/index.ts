@@ -32,6 +32,7 @@ import { EditarLojaUsecase } from '@modules/lojas/useCases/editarLoja/editarLoja
 import { DeletarContatoUseCase } from '@modules/contatosDeEmergencia/useCases/deletarContato/deletarContatoUsecase'
 import { EditarContatoDeEmergenciaUsecase } from '@modules/contatosDeEmergencia/useCases/editarContatoDeEmergencia/editarContatoDeEmergenciaUsecase'
 import { AuthUsecase } from '@modules/colaboradores/useCases/auth/authUseCase'
+import { EditarColaboradorUseCase } from '@modules/colaboradores/useCases/editarColaborador/editarColaboradorUseCase'
 
 diContainer.register({
   contatosEmergenciaRepository: asClass(ContatosEmergenciaRepository, {
@@ -399,6 +400,17 @@ export function diColaboradores(
     authUsecase: asFunction(
       ({ colaboradoresRepository }: any) => {
         return new AuthUsecase(colaboradoresRepository)
+      },
+      {
+        lifetime: Lifetime.SCOPED,
+        dispose: (module: any) => module.dispose(),
+      },
+    ),
+  })
+  request.diScope.register({
+    editarColaboradorUsecase: asFunction(
+      ({ colaboradoresRepository }: any) => {
+        return new EditarColaboradorUseCase(colaboradoresRepository)
       },
       {
         lifetime: Lifetime.SCOPED,

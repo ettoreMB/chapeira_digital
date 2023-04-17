@@ -13,8 +13,40 @@ import { prisma } from 'db/prisma'
 
 export class ColaboradoresRepository implements IColaboradorRepository {
   db = prisma.tb_Colaboradores
-  editar(data: tb_Colaboradores): Promise<tb_Colaboradores> {
-    throw new Error('Method not implemented.')
+  async editar({
+    Id,
+    Nome,
+    Administrador,
+    Id_Universo,
+    Brigadista,
+    Formacao_Data,
+    Admissao_Data,
+    Email,
+    Telefone,
+    Funcao,
+    Endereco,
+    Observacao,
+    Empresa,
+  }: tb_Colaboradores): Promise<tb_Colaboradores> {
+    const colborador = await this.db.update({
+      where: { Id },
+      data: {
+        Nome,
+        Administrador,
+        Id_Universo,
+        Brigadista,
+        Formacao_Data,
+        Admissao_Data,
+        Email,
+        Telefone,
+        Funcao,
+        Endereco,
+        Observacao,
+        Empresa,
+      },
+    })
+
+    return colborador
   }
 
   async listarColaboradoresPorTipoOuUniverso({
