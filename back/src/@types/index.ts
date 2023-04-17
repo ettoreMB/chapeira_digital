@@ -9,6 +9,7 @@ import { CriarColaboradorController } from '@modules/colaboradores/useCases/cria
 import { CriarColaboradorUsecase } from '@modules/colaboradores/useCases/criarColaborador/criarColaboradorUsecase'
 import { DesativarColaboradorUsecase } from '@modules/colaboradores/useCases/desativarColaborador/DesativarColaboradorUsecase'
 import { EditarColaboradorUseCase } from '@modules/colaboradores/useCases/editarColaborador/editarColaboradorUseCase'
+import { EnviarEmailPerdaSenhaUsecase } from '@modules/colaboradores/useCases/enviarEmailPerdaSenha/enviarEmailPerdaSenhaUsecase'
 import { InformacoesColaboradoresUsecase } from '@modules/colaboradores/useCases/informacoesColaboradores/informacoesColaboradoresUseCase'
 import { ListarColaboradoresUseCase } from '@modules/colaboradores/useCases/listarColaboradoresPorLoja/listarColaboradoresUseCase'
 import { ContatosEmergenciaRepository } from '@modules/contatosDeEmergencia/infra/prisma/EmergenciContactsRepository'
@@ -34,6 +35,8 @@ import { CriarUniversoUsecase } from '@modules/universos/useCases/criarUniverso/
 import { DeletarUniversoUsecase } from '@modules/universos/useCases/deletarUniverso/deletarUniversoUsecase'
 import { EditarUniversoUsecase } from '@modules/universos/useCases/editarUniverso/editarUniversoUsecase'
 import { ListarUniversosPorLojaUsecase } from '@modules/universos/useCases/listarUniversosPorLoja/listarUniversosPorLojaUsecase'
+import { IMailProvider } from '@shared/container/providers/MailProvider/IMailProvider'
+import { EthrealMailProvider } from '@shared/container/providers/MailProvider/nodemailer/EthrealProvider'
 
 declare module '@fastify/awilix' {
   interface Cradle {
@@ -70,6 +73,8 @@ declare module '@fastify/awilix' {
     editarContatoDeEmergencia: EditarContatoDeEmergenciaUsecase
     authUsecase: AuthUsecase
     editarColaboradorUsecase: EditarColaboradorUseCase
+    ethrealMailProvider: EthrealMailProvider
+    enviarEmailPerdaSenhaUsecase: EnviarEmailPerdaSenhaUsecase
   }
   interface RequestCradle {
     contatosEmergenciaRepository: ContatosEmergenciaRepository
@@ -79,5 +84,6 @@ declare module '@fastify/awilix' {
     colaboradoresRepository: ColaboradoresRepository
     cidadesRepository: CidadeRepository
     invoicesReposiotry: InvoiceRepository
+    ethrealMailProvider: EthrealMailProvider
   }
 }

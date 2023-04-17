@@ -3,6 +3,7 @@ import { ChekcInOutController } from '@modules/colaboradores/useCases/CheckInChe
 import { CriarColaboradorController } from '@modules/colaboradores/useCases/criarColaborador/criarColaboradorController'
 import { DesativarColaboradorController } from '@modules/colaboradores/useCases/desativarColaborador/DesativarColaboradorController'
 import { editarColaborador } from '@modules/colaboradores/useCases/editarColaborador/editarColaboradorController'
+import { enviarEmailPerdaSenha } from '@modules/colaboradores/useCases/enviarEmailPerdaSenha/enviarEmailPerdaSenhaController'
 import { InformacoesColaboradoresController } from '@modules/colaboradores/useCases/informacoesColaboradores/informacoesColaboradoresController'
 import { ListarColaboradoresController } from '@modules/colaboradores/useCases/listarColaboradoresPorLoja/listarColaboradoresController'
 import { verificarJwt } from '@shared/middlewares/verificarJwt'
@@ -38,4 +39,5 @@ export async function colaboradoresRoutes(app: FastifyInstance) {
     buscarColaboradorPorId,
   )
   app.put('/editar/:id', editarColaborador)
+  app.post('/recuperarSenha', enviarEmailPerdaSenha)
 }

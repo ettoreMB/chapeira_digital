@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
 
-    "target": "es2016",                                 
+    "target": "es2020",                                 
     "module": "commonjs",                              
     "esModuleInterop": true,                             
     "strict": true,                                     
@@ -15,7 +15,8 @@
       "@utils/*": ["utils/*"]
     },
       "experimentalDecorators": true,
-      "emitDecoratorMetadata": true
+      "emitDecoratorMetadata": true,
+      "strictPropertyInitialization": false,
                                                        
   }
 }

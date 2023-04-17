@@ -33,9 +33,18 @@ import { DeletarContatoUseCase } from '@modules/contatosDeEmergencia/useCases/de
 import { EditarContatoDeEmergenciaUsecase } from '@modules/contatosDeEmergencia/useCases/editarContatoDeEmergencia/editarContatoDeEmergenciaUsecase'
 import { AuthUsecase } from '@modules/colaboradores/useCases/auth/authUseCase'
 import { EditarColaboradorUseCase } from '@modules/colaboradores/useCases/editarColaborador/editarColaboradorUseCase'
+import { EthrealMailProvider } from './providers/MailProvider/nodemailer/EthrealProvider'
+import { EnviarEmailPerdaSenhaUsecase } from '@modules/colaboradores/useCases/enviarEmailPerdaSenha/enviarEmailPerdaSenhaUsecase'
 
 diContainer.register({
   contatosEmergenciaRepository: asClass(ContatosEmergenciaRepository, {
+    lifetime: Lifetime.SINGLETON,
+    dispose: (module: any) => module.dispose(),
+  }),
+})
+
+diContainer.register({
+  ethrealMailProvider: asClass(EthrealMailProvider, {
     lifetime: Lifetime.SINGLETON,
     dispose: (module: any) => module.dispose(),
   }),
@@ -440,3 +449,26 @@ export function diInvoices(
 
   done()
 }
+
+// export function diMail(
+//   request: FastifyRequest,
+//   reply: FastifyReply,
+//   done: DoneFuncWithErrOrRes,
+// ) {
+//   request.diScope.register({
+//     enviarEmailPerdaSenhaUsecase: asFunction(
+//       ({ colaboradoresRepository, ethrealMailProvider }: any) => {
+//         return new EnviarEmailPerdaSenhaUsecase(
+//           colaboradoresRepository,
+//           ethrealMailProvider,
+//         )
+//       },
+//       {
+//         lifetime: Lifetime.SCOPED,
+//         dispose: (module: any) => module.dispose(),
+//       },
+//     ),
+//   })
+
+//   done()
+// }
