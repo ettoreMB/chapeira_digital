@@ -1,0 +1,911 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model sysdiagrams {
+  name         String @db.NVarChar(128)
+  principal_id Int
+  diagram_id   Int    @id(map: "PK__sysdiagr__C2B05B61501E4260") @default(autoincrement())
+  version      Int?
+  definition   Bytes?
+
+  @@unique([principal_id, name], map: "UK_principal_name")
+}
+
+model tb_Andares {
+  Id          Decimal    @unique(map: "IX_tb_Andares") @db.Decimal(18, 0)
+  Loja_Sigla  String     @db.NVarChar(16)
+  Andar_Sigla String     @db.NVarChar(16)
+  Andar       String?    @db.NVarChar(64)
+  Insert_Date DateTime?  @default(now(), map: "DF__tb_Andare__Inser__025D5595") @db.DateTime
+  Insert_User String?    @db.NVarChar(256)
+  Update_Date DateTime?  @db.DateTime
+  Update_User String?    @db.NVarChar(256)
+  tb_Lojas    tb_Lojas   @relation(fields: [Loja_Sigla], references: [Loja_Sigla], onUpdate: NoAction, map: "FK_tb_Andares_tb_Lojas")
+  tb_Zonas    tb_Zonas[]
+
+  @@id([Loja_Sigla, Andar_Sigla], map: "PK_tb_Andares")
+}
+
+model tb_Ativo {
+  Id    Decimal @unique(map: "IX_tb_Ativo") @db.Decimal(18, 0)
+  Ativo String  @id(map: "PK_tb_Ativo") @db.NVarChar(3)
+}
+
+model tb_Cidades {
+  Id                     Int                      @unique(map: "IX_tb_Cidades_Id") @default(autoincrement())
+  Pais_Sigla             String                   @db.NVarChar(2)
+  Estado_Sigla           String                   @db.NVarChar(2)
+  Cidade                 String                   @db.NVarChar(128)
+  Insert_Date            DateTime?                @default(now(), map: "DF__tb_Cidade__Inser__07220AB2") @db.DateTime
+  Insert_User            String?                  @db.NVarChar(256)
+  Update_Date            DateTime?                @db.DateTime
+  Update_User            String?                  @db.NVarChar(256)
+  tb_Estados             tb_Estados               @relation(fields: [Pais_Sigla, Estado_Sigla], references: [Pais_Sigla, Estado_Sigla], onUpdate: NoAction, map: "FK_tb_Cidades_tb_Estados")
+  tb_Feriados_Municipais tb_Feriados_Municipais[]
+  tb_Lojas               tb_Lojas[]
+
+  @@id([Pais_Sigla, Estado_Sigla, Cidade], map: "PK_tb_Cidades")
+}
+
+model tb_Colaboradores {
+  Id                       Int                       @id(map: "PK_tb_Colaboradores") @default(autoincrement())
+  Ativo                    String                    @default("Sim", map: "DF__tb_Colabo__Ativo__226010D3") @db.NVarChar(3)
+  Id_Key                   String?                   @db.NVarChar(128)
+  Loja_Sigla               String                    @db.NVarChar(16)
+  Id_Universo              Int?                      @default(0, map: "DF__tb_Colabo__Id_Un__2354350C")
+  Nome                     String?                   @db.NVarChar(128)
+  Funcao_Sigla             String?                   @db.NVarChar(16)
+  Funcao                   String?                   @db.NVarChar(256)
+  Email                    String?                   @db.NVarChar(256)
+  Telefone                 String?                   @db.NVarChar(32)
+  Endereco                 String?                   @db.NVarChar(256)
+  Cidade                   String?                   @db.NVarChar(128)
+  UF                       String?                   @db.NVarChar(2)
+  Tipo                     String?                   @default("Colaborador", map: "DF__tb_Colabor__Tipo__24485945") @db.VarChar(16)
+  Empresa                  String?                   @default("DECATHLON", map: "DF__tb_Colabo__Empre__253C7D7E") @db.NVarChar(256)
+  Brigadista               String?                   @default("Nao", map: "DF__tb_Colabo__Briga__2630A1B7") @db.NVarChar(3)
+  Formacao_Data            String?                   @default("", map: "DF__tb_Colabo__Forma__2724C5F0") @db.NVarChar(50)
+  Admissao_Data            String?                   @default("", map: "DF__tb_Colabo__Admis__2818EA29") @db.NVarChar(50)
+  Observacao               String?                   @db.NVarChar(Max)
+  Administrador            String                    @default("Nao", map: "DF__tb_Colabo__Admin__290D0E62") @db.NVarChar(3)
+  Jornada_Sigla            String?                   @db.NVarChar(16)
+  Status                   String?                   @default("Ausente", map: "DF__tb_Colabo__Statu__2A01329B") @db.NVarChar(8)
+  CheckIn                  Int?                      @default(0, map: "DF__tb_Colabo__Check__2AF556D4")
+  CheckIn_Date             DateTime?                 @db.DateTime
+  CheckIn_Status           String?                   @default("Ausente", map: "DF__tb_Colabo__Check__2BE97B0D") @db.NVarChar(8)
+  CheckIn_IP               String?                   @db.NVarChar(128)
+  CheckIn_Browser          String?                   @db.NVarChar(256)
+  CheckIn_Session          String?                   @db.NVarChar(256)
+  Senha                    String?                   @default("DefaultPassword", map: "DF__tb_Colabo__Senha__2CDD9F46") @db.NVarChar(50)
+  Acao                     String?                   @default("Check In", map: "DF__tb_Colabor__Acao__2DD1C37F") @db.NVarChar(8)
+  Cor                      String?                   @default("danger", map: "DF__tb_Colabora__Cor__2EC5E7B8") @db.NVarChar(8)
+  Qtd_Colaborador          Int?
+  Qtd_Brigadista           Int?
+  Qtd_Nao_Brigadista       Int?
+  Qtd_Terceiro             Int?
+  Qtd_Visitante            Int?
+  Qtd_Presente             Int?
+  Qtd_Ausente              Int?
+  Qtd_Ativo                Int?
+  Insert_Date              String?                   @default("getdate()", map: "DF__tb_Colabo__Inser__2FBA0BF1") @db.NVarChar(256)
+  Insert_User              String?                   @db.NVarChar(256)
+  Update_Date              String?                   @db.NVarChar(256)
+  Update_User              String?                   @db.NVarChar(256)
+  tb_Colaboradores_Funcoes tb_Colaboradores_Funcoes? @relation(fields: [Funcao_Sigla], references: [Funcao_Sigla], onDelete: NoAction, onUpdate: NoAction, map: "FK_tb_Colaboradores_tb_Colaboradores_Funcoes")
+  tb_Jornadas              tb_Jornadas?              @relation(fields: [Jornada_Sigla], references: [Jornada_Sigla], onDelete: NoAction, onUpdate: NoAction, map: "FK_tb_Colaboradores_tb_Jornadas")
+  tb_Lojas                 tb_Lojas                  @relation(fields: [Loja_Sigla], references: [Loja_Sigla], onUpdate: NoAction, map: "FK_tb_Colaboradores_tb_Lojas")
+  tb_universos             tb_Universos?             @relation(fields: [Id_Universo], references: [Id])
+
+  @@index([Email], map: "IX_tb_Colaboradores_Email")
+  @@index([Loja_Sigla], map: "IX_tb_Colaboradores_Loja_Sigla")
+}
+
+model tb_Colaboradores_Funcoes {
+  Id                         Decimal                      @unique(map: "IX_tb_Colaboradores_Funcoes_Id") @db.Decimal(18, 0)
+  Funcao_Sigla               String                       @id(map: "PK_tb_Colaboradores_Funcoes") @db.NVarChar(16)
+  Funcao                     String                       @unique(map: "IX_tb_Colaboradores_Funcoes_Funcao") @db.NVarChar(16)
+  Insert_Date                DateTime?                    @default(now(), map: "DF__tb_Colabo__Inser__04459E07") @db.DateTime
+  Insert_User                String?                      @db.NVarChar(256)
+  Update_Date                DateTime?                    @db.DateTime
+  Update_User                String?                      @db.NVarChar(256)
+  tb_Colaboradores           tb_Colaboradores[]
+  tb_Planner_Escalas_Funcoes tb_Planner_Escalas_Funcoes[]
+}
+
+model tb_Colaboradores_Log {
+  Id              Decimal   @id(map: "PK_tb_Colaboradores_Log") @db.Decimal(18, 0)
+  Id_Colaborador  Decimal?  @db.Decimal(18, 0)
+  CheckIn_Status  String?   @db.NVarChar(8)
+  CheckIn_Date    DateTime? @db.DateTime
+  Minutos_CheckIn Decimal?  @db.Decimal(18, 0)
+  Minutos_Entrada Decimal?  @db.Decimal(18, 0)
+  Minutos_Saida   Decimal?  @db.Decimal(18, 0)
+  CheckIn_IP      String?   @db.NVarChar(128)
+  Ano             Decimal?  @db.Decimal(18, 0)
+  Mes             Decimal?  @db.Decimal(18, 0)
+  Dia             Decimal?  @db.Decimal(18, 0)
+  Hora            Decimal?  @db.Decimal(18, 0)
+  MInutos         Decimal?  @db.Decimal(18, 0)
+  Insert_Date     DateTime? @default(dbgenerated("[dbo].[MyDateTime]()"), map: "DF__tb_Colabo__Inser__1D9B5BB6") @db.DateTime
+}
+
+model tb_Contatos_Emergencia {
+  Id          Int       @id(map: "PK_tb_Contatos_Emergencia") @default(autoincrement())
+  Loja_Sigla  String?   @db.NVarChar(16)
+  Contato     String?   @db.NVarChar(256)
+  Telefone    String?   @db.NVarChar(128)
+  Descricao   String?   @db.NVarChar(Max)
+  Endereco    String?   @db.NVarChar(Max)
+  Insert_Date DateTime? @default(now(), map: "DF__tb_Contat__Inser__09FE775D") @db.DateTime
+  Insert_User String?   @db.NVarChar(256)
+  Update_Date DateTime? @db.DateTime
+  Update_User String?   @db.NVarChar(256)
+  tb_Lojas    tb_Lojas? @relation(fields: [Loja_Sigla], references: [Loja_Sigla], onDelete: NoAction, onUpdate: NoAction, map: "FK_tb_Contatos_Emergencia_tb_Lojas")
+}
+
+model tb_Datas {
+  Data_Id                      Decimal                        @id(map: "PK_tb_Datas") @db.Decimal(18, 0)
+  Data                         DateTime                       @unique(map: "IX_tb_Datas") @db.Date
+  Ano                          Int
+  Mes                          Int
+  Dia                          Int
+  Dia_Semana                   Int
+  Dia_Ano                      Int
+  Semana_Mes                   Int
+  Semana_Ano                   Int
+  Ultimo_Dia_Mes               Int
+  Ultima_Semana_Mes            Int
+  tb_Datas_Anos                tb_Datas_Anos                  @relation(fields: [Ano], references: [Ano], onUpdate: NoAction, map: "FK_tb_Datas_tb_Datas_Anos")
+  tb_Datas_Dias_Ano            tb_Datas_Dias_Ano              @relation(fields: [Dia_Ano], references: [Dia_Ano], onUpdate: NoAction, map: "FK_tb_Datas_tb_Datas_Dias_Ano")
+  tb_Datas_Dias_Mes            tb_Datas_Dias_Mes              @relation(fields: [Dia], references: [Dia_Mes], onUpdate: NoAction, map: "FK_tb_Datas_tb_Datas_Dias_Mes")
+  tb_Datas_Dias_Semana         tb_Datas_Dias_Semana           @relation(fields: [Dia_Semana], references: [Dia_Semana], onUpdate: NoAction, map: "FK_tb_Datas_tb_Datas_Dias_Semana")
+  tb_Datas_Meses               tb_Datas_Meses                 @relation(fields: [Mes], references: [Mes], onUpdate: NoAction, map: "FK_tb_Datas_tb_Datas_Meses")
+  tb_Datas_Semanas_Ano         tb_Datas_Semanas_Ano           @relation(fields: [Semana_Ano], references: [Semana_Ano], onUpdate: NoAction, map: "FK_tb_Datas_tb_Datas_Semanas_Ano")
+  tb_Datas_Semanas_Mes         tb_Datas_Semanas_Mes           @relation(fields: [Semana_Mes], references: [Semana_Mes], onUpdate: NoAction, map: "FK_tb_Datas_tb_Datas_Semanas_Mes")
+  tb_Datas_Feriados_Estaduais  tb_Datas_Feriados_Estaduais[]
+  tb_Datas_Feriados_Municipais tb_Datas_Feriados_Municipais[]
+  tb_Datas_Feriados_Nacionais  tb_Datas_Feriados_Nacionais[]
+}
+
+model tb_Datas_Anos {
+  Ano       Int        @id(map: "PK_tb_Datas_Anos")
+  Ano_Texto String     @unique(map: "IX_tb_Datas_Anos") @db.NVarChar(4)
+  Ativo     Boolean
+  tb_Datas  tb_Datas[]
+}
+
+model tb_Datas_Dezenas {
+  Dezena            Int                 @id(map: "PK_tb_Datas_Dezenas")
+  Dezena_Texto      String              @unique(map: "IX_tb_Datas_Dezenas_Texto") @db.NVarChar(2)
+  Dezena_Sigla      String              @unique(map: "IX_tb_Datas_Dezenas_Sigla") @db.NVarChar(16)
+  Dezena_Extenso    String              @unique(map: "IX_tb_Datas_Dezenas_Extenso") @db.NVarChar(64)
+  tb_Datas_Dias_Mes tb_Datas_Dias_Mes[]
+}
+
+model tb_Datas_Dias_Ano {
+  Dia_Ano       Int        @id(map: "PK_tb_Datas_Dias_Ano")
+  Dia_Ano_Texto String     @unique(map: "IX_tb_Datas_Dias_Ano_Texto") @db.NVarChar(3)
+  tb_Datas      tb_Datas[]
+}
+
+model tb_Datas_Dias_Mes {
+  Dia_Mes            Int                @id(map: "PK_tb_Datas_Dias_Mes")
+  Dia_Mes_Texto      String             @unique(map: "IX_tb_Datas_Dias_Mes_Texto") @db.NVarChar(2)
+  Dezena             Int
+  Quinzena           Int
+  tb_Datas           tb_Datas[]
+  tb_Datas_Dezenas   tb_Datas_Dezenas   @relation(fields: [Dezena], references: [Dezena], onUpdate: NoAction, map: "FK_tb_Datas_Dias_Mes_tb_Datas_Dezenas")
+  tb_Datas_Quinzenas tb_Datas_Quinzenas @relation(fields: [Quinzena], references: [Quinzena], onUpdate: NoAction, map: "FK_tb_Datas_Dias_Mes_tb_Datas_Quinzenas")
+}
+
+model tb_Datas_Dias_Semana {
+  Dia_Semana         Int        @id(map: "PK_tb_Datas_Dias_Semana")
+  Dia_Semana_Sigla   String     @unique(map: "IX_tb_Datas_Dias_Semana_Sigla") @db.NVarChar(3)
+  Dia_Semana_Extenso String     @unique(map: "IX_tb_Datas_Dias_Semana_Extenso") @db.NVarChar(64)
+  Dia_Semana_Texto   String     @unique(map: "IX_tb_Datas_Dias_Semana_Texto") @db.NVarChar(2)
+  tb_Datas           tb_Datas[]
+}
+
+model tb_Datas_Feriados_Estaduais {
+  Id                    Decimal               @unique(map: "IX_tb_Datas_Feriados_Estaduais") @db.Decimal(18, 0)
+  Feriado_Id            Decimal               @db.Decimal(18, 0)
+  Data_Id               Decimal               @db.Decimal(18, 0)
+  Insert_Date           DateTime?             @default(now(), map: "DF__tb_Datas___Inser__10AB74EC") @db.DateTime
+  Insert_User           String?               @db.NVarChar(256)
+  Update_Date           DateTime?             @db.DateTime
+  Update_User           String?               @db.NVarChar(256)
+  tb_Datas              tb_Datas              @relation(fields: [Data_Id], references: [Data_Id], onUpdate: NoAction, map: "FK_tb_Datas_Feriados_Estaduais_tb_Datas")
+  tb_Feriados_Estaduais tb_Feriados_Estaduais @relation(fields: [Feriado_Id], references: [Feriado_Id], onUpdate: NoAction, map: "FK_tb_Datas_Feriados_Estaduais_tb_Feriados_Estaduais")
+
+  @@id([Feriado_Id, Data_Id], map: "PK_tb_Datas_Feriados_Estaduais")
+}
+
+model tb_Datas_Feriados_Municipais {
+  Id                     Decimal                @unique(map: "IX_tb_Datas_Feriados_Municipais") @db.Decimal(18, 0)
+  Feriado_Id             Decimal                @db.Decimal(18, 0)
+  Data_Id                Decimal                @db.Decimal(18, 0)
+  Insert_Date            DateTime?              @default(now(), map: "DF__tb_Datas___Inser__147C05D0") @db.DateTime
+  Insert_User            String?                @db.NVarChar(256)
+  Update_Date            DateTime?              @db.DateTime
+  Update_User            String?                @db.NVarChar(256)
+  tb_Datas               tb_Datas               @relation(fields: [Data_Id], references: [Data_Id], onUpdate: NoAction, map: "FK_tb_Datas_Feriados_Municipais_tb_Datas1")
+  tb_Feriados_Municipais tb_Feriados_Municipais @relation(fields: [Feriado_Id], references: [Feriado_Id], onUpdate: NoAction, map: "FK_tb_Datas_Feriados_Municipais_tb_Feriados_Municipais")
+
+  @@id([Feriado_Id, Data_Id], map: "PK_tb_Datas_Feriados_Municipais")
+}
+
+model tb_Datas_Feriados_Nacionais {
+  Id                    Decimal               @unique(map: "IX_tb_Datas_Feriados_Nacionais") @db.Decimal(18, 0)
+  Feriado_Id            Decimal               @db.Decimal(18, 0)
+  Data_Id               Decimal               @db.Decimal(18, 0)
+  Insert_Date           DateTime?             @default(now(), map: "DF__tb_Datas___Inser__1293BD5E") @db.DateTime
+  Insert_User           String?               @db.NVarChar(256)
+  Update_Date           DateTime?             @db.DateTime
+  Update_User           String?               @db.NVarChar(256)
+  tb_Datas              tb_Datas              @relation(fields: [Data_Id], references: [Data_Id], onUpdate: NoAction, map: "FK_tb_Datas_Feriados_Nacionais_tb_Datas")
+  tb_Feriados_Nacionais tb_Feriados_Nacionais @relation(fields: [Feriado_Id], references: [Feriado_Id], onUpdate: NoAction, map: "FK_tb_Datas_Feriados_Nacionais_tb_Feriados_Nacionais")
+
+  @@id([Feriado_Id, Data_Id], map: "PK_tb_Datas_Feriados_Nacionais_1")
+}
+
+model tb_Datas_Meses {
+  Mes                 Int                 @id(map: "PK_tb_Datas_Meses")
+  Mes_Texto           String              @unique(map: "IX_tb_Datas_Meses_Texto") @db.NVarChar(2)
+  Mes_Sigla           String              @unique(map: "IX_tb_Datas_Meses_Sigla") @db.NVarChar(3)
+  Mes_Extenso         String              @unique(map: "IX_tb_Datas_Meses_Extenso") @db.NVarChar(64)
+  Trimestre           Int
+  tb_Datas            tb_Datas[]
+  tb_Datas_Trimestres tb_Datas_Trimestres @relation(fields: [Trimestre], references: [Trimestre], onUpdate: NoAction, map: "FK_tb_Datas_Meses_tb_Datas_Trimestres")
+}
+
+model tb_Datas_Quinzenas {
+  Quinzena          Int                 @id(map: "PK_tb_Datas_Quinzenas")
+  Quinzena_Texto    String              @unique(map: "IX_tb_Datas_Quinzenas_Texto") @db.NVarChar(2)
+  Quinzena_Sigla    String              @unique(map: "IX_tb_Datas_Quinzenas_Sigla") @db.NVarChar(16)
+  Quinzena_Extenso  String              @unique(map: "IX_tb_Datas_Quinzenas_Extenso") @db.NVarChar(64)
+  tb_Datas_Dias_Mes tb_Datas_Dias_Mes[]
+}
+
+model tb_Datas_Semanas_Ano {
+  Semana_Ano       Int        @id(map: "PK_tb_Datas_Semanas_Ano")
+  Semana_Ano_Texto String     @unique(map: "IX_tb_Datas_Semanas_Ano_Texto") @db.NVarChar(2)
+  tb_Datas         tb_Datas[]
+}
+
+model tb_Datas_Semanas_Mes {
+  Semana_Mes         Int        @id(map: "PK_tb_Datas_Semanas_Mes")
+  Semana_Mes_Texto   String     @unique(map: "IX_tb_Datas_Semanas_Mes_Texto") @db.NVarChar(2)
+  Semana_Mes_Sigla   String     @unique(map: "IX_tb_Datas_Semanas_Mes_Sigla") @db.NVarChar(16)
+  Semana_Mes_Extenso String     @unique(map: "IX_tb_Datas_Semanas_Mes_Extenso") @db.NVarChar(64)
+  tb_Datas           tb_Datas[]
+}
+
+model tb_Datas_Semestres {
+  Semestre            Int                   @id(map: "PK_tb_Datas_Semestres")
+  Semestre_Texto      String                @unique(map: "IX_tb_Datas_Semestres_Texto") @db.NVarChar(2)
+  Semestre_Sigla      String                @unique(map: "IX_tb_Datas_Semestres_Sigla") @db.NVarChar(16)
+  Semestre_Extenso    String                @unique(map: "IX_tb_Datas_Semestres_Extenso") @db.NVarChar(64)
+  tb_Datas_Trimestres tb_Datas_Trimestres[]
+}
+
+model tb_Datas_Trimestres {
+  Trimestre          Int                @id(map: "PK_tb_Datas_Trimestres")
+  Trimestre_Texto    String             @unique(map: "IX_tb_Datas_Trimestres_Texto") @db.NVarChar(2)
+  Trimestre_Sigla    String             @unique(map: "IX_tb_Datas_Trimestres_Sigla") @db.NVarChar(16)
+  Trimestre_Extenso  String             @unique(map: "IX_tb_Datas_Trimestres_Extenso") @db.NVarChar(64)
+  Semestre           Int
+  tb_Datas_Meses     tb_Datas_Meses[]
+  tb_Datas_Semestres tb_Datas_Semestres @relation(fields: [Semestre], references: [Semestre], onUpdate: NoAction, map: "FK_tb_Datas_Trimestres_tb_Datas_Semestres")
+}
+
+model tb_Dominios {
+  Id          Decimal   @unique(map: "IX_tb_Dominios") @db.Decimal(18, 0)
+  Ativo       String?   @default("N'Sim'", map: "DF__tb_Domini__Ativo__1B29035F") @db.NVarChar(3)
+  Dominio     String    @id(map: "PK_tb_Dominios") @db.NVarChar(256)
+  Insert_Date DateTime? @default(now(), map: "DF__tb_Domini__Inser__1C1D2798") @db.DateTime
+  Insert_User String?   @db.NVarChar(256)
+  Update_Date DateTime? @db.DateTime
+  Update_User String?   @db.NVarChar(256)
+}
+
+model tb_Estados {
+  Id                    Decimal                 @unique(map: "IX_tb_Estados") @db.Decimal(18, 0)
+  Pais_Sigla            String                  @db.NVarChar(2)
+  Estado_Sigla          String                  @db.NVarChar(2)
+  Estado                String                  @db.NVarChar(128)
+  Insert_Date           DateTime?               @db.DateTime
+  Insert_User           String?                 @db.NVarChar(256)
+  Update_Date           DateTime?               @db.DateTime
+  Update_User           String?                 @db.NVarChar(256)
+  tb_Cidades            tb_Cidades[]
+  tb_Paises             tb_Paises               @relation(fields: [Pais_Sigla], references: [Pais_Sigla], onUpdate: NoAction, map: "FK_tb_Estados_tb_Paises")
+  tb_Feriados_Estaduais tb_Feriados_Estaduais[]
+
+  @@id([Pais_Sigla, Estado_Sigla], map: "PK_tb_Estados")
+}
+
+model tb_Feriados_Estaduais {
+  Feriado_Id                  Decimal                       @id(map: "PK_Feriados_Estaduais") @db.Decimal(18, 0)
+  Feriado                     String                        @db.NVarChar(128)
+  Pais_Sigla                  String                        @db.NVarChar(2)
+  Estado_Sigla                String                        @db.NVarChar(2)
+  Mes                         Int?
+  Dia                         Int?
+  Insert_Date                 DateTime?                     @default(now(), map: "DF__tb_Feriad__Inser__1FEDB87C") @db.DateTime
+  Insert_User                 String?                       @db.NVarChar(256)
+  Update_Date                 DateTime?                     @db.DateTime
+  Update_User                 String?                       @db.NVarChar(256)
+  tb_Datas_Feriados_Estaduais tb_Datas_Feriados_Estaduais[]
+  tb_Estados                  tb_Estados                    @relation(fields: [Pais_Sigla, Estado_Sigla], references: [Pais_Sigla, Estado_Sigla], onUpdate: NoAction, map: "FK_tb_Feriados_Estaduais_tb_Estados")
+
+  @@unique([Pais_Sigla, Estado_Sigla, Feriado], map: "IX_tb_Feriados_Estaduais")
+}
+
+model tb_Feriados_Municipais {
+  Feriado_Id                   Decimal                        @id(map: "PK_tb_Feriados_Municipais") @db.Decimal(18, 0)
+  Feriado                      String                         @db.NVarChar(128)
+  Pais_Sigla                   String                         @db.NVarChar(2)
+  Estado_Sigla                 String                         @db.NVarChar(2)
+  Cidade                       String                         @db.NVarChar(128)
+  Mes                          Int?
+  Dia                          Int?
+  Insert_Date                  DateTime?                      @default(now(), map: "DF__tb_Feriad__Inser__21D600EE") @db.DateTime
+  Insert_User                  String?                        @db.NVarChar(256)
+  Update_Date                  DateTime?                      @db.DateTime
+  Update_User                  String?                        @db.NVarChar(256)
+  tb_Datas_Feriados_Municipais tb_Datas_Feriados_Municipais[]
+  tb_Cidades                   tb_Cidades                     @relation(fields: [Pais_Sigla, Estado_Sigla, Cidade], references: [Pais_Sigla, Estado_Sigla, Cidade], onUpdate: NoAction, map: "FK_tb_Feriados_Municipais_tb_Cidades")
+
+  @@unique([Pais_Sigla, Estado_Sigla, Cidade, Feriado], map: "IX_tb_Feriados_Municipais")
+}
+
+model tb_Feriados_Nacionais {
+  Feriado_Id                  Decimal                       @id(map: "PK_tb_Feriados_Nacionais") @db.Decimal(18, 0)
+  Feriado                     String?                       @db.NVarChar(128)
+  Pais_Sigla                  String?                       @db.NVarChar(2)
+  Mes                         Int?
+  Dia                         Int?
+  Insert_Date                 DateTime?                     @default(now(), map: "DF__tb_Feriad__Inser__23BE4960") @db.DateTime
+  Insert_User                 String?                       @db.NVarChar(256)
+  Update_Date                 DateTime?                     @db.DateTime
+  Update_User                 String?                       @db.NVarChar(256)
+  tb_Datas_Feriados_Nacionais tb_Datas_Feriados_Nacionais[]
+  tb_Paises                   tb_Paises?                    @relation(fields: [Pais_Sigla], references: [Pais_Sigla], onDelete: NoAction, onUpdate: NoAction, map: "FK_tb_Feriados_Nacionais_tb_Paises")
+
+  @@unique([Pais_Sigla, Feriado], map: "IX_tb_Feriados_Nacionais")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model tb_Horarios {
+  Horario DateTime @db.Time
+  Minutos Decimal? @db.Decimal(18, 0)
+  Horas   Decimal? @db.Decimal(18, 2)
+
+  @@ignore
+}
+
+model tb_Jornadas {
+  Id                 Decimal            @unique(map: "IX_tb_Jornadas_Semanais_Id") @db.Decimal(18, 0)
+  Jornada_Sigla      String             @id(map: "PK_tb_Jornadas") @db.NVarChar(16)
+  Jornada_Tipo_Sigla String             @db.NVarChar(16)
+  Jornada            String             @unique(map: "IX_tb_Jornadas_Jornada") @db.NVarChar(64)
+  Jornada_Horas      Int                @unique(map: "IX_tb_Jornadas_Horas")
+  Jornada_Minutos    Int?
+  Insert_Date        DateTime?          @default(now(), map: "DF__tb_Jornad__Inser__269AB60B") @db.DateTime
+  Insert_User        String?            @db.NVarChar(256)
+  Update_Date        DateTime?          @db.DateTime
+  Update_User        String?            @db.NVarChar(256)
+  tb_Colaboradores   tb_Colaboradores[]
+  tb_Jornadas_Tipos  tb_Jornadas_Tipos  @relation(fields: [Jornada_Tipo_Sigla], references: [Jornada_Tipo_Sigla], onUpdate: NoAction, map: "FK_tb_Jornadas_tb_Jornadas_Tipos")
+}
+
+model tb_Jornadas_Tipos {
+  Id                 Decimal       @unique(map: "IX_tb_Jornadas_Tipos_Id") @db.Decimal(18, 0)
+  Jornada_Tipo_Sigla String        @id(map: "PK_tb_Jornadas_Tipos") @db.NVarChar(16)
+  Jornada_Tipo       String        @unique(map: "IX_tb_Jornadas_Tipos_Tipo") @db.NVarChar(64)
+  Insert_Date        DateTime?     @default(now(), map: "DF__tb_Jornad__Inser__2882FE7D") @db.DateTime
+  Insert_User        String?       @db.NVarChar(256)
+  Update_Date        DateTime?     @db.DateTime
+  Update_User        String?       @db.NVarChar(256)
+  tb_Jornadas        tb_Jornadas[]
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model tb_Log_Mail {
+  ID           Decimal   @db.Decimal(18, 0)
+  MailKey      String?   @db.NVarChar(256)
+  Send_Date    DateTime? @db.DateTime
+  Send_IP      String?   @db.NVarChar(50)
+  Session_ID   String?   @db.NVarChar(50)
+  MailFrom     String?   @db.NVarChar(256)
+  MailFromName String?   @db.NVarChar(256)
+  MailTo       String?   @db.NVarChar(256)
+  MailToName   String?   @db.NVarChar(256)
+  MailSubject  String?   @db.NVarChar(Max)
+  MailMessage  String?   @db.NVarChar(Max)
+  UserLogged   String?   @db.NVarChar(256)
+  UserName     String?   @db.NVarChar(256)
+  MailStatus   String?   @db.NVarChar(20)
+  Active       Boolean?  @default(true, map: "DF__tb_Log_Ma__Activ__3AA1AEB8")
+  Show         Boolean?  @default(true, map: "DF__tb_Log_Mai__Show__3B95D2F1")
+  Insert_Date  DateTime? @default(now(), map: "DF__tb_Log_Ma__Inser__3C89F72A") @db.DateTime
+  Insert_User  String?   @db.NVarChar(256)
+  Update_Date  DateTime? @db.DateTime
+  Update_User  String?   @db.NVarChar(256)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model tb_Log_Site {
+  ID             Decimal   @db.Decimal(18, 0)
+  Sistema        String?   @db.NVarChar(256)
+  Loja_Sigla     String?   @default("", map: "DF__tb_Log_Si__Loja___2B5F6B28") @db.NVarChar(16)
+  Colaborador_Id Decimal?  @db.Decimal(18, 0)
+  Login_Mail     String?   @default("", map: "DF__tb_Log_Si__Login__2C538F61") @db.NVarChar(256)
+  Login_Key      String?   @default("", map: "DF__tb_Log_Si__Login__2D47B39A") @db.NVarChar(256)
+  Login_Date     String?   @db.NVarChar(50)
+  Login_IP       String?   @default("", map: "DF__tb_Log_Si__Login__2E3BD7D3") @db.NVarChar(50)
+  Session_ID     String?   @default("", map: "DF__tb_Log_Si__Sessi__2F2FFC0C") @db.NVarChar(50)
+  Active         Boolean?  @default(true, map: "DF__tb_Log_Si__Activ__30242045")
+  Show           Boolean?  @default(true, map: "DF__tb_Log_Sit__Show__3118447E")
+  Insert_Date    DateTime? @default(dbgenerated("[dbo].[MyDateTime]()"), map: "DF__tb_Log_Si__Inser__320C68B7") @db.DateTime
+  Insert_User    String?   @db.NVarChar(100)
+  Update_Date    DateTime? @db.DateTime
+  Update_User    String?   @db.NVarChar(256)
+
+  @@ignore
+}
+
+model tb_Lojas {
+  Id                      Int                      @unique(map: "IX_tb_Lojas_1") @default(autoincrement())
+  Ativo                   String?                  @default("Sim", map: "DF__tb_Lojas__Ativo__33F4B129") @db.NVarChar(3)
+  Loja_Sigla              String                   @id(map: "PK_tb_Lojas") @db.NVarChar(16)
+  Razao_Social            String?                  @db.NVarChar(256)
+  Loja                    String?                  @unique(map: "IX_tb_Lojas") @db.NVarChar(128)
+  Loja_Endereco           String?                  @db.NVarChar(256)
+  Loja_Cidade             String?                  @db.NVarChar(128)
+  Loja_UF                 String?                  @db.NVarChar(2)
+  Loja_Pais_Sigla         String?                  @default("BR", map: "DF__tb_Lojas__Loja_P__34E8D562") @db.NVarChar(2)
+  Loja_Telefone           String?                  @db.NVarChar(32)
+  Loja_Horario            String?                  @db.NVarChar(128)
+  Loja_Grupo              String?                  @default("Decatlhon", map: "DF__tb_Lojas__Loja_G__35DCF99B") @db.NVarChar(128)
+  EPLANNER                Boolean?                 @default(false, map: "DF__tb_Lojas__EPLANN__36D11DD4")
+  E_Planner               String?                  @default("Nao", map: "DF__tb_Lojas__E_Plan__37C5420D") @db.NVarChar(3)
+  Responsavel             String?                  @db.NVarChar(256)
+  Responsavel_Email       String?                  @db.NVarChar(256)
+  Responsavel_Telefone    String?                  @db.NVarChar(128)
+  Adm_Email               String?                  @db.NVarChar(256)
+  Adm_Senha               String?                  @db.NVarChar(32)
+  Pasta_WEB               String?                  @db.NVarChar(50)
+  URL                     String?                  @db.NVarChar(50)
+  Faturamento_Inicio      DateTime?                @db.DateTime
+  Faturamento_Responsavel String?                  @db.NVarChar(256)
+  Faturamento_Email       String?                  @db.NVarChar(256)
+  Faturamento_Telefone    String?                  @db.NVarChar(128)
+  Faturar                 Boolean?
+  CNPJ                    Int?
+  Inscricao_Estadual      String?                  @db.NChar(10)
+  Tablets                 Decimal?                 @db.Decimal(18, 0)
+  Insert_Date             DateTime?                @default(now(), map: "DF__tb_Lojas__Insert__38B96646") @db.DateTime
+  Insert_User             String?                  @db.NVarChar(256)
+  Update_Date             DateTime?                @db.DateTime
+  Update_User             String?                  @db.NVarChar(256)
+  tb_Andares              tb_Andares[]
+  tb_Colaboradores        tb_Colaboradores[]
+  tb_Contatos_Emergencia  tb_Contatos_Emergencia[]
+  tb_Cidades              tb_Cidades?              @relation(fields: [Loja_Pais_Sigla, Loja_UF, Loja_Cidade], references: [Pais_Sigla, Estado_Sigla, Cidade], onDelete: NoAction, onUpdate: NoAction, map: "FK_tb_Lojas_tb_Cidades")
+  tb_Lojas_Equipamentos   tb_Lojas_Equipamentos[]
+  tb_Lojas_Faturamentos   tb_Lojas_Faturamentos[]
+  tb_Lojas_Horarios       tb_Lojas_Horarios?
+  tb_Lojas_Imagens        tb_Lojas_Imagens[]
+  tb_Universos            tb_Universos[]
+}
+
+model tb_Lojas_Equipamentos {
+  Id              Decimal   @unique(map: "IX_tb_Lojas_Equipamentos_Id") @db.Decimal(18, 0)
+  Loja_Sigla      String?   @db.NVarChar(16)
+  IMEI            String    @id(map: "PK_tb_Lojas_Equipamentos") @db.NVarChar(50)
+  MacAddress      String?   @db.VarChar(50)
+  Tipo            String?   @default("N'Tablet'", map: "DF__tb_Lojas_E__Tipo__47FBA9D6") @db.NVarChar(50)
+  Modelo          String?   @db.NVarChar(50)
+  Gmail           String?   @db.NVarChar(256)
+  Gmail_Senha     String?   @db.NVarChar(50)
+  AnyDesk         String?   @db.NVarChar(50)
+  Data_Envio      DateTime? @db.Date
+  Codigo_Rastreio String?   @db.NChar(10)
+  Entregue        Boolean?  @default(false, map: "DF__tb_Lojas___Entre__48EFCE0F")
+  Ativo           Boolean   @default(true, map: "DF__tb_Lojas___Ativo__49E3F248")
+  Observacoes     String?   @db.VarChar(Max)
+  Insert_Date     DateTime  @default(now(), map: "DF__tb_Lojas___Inser__4AD81681") @db.DateTime
+  Insert_User     String?   @db.NVarChar(256)
+  Update_Date     DateTime? @db.DateTime
+  Update_User     String?   @db.NVarChar(256)
+  tb_Lojas        tb_Lojas? @relation(fields: [Loja_Sigla], references: [Loja_Sigla], onDelete: NoAction, onUpdate: NoAction, map: "FK_tb_Lojas_Equipamentos_tb_Lojas")
+}
+
+model tb_Lojas_Faturamentos {
+  Id               Int       @unique(map: "IX_tb_Lojas_Faturamentos_Id") @default(autoincrement())
+  Loja_Sigla       String?   @db.NVarChar(16)
+  Nota_Fiscal      String    @id(map: "PK_tb_Lojas_Faturamentos") @db.NVarChar(50)
+  Data_Faturamento DateTime? @db.Date
+  Valor_Servicos   Decimal   @default(0, map: "DF__tb_Lojas___Valor__405A880E") @db.Decimal(18, 2)
+  Valor_Nota       Decimal   @default(0, map: "DF__tb_Lojas___Valor__414EAC47") @db.Decimal(18, 2)
+  Data_Vencimento  DateTime? @db.Date
+  Data_Pagamento   DateTime? @db.Date
+  Valor_Recebido   Decimal   @default(0, map: "DF__tb_Lojas___Valor__4242D080") @db.Decimal(18, 2)
+  Pendente         Boolean?  @default(true, map: "DF__tb_Lojas___Pende__4336F4B9")
+  Pago             Boolean?  @default(false, map: "DF__tb_Lojas_F__Pago__442B18F2")
+  Cancelado        Boolean?  @default(false, map: "DF__tb_Lojas___Cance__451F3D2B")
+  Observacoes      String?   @db.NVarChar(Max)
+  Nota_Imagem      Bytes?    @db.Image
+  Insert_Date      DateTime  @default(now(), map: "DF__tb_Lojas___Inser__46136164") @db.DateTime
+  Insert_User      String?   @db.NVarChar(256)
+  Update_Date      DateTime? @db.DateTime
+  Update_User      String?   @db.NVarChar(256)
+  tb_Lojas         tb_Lojas? @relation(fields: [Loja_Sigla], references: [Loja_Sigla], onDelete: NoAction, onUpdate: NoAction, map: "FK_tb_Lojas_Faturamentos_tb_Lojas")
+}
+
+model tb_Lojas_Horarios {
+  Id                 Decimal   @db.Decimal(18, 0)
+  Loja_Sigla         String    @id(map: "PK_tb_Lojas_Horarios") @db.NVarChar(16)
+  SEG_SEX_Abertura   DateTime  @db.Time
+  SEG_SEX_Fechamento DateTime  @db.Time
+  SABADO_Abertura    DateTime  @db.Time
+  SABADO_Fechamento  DateTime  @db.Time
+  DOMINGO_Abertura   DateTime  @db.Time
+  DOMINGO_Fechamento DateTime  @db.Time
+  FERIADO_Abertura   DateTime  @db.Time
+  FERIADO_Fechamento DateTime  @db.Time
+  Horario            String?   @db.VarChar(Max)
+  Insert_Date        DateTime? @default(now(), map: "DF__tb_Lojas___Inser__3E723F9C") @db.DateTime
+  Insert_User        String?   @db.NVarChar(256)
+  Update_Date        DateTime? @db.DateTime
+  Update_User        String?   @db.NVarChar(256)
+  tb_Lojas           tb_Lojas  @relation(fields: [Loja_Sigla], references: [Loja_Sigla], onUpdate: NoAction, map: "FK_tb_Lojas_Horarios_tb_Lojas")
+}
+
+model tb_Lojas_Imagens {
+  Id          Decimal   @db.Decimal(18, 0)
+  Loja_Sigla  String    @db.NVarChar(16)
+  Titulo      String?   @db.NVarChar(64)
+  Descricao   String?   @db.NVarChar(Max)
+  Imagem      Bytes?    @db.Image
+  Tamanho     Int?
+  Tipo        String?   @db.NVarChar(50)
+  Insert_Date DateTime? @default(now(), map: "DF__tb_Lojas___Inser__3A379A64") @db.DateTime
+  Insert_User String?   @db.NVarChar(256)
+  Update_Date DateTime? @db.DateTime
+  Update_User String?   @db.NVarChar(256)
+  tb_Lojas    tb_Lojas  @relation(fields: [Loja_Sigla], references: [Loja_Sigla], onUpdate: NoAction, map: "FK_tb_Lojas_Imagens_tb_Lojas")
+
+  @@id([Id, Loja_Sigla], map: "PK_tb_Lojas_Imagens")
+}
+
+model tb_Mensagens {
+  Id          Decimal   @id(map: "PK_tb_Mensagens") @db.Decimal(18, 0)
+  Ativo       String    @default("N'Sim'", map: "DF__tb_Mensag__Ativo__4CC05EF3") @db.NVarChar(3)
+  Grupo       String    @db.NVarChar(64)
+  Tipo        String    @db.NVarChar(64)
+  Titulo      String    @db.NVarChar(64)
+  Mensagem    String    @db.Text
+  Insert_Date DateTime? @default(now(), map: "DF__tb_Mensag__Inser__4DB4832C") @db.DateTime
+  Insert_User String?   @db.NVarChar(256)
+  Update_Date DateTime? @db.DateTime
+  Update_User String?   @db.NVarChar(256)
+}
+
+model tb_Paises {
+  Id                    Decimal                 @unique(map: "IX_tb_Paises") @db.Decimal(18, 0)
+  Pais_Sigla            String                  @id(map: "PK_tb_Paises") @db.NVarChar(2)
+  Pais                  String                  @db.NVarChar(128)
+  Insert_Date           DateTime?               @default(now(), map: "DF__tb_Paises__Inser__4F9CCB9E") @db.DateTime
+  Insert_User           String?                 @db.NVarChar(256)
+  Update_Date           DateTime?               @db.DateTime
+  Update_User           String?                 @db.NVarChar(256)
+  tb_Estados            tb_Estados[]
+  tb_Feriados_Nacionais tb_Feriados_Nacionais[]
+}
+
+model tb_Pessoas {
+  Tipo           String?   @db.NVarChar(16)
+  ID             String    @id(map: "PK_tb_Pessoas") @db.NVarChar(32)
+  Email          String?   @db.NVarChar(256)
+  Nome           String?   @db.NVarChar(256)
+  Funcao         String?   @db.NVarChar(64)
+  Telefone       String?   @db.NVarChar(64)
+  Emergencia     String?   @db.NVarChar(8)
+  Brigadista     String?   @db.NVarChar(8)
+  Localizacao    String?   @db.NVarChar(Max)
+  Universo       String?   @db.NVarChar(128)
+  Universo_Tipo  String?   @db.NVarChar(64)
+  Zona           String?   @db.NVarChar(16)
+  Andar          String?   @db.NVarChar(16)
+  Sigla_Loja     String?   @db.NVarChar(8)
+  Loja           String?   @db.NVarChar(256)
+  Status         String?   @default("Ausente", map: "DF__tb_Pessoa__Statu__51851410") @db.NVarChar(16)
+  Ativo          String?   @default("Sim", map: "DF__tb_Pessoa__Ativo__52793849") @db.NVarChar(50)
+  Ultimo_CheckIn DateTime? @db.DateTime
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model tb_Pessoas_Log {
+  ID        String?   @db.NVarChar(32)
+  Status    String?   @db.NVarChar(16)
+  Data_Hora DateTime? @db.DateTime
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model tb_Planner_Atividades {
+  ATIVIDADE_SIGLA String @db.VarChar(3)
+  ATIVIDADE       String @db.VarChar(128)
+
+  @@ignore
+}
+
+model tb_Planner_Escalas {
+  Id                         Decimal                      @unique(map: "IX_tb_Planner_Escalas_Id") @db.Decimal(18, 0)
+  Escala_Sigla               String                       @id(map: "PK_tb_Planner_Escalas") @db.VarChar(3)
+  Escala_Ordem               Int?
+  Escala                     String                       @db.VarChar(128)
+  Escala_Descricao           String?                      @db.VarChar(256)
+  Escala_Cor_Fundo           String                       @db.VarChar(50)
+  Escala_Cor_Fonte           String                       @db.VarChar(50)
+  Insert_Date                DateTime?                    @default(now(), map: "DF__tb_Planne__Inser__5649C92D") @db.DateTime
+  Insert_User                String?                      @db.NVarChar(256)
+  Update_Date                DateTime?                    @db.DateTime
+  Update_User                String?                      @db.NVarChar(256)
+  tb_Planner_Escalas_Funcoes tb_Planner_Escalas_Funcoes[]
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model tb_Planner_Escalas_Colaboradores {
+  LOJA_SIGLA    String   @db.VarChar(16)
+  EMAIL         String   @db.VarChar(256)
+  DATA_ID       Decimal  @db.Decimal(18, 0)
+  PLANNER_SIGLA String   @db.VarChar(3)
+  HORA_INICIO   DateTime @db.Time
+  HORA_FINAL    DateTime @db.Time
+
+  @@ignore
+}
+
+model tb_Planner_Escalas_Funcoes {
+  Id                       Decimal                  @unique(map: "IX_tb_Planner_Escalas_Funcoes") @db.Decimal(18, 0)
+  Escala_Sigla             String                   @db.VarChar(3)
+  Funcao_Sigla             String                   @db.NVarChar(16)
+  Insert_Date              DateTime?                @default(now(), map: "DF__tb_Planne__Inser__592635D8") @db.DateTime
+  Insert_User              String?                  @db.NVarChar(256)
+  Update_Date              DateTime?                @db.DateTime
+  Update_User              String?                  @db.NVarChar(256)
+  tb_Colaboradores_Funcoes tb_Colaboradores_Funcoes @relation(fields: [Funcao_Sigla], references: [Funcao_Sigla], onUpdate: NoAction, map: "FK_tb_Planner_Escalas_Funcoes_tb_Colaboradores_Funcoes")
+  tb_Planner_Escalas       tb_Planner_Escalas       @relation(fields: [Escala_Sigla], references: [Escala_Sigla], onUpdate: NoAction, map: "FK_tb_Planner_Escalas_Funcoes_tb_Planner_Escalas")
+
+  @@id([Escala_Sigla, Funcao_Sigla], map: "PK_tb_Planner_Escalas_Funcoes")
+}
+
+model tb_Planner_Horarios {
+  Id      Decimal  @unique(map: "IX_tb_Planner_Horarios") @db.Decimal(18, 0)
+  Horario DateTime @id(map: "PK_tb_Planner_Horarios") @db.Time
+  Minutos Decimal? @db.Decimal(18, 0)
+  Horas   Decimal? @db.Decimal(18, 2)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model tb_Planner_Lojas_Horarios {
+  LOJA_SIGLA    String    @db.VarChar(16)
+  PLANNER_SIGLA String    @db.VarChar(3)
+  HORA_INICIO   DateTime? @db.Time
+  HORA_FINAL    DateTime? @db.Time
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model tb_Prestadores {
+  Id_Key         String?   @db.NVarChar(128)
+  Id             Decimal   @db.Decimal(18, 0)
+  Loja_Sigla     String    @db.NVarChar(16)
+  Id_Universo    Decimal   @db.Decimal(18, 0)
+  Nome           String?   @db.NVarChar(128)
+  Funcao         String?   @db.NVarChar(128)
+  Email          String    @db.NVarChar(256)
+  Telefone       String?   @db.NVarChar(32)
+  Endereco       String?   @db.NVarChar(256)
+  Cidade         String?   @db.NVarChar(128)
+  UF             String?   @db.NVarChar(2)
+  Tipo           String?   @db.VarChar(16)
+  Brigadista     String?   @db.NVarChar(3)
+  Formacao_Data  String?   @db.NVarChar(50)
+  Admissao_Data  String?   @db.NVarChar(50)
+  Observacao     String?   @db.NVarChar(Max)
+  CheckIn        Decimal?  @db.Decimal(18, 0)
+  CheckIn_Date   DateTime? @db.DateTime
+  CheckIn_Status String?   @db.NVarChar(8)
+  Status         String?   @db.NVarChar(8)
+  Ativo          String?   @db.VarChar(3)
+  Administrador  String?   @db.NVarChar(3)
+  Senha          String?   @db.NVarChar(50)
+  Insert_Date    DateTime? @db.DateTime
+  Insert_User    String?   @db.NVarChar(256)
+  Update_Date    DateTime? @db.DateTime
+  Update_User    String?   @db.NVarChar(256)
+  Acao           String?   @db.NVarChar(8)
+  Cor            String?   @db.NVarChar(8)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model tb_Prestadores_Log {
+  Id             Decimal   @db.Decimal(18, 0)
+  Id_Prestador   Decimal?  @db.Decimal(18, 0)
+  CheckIn_Status String?   @db.NVarChar(8)
+  CheckIn_Date   DateTime? @db.DateTime
+
+  @@ignore
+}
+
+model tb_Terceiros {
+  Id_Key         String?   @db.NVarChar(128)
+  Id             Decimal   @id(map: "PK_tb_Terceiros") @db.Decimal(18, 0)
+  Loja_Sigla     String    @db.NVarChar(16)
+  Nome           String?   @db.NVarChar(128)
+  Funcao         String?   @db.NVarChar(128)
+  Empresa        String?   @db.NVarChar(128)
+  Email          String    @db.NVarChar(256)
+  Telefone       String?   @db.NVarChar(32)
+  Endereco       String?   @db.NVarChar(256)
+  Cidade         String?   @db.NVarChar(128)
+  UF             String?   @db.NVarChar(2)
+  Tipo           String?   @db.VarChar(16)
+  Observacao     String?   @db.NVarChar(Max)
+  CheckIn        Decimal?  @db.Decimal(18, 0)
+  CheckIn_Date   DateTime? @db.DateTime
+  CheckIn_Status String?   @db.NVarChar(8)
+  Status         String?   @default("N'Ausente'", map: "DF__tb_Tercei__Statu__5EDF0F2E") @db.NVarChar(8)
+  Ativo          String?   @default("Sim", map: "DF__tb_Tercei__Ativo__5FD33367") @db.VarChar(3)
+  Insert_Date    DateTime? @default(now(), map: "DF__tb_Tercei__Inser__60C757A0") @db.DateTime
+  Insert_User    String?   @db.NVarChar(256)
+  Update_Date    DateTime? @db.DateTime
+  Update_User    String?   @db.NVarChar(256)
+  Acao           String?   @db.NVarChar(8)
+  Cor            String?   @db.NVarChar(8)
+}
+
+model tb_Terceiros_Log {
+  Id             Decimal   @id(map: "PK_tb_Terceiros_Log") @db.Decimal(18, 0)
+  Id_Terceiro    Decimal?  @db.Decimal(18, 0)
+  CheckIn_Status String?   @db.NVarChar(8)
+  CheckIn_Date   DateTime? @db.DateTime
+}
+
+model tb_Universos {
+  Id               Int                @id(map: "PK_tb_Universos_1") @default(autoincrement())
+  Id_Key           String?            @db.NVarChar(128)
+  Loja_Sigla       String             @db.NVarChar(16)
+  Zona             String?            @default("", map: "DF__tb_Univers__Zona__6B44E613") @db.NVarChar(2)
+  Andar            String?            @default("", map: "DF__tb_Univer__Andar__6C390A4C") @db.NVarChar(2)
+  Universo         String             @db.NVarChar(128)
+  Insert_Date      DateTime?          @default(now(), map: "DF__tb_Univer__Inser__6D2D2E85") @db.DateTime
+  Insert_User      String?            @db.NVarChar(256)
+  Update_Date      DateTime?          @db.DateTime
+  Update_User      String?            @db.NVarChar(256)
+  tb_Lojas         tb_Lojas           @relation(fields: [Loja_Sigla], references: [Loja_Sigla], onUpdate: NoAction, map: "FK_tb_Universos_tb_Lojas")
+  tb_Colaboradores tb_Colaboradores[]
+}
+
+model tb_Users {
+  Id          Decimal   @db.Decimal(18, 0)
+  Loja_Sigla  String?   @db.NVarChar(16)
+  Email       String    @id(map: "PK_tb_Users") @db.NVarChar(256)
+  Nome        String?   @db.NVarChar(256)
+  Senha       String?   @db.NVarChar(50)
+  Active      Boolean?  @default(true, map: "DF__tb_Users__Active__6774552F")
+  Show        Boolean?  @default(true, map: "DF__tb_Users__Show__68687968")
+  Insert_Date DateTime? @default(now(), map: "DF__tb_Users__Insert__695C9DA1") @db.DateTime
+  Insert_User String?   @db.NVarChar(256)
+  Update_Date DateTime? @db.DateTime
+  Update_User String?   @db.NVarChar(256)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model tb_Users_Domains {
+  ID          Decimal   @db.Decimal(18, 0)
+  USER_DOMAIN String    @db.NVarChar(50)
+  Active      Boolean?  @default(true, map: "DF__tb_Users___Activ__63A3C44B")
+  Show        Boolean?  @default(true, map: "DF__tb_Users_D__Show__6497E884")
+  Insert_Date DateTime? @default(now(), map: "DF__tb_Users___Inser__658C0CBD") @db.DateTime
+  Insert_User String?   @db.NVarChar(256)
+  Update_Date DateTime? @db.DateTime
+  Update_User String?   @db.NVarChar(256)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model tb_Users_Profiles {
+  ID                Decimal   @db.Decimal(18, 0)
+  USER_PROFILE_CODE String    @db.NVarChar(3)
+  USER_PROFILE      String?   @db.NVarChar(50)
+  Active            Boolean?  @default(true, map: "DF__tb_Users___Activ__6F1576F7")
+  Show              Boolean?  @default(true, map: "DF__tb_Users_P__Show__70099B30")
+  Insert_Date       DateTime? @default(now(), map: "DF__tb_Users___Inser__70FDBF69") @db.DateTime
+  Insert_User       String?   @db.NVarChar(256)
+  Update_Date       DateTime? @db.DateTime
+  Update_User       String?   @db.NVarChar(256)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model tb_Users_Status {
+  ID               Decimal   @db.Decimal(18, 0)
+  USER_STATUS_CODE String    @db.NVarChar(3)
+  USER_STATUS      String?   @db.NVarChar(50)
+  Active           Boolean?  @default(true, map: "DF__tb_Users___Activ__72E607DB")
+  Show             Boolean?  @default(true, map: "DF__tb_Users_S__Show__73DA2C14")
+  Insert_Date      DateTime? @default(now(), map: "DF__tb_Users___Inser__74CE504D") @db.DateTime
+  Insert_User      String?   @db.NVarChar(256)
+  Update_Date      DateTime? @db.DateTime
+  Update_User      String?   @db.NVarChar(256)
+
+  @@ignore
+}
+
+model tb_Visitantes {
+  Id_Key         String?   @db.NVarChar(128)
+  Id             Decimal   @id(map: "PK_tb_Visitantes") @db.Decimal(18, 0)
+  Loja_Sigla     String    @db.NVarChar(16)
+  Nome           String?   @db.NVarChar(128)
+  Email          String    @db.NVarChar(256)
+  Telefone       String?   @db.NVarChar(32)
+  Endereco       String?   @db.NVarChar(256)
+  Cidade         String?   @db.NVarChar(128)
+  UF             String?   @db.NVarChar(2)
+  Empresa        String?   @db.NVarChar(128)
+  Destino        String?   @db.NVarChar(128)
+  Motivo         String?   @db.NVarChar(Max)
+  Observacao     String?   @db.NVarChar(Max)
+  CheckIn        Decimal?  @db.Decimal(18, 0)
+  CheckIn_Date   DateTime? @db.DateTime
+  CheckIn_Status String?   @db.NVarChar(8)
+  Status         String?   @default("N'Presente'", map: "DF__tb_Visita__Statu__76B698BF") @db.NVarChar(8)
+  Ativo          String?   @default("Sim", map: "DF__tb_Visita__Ativo__77AABCF8") @db.VarChar(3)
+  Insert_Date    DateTime? @default(now(), map: "DF__tb_Visita__Inser__789EE131") @db.DateTime
+  Insert_User    String?   @db.NVarChar(256)
+  Update_Date    DateTime? @db.DateTime
+  Update_User    String?   @db.NVarChar(256)
+  Acao           String?   @db.NVarChar(8)
+  Cor            String?   @db.NVarChar(8)
+}
+
+model tb_Visitantes_Log {
+  Id             Decimal   @id(map: "PK_tb_Visitantes_Log") @db.Decimal(18, 0)
+  Id_Visitante   Decimal?  @db.Decimal(18, 0)
+  CheckIn_Status String?   @db.NVarChar(8)
+  CheckIn_Date   DateTime? @db.DateTime
+}
+
+model tb_Zonas {
+  Id          Decimal    @unique(map: "IX_tb_Zonas") @db.Decimal(18, 0)
+  Loja_Sigla  String     @db.NVarChar(16)
+  Andar_Sigla String     @db.NVarChar(16)
+  Zona_Sigla  String     @db.NVarChar(16)
+  Zona        String?    @db.NVarChar(128)
+  Insert_Date DateTime?  @default(now(), map: "DF__tb_Zonas__Insert__7B7B4DDC") @db.DateTime
+  Insert_User String?    @db.NVarChar(256)
+  Update_Date DateTime?  @db.DateTime
+  Update_User String?    @db.NVarChar(256)
+  tb_Andares  tb_Andares @relation(fields: [Loja_Sigla, Andar_Sigla], references: [Loja_Sigla, Andar_Sigla], onUpdate: NoAction, map: "FK_tb_Zonas_tb_Andares")
+
+  @@id([Loja_Sigla, Andar_Sigla, Zona_Sigla], map: "PK_tb_Zonas")
+}
