@@ -18,28 +18,31 @@ export class EnviarEmailPerdaSenhaUsecase {
   ): Promise<void> {
     const colaborador = await this.colaboradorRepository.buscarPorEmail(email)
     const loja = await this.lojaRepository.buscarPorSiglaOuNome(lojaSigla)
+
     if (!colaborador) {
       throw new AppErrors('Colaborador não encontrado', 404)
     }
 
-    if (lojaSigla !== loja?.Pasta_WEB) {
+    if (colaborador.Administrador === 'Nao') {
+      throw new AppErrors('Não autorizado', 401)
+    }
+    if (
+      lojaSigla.toUpperCase() !== loja?.Pasta_WEB?.toUpperCase() &&
+      lojaSigla.toUpperCase() !== loja?.Loja_Sigla.toUpperCase()
+    ) {
       throw new AppErrors('Loja não encontrada', 404)
     }
 
-    const templatePath = path.resolve(
-      'src',
-      'views',
-      'emails',
-      'recuperarSenha.hbs',
-    )
+    const templatePath = path.resolve('views', 'emails', 'recuperarSenha.hbs')
     const variaveis = {
       nome: colaborador.Nome,
       token,
-      link: `http://localhost:3000/recuperarSenha/${token}`,
+      lojaSigla,
+      link: `http://localhost:3000/${loja.Pasta_WEB}/recuperarSenha/${token}`,
     }
     await this.mailProvider.enviarEmail(
       email,
-      'Recuperação de senha',
+      'Recuperação de senha chapeira digital',
       variaveis,
       templatePath,
     )

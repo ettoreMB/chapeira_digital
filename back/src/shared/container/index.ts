@@ -34,7 +34,8 @@ import { EditarContatoDeEmergenciaUsecase } from '@modules/contatosDeEmergencia/
 import { AuthUsecase } from '@modules/colaboradores/useCases/auth/authUseCase'
 import { EditarColaboradorUseCase } from '@modules/colaboradores/useCases/editarColaborador/editarColaboradorUseCase'
 import { EthrealMailProvider } from './providers/MailProvider/nodemailer/EthrealProvider'
-import { EnviarEmailPerdaSenhaUsecase } from '@modules/colaboradores/useCases/enviarEmailPerdaSenha/enviarEmailPerdaSenhaUsecase'
+
+import { CadastrarNovaSenhaUseCase } from '@modules/colaboradores/useCases/cadastrarNovaSenha/cadastrarNovaSenhaUseCase'
 
 diContainer.register({
   contatosEmergenciaRepository: asClass(ContatosEmergenciaRepository, {
@@ -420,6 +421,20 @@ export function diColaboradores(
     editarColaboradorUsecase: asFunction(
       ({ colaboradoresRepository }: any) => {
         return new EditarColaboradorUseCase(colaboradoresRepository)
+      },
+      {
+        lifetime: Lifetime.SCOPED,
+        dispose: (module: any) => module.dispose(),
+      },
+    ),
+  })
+  request.diScope.register({
+    cadastrarNovaSenhaUsecase: asFunction(
+      ({ colaboradoresRepository, lojasRepository }: any) => {
+        return new CadastrarNovaSenhaUseCase(
+          colaboradoresRepository,
+          lojasRepository,
+        )
       },
       {
         lifetime: Lifetime.SCOPED,

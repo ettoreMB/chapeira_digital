@@ -1,4 +1,4 @@
-import { makeEtherealMailUsecase } from '@shared/factories/make-etherealMail'
+import { makeMailUsecase } from '@shared/factories/make-etherealMail'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
@@ -13,7 +13,7 @@ export async function enviarEmailPerdaSenha(
 
   const { email, loja } = reqBodySchema.parse(req.body)
 
-  const enviarEmailPerdaSenhaUsecase = makeEtherealMailUsecase()
+  const enviarEmailPerdaSenhaUsecase = makeMailUsecase()
 
   const token = await res.jwtSign({}, { sign: { sub: email! } })
   await enviarEmailPerdaSenhaUsecase.execute(email, loja, token)

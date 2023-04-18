@@ -1,48 +1,64 @@
-import { useContext } from 'react'
 import Link from 'next/link'
-import { lojaSiglaContext } from '@/contexts/lojaSiglaContext'
 import Layout from '@/layout'
 import { useRouter } from 'next/router'
-
+import { Container, LinkContainer } from './styles'
+import { BsGear } from 'react-icons/bs'
 export default function AdminHome() {
-  const { lojaId } = useContext(lojaSiglaContext)
   const { loja } = useRouter().query
 
   return (
     <Layout admin>
-      <h1>Administração Chapeira Digital</h1>
-      <Link
-        href={{
-          pathname: `/[loja]/admin/listaUniversos`,
-          query: { loja },
-        }}
-      >
-        Universos
-      </Link>
-      <Link
-        href={{
-          pathname: `/[loja]/admin/listaColaboradores`,
-          query: { loja },
-        }}
-      >
-        Colaboradores
-      </Link>
-      <Link
-        href={{
-          pathname: `/[loja]/admin/[id]/editarLoja`,
-          query: { loja, id: lojaId },
-        }}
-      >
-        Loja
-      </Link>
-      <Link
-        href={{
-          pathname: '/[loja]/admin/listaContatosDeEmergencia',
-          query: { loja },
-        }}
-      >
-        Contatos de emergência
-      </Link>
+      <Container>
+        <h1>Administração Chapeira Digital</h1>
+
+        <LinkContainer>
+          <BsGear size={24} />
+          <Link
+            href={{
+              pathname: `/[loja]/admin/listaUniversos`,
+              query: { loja },
+            }}
+          >
+            Universos
+          </Link>
+        </LinkContainer>
+
+        <LinkContainer>
+          <BsGear size={24} />
+          <Link
+            href={{
+              pathname: `/[loja]/admin/listaColaboradores`,
+              query: { loja },
+            }}
+          >
+            Colaboradores
+          </Link>
+        </LinkContainer>
+
+        <LinkContainer>
+          <BsGear size={24} />
+          <Link
+            href={{
+              pathname: `/[loja]/admin/editarLoja`,
+              query: { loja },
+            }}
+          >
+            Informações loja
+          </Link>
+        </LinkContainer>
+
+        <LinkContainer>
+          <BsGear size={24} />
+          <Link
+            href={{
+              pathname: `/[loja]/admin/listaContatosDeEmergencia`,
+              query: { loja },
+            }}
+          >
+            Contatos de emergência
+          </Link>
+        </LinkContainer>
+      </Container>
     </Layout>
   )
 }

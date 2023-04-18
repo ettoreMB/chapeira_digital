@@ -26,7 +26,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const { loja } = router.query
   useEffect(() => {
     setNomeUsuario(cookies['@chapeiraDigital_usuario'])
-  }, [])
+  }, [cookies])
 
   async function signIn({ email, senha }: CredenciaisProps) {
     try {

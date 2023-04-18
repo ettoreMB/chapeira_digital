@@ -25,6 +25,11 @@ describe('Criar Colaborador Usecase', () => {
       Nome: 'testeNome',
       Senha: '123',
       Tipo: 'Colaborador',
+      Admissao_Data: '',
+      Empresa: '',
+      Endereco: '',
+      Observacao: '',
+      Telefone: '',
     })
 
     expect(colaborador.Id).toEqual(expect.any(Number))
@@ -42,6 +47,11 @@ describe('Criar Colaborador Usecase', () => {
       Nome: 'testeNome',
       Senha: '123',
       Tipo: 'Colaborador',
+      Admissao_Data: '',
+      Empresa: '',
+      Endereco: '',
+      Observacao: '',
+      Telefone: '',
     })
 
     await expect(() =>
@@ -56,6 +66,11 @@ describe('Criar Colaborador Usecase', () => {
         Nome: 'testeNome',
         Senha: '123',
         Tipo: 'Colaborador',
+        Admissao_Data: '',
+        Empresa: '',
+        Endereco: '',
+        Observacao: '',
+        Telefone: '',
       }),
     ).rejects.toBeInstanceOf(AppErrors)
   })

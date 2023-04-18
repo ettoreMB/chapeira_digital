@@ -4,6 +4,7 @@ import { ColaboradoresRepository } from '@modules/colaboradores/infra/prisma/col
 import { AuthUsecase } from '@modules/colaboradores/useCases/auth/authUseCase'
 
 import { BuscarColaboradorPorIdUseCase } from '@modules/colaboradores/useCases/buscarPorId/buscarColaboradorPorIdUseCase'
+import { CadastrarNovaSenhaUseCase } from '@modules/colaboradores/useCases/cadastrarNovaSenha/cadastrarNovaSenhaUseCase'
 import { CheckInOutUsecase } from '@modules/colaboradores/useCases/CheckInCheckout/CheckInOutUsecase'
 import { CriarColaboradorController } from '@modules/colaboradores/useCases/criarColaborador/criarColaboradorController'
 import { CriarColaboradorUsecase } from '@modules/colaboradores/useCases/criarColaborador/criarColaboradorUsecase'
@@ -75,6 +76,7 @@ declare module '@fastify/awilix' {
     editarColaboradorUsecase: EditarColaboradorUseCase
     ethrealMailProvider: EthrealMailProvider
     enviarEmailPerdaSenhaUsecase: EnviarEmailPerdaSenhaUsecase
+    cadastrarNovaSenhaUsecase: CadastrarNovaSenhaUseCase
   }
   interface RequestCradle {
     contatosEmergenciaRepository: ContatosEmergenciaRepository

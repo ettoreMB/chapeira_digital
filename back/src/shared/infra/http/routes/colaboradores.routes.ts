@@ -1,4 +1,5 @@
 import { buscarColaboradorPorId } from '@modules/colaboradores/useCases/buscarPorId/buscarColaboradorPorIdController'
+import { cadastrarNovaSenha } from '@modules/colaboradores/useCases/cadastrarNovaSenha/CadastrarNovaSenhaController'
 import { ChekcInOutController } from '@modules/colaboradores/useCases/CheckInCheckout/ChekcInOutCcontroller'
 import { CriarColaboradorController } from '@modules/colaboradores/useCases/criarColaborador/criarColaboradorController'
 import { DesativarColaboradorController } from '@modules/colaboradores/useCases/desativarColaborador/DesativarColaboradorController'
@@ -39,5 +40,10 @@ export async function colaboradoresRoutes(app: FastifyInstance) {
     buscarColaboradorPorId,
   )
   app.put('/editar/:id', editarColaborador)
-  app.post('/recuperarSenha', enviarEmailPerdaSenha)
+  app.post(
+    '/recuperarSenha',
+    { onRequest: verificarJwt },
+    enviarEmailPerdaSenha,
+  )
+  app.post('/novaSenha/:loja', cadastrarNovaSenha)
 }

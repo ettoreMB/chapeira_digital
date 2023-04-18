@@ -1,10 +1,9 @@
 import { Container } from './styles'
-import Arrow from '../../assets/icons/ArrowLeft.svg'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import { lojaSiglaContext } from '@/contexts/lojaSiglaContext'
-
+import { FaHome } from 'react-icons/fa'
+import { RiHomeGearFill } from 'react-icons/ri'
 interface Props {
   admin: boolean
 }
@@ -21,7 +20,8 @@ export default function BotaoVoltar({ admin }: Props) {
 
   return (
     <Container onClick={() => VoltarLink()}>
-      <Image src={Arrow} alt="" width={24} height={32} />
+      {/* <Image src={Arrow} alt="" width={24} height={32} /> */}
+      {admin ? <RiHomeGearFill size={26} /> : <FaHome size={26} />}
       INÍCIO
     </Container>
   )

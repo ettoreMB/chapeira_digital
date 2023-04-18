@@ -41,6 +41,7 @@ app.register(fastifyJwt, {
   sign: {
     expiresIn: '15min',
   },
+  decode: { complete: true },
 })
 app.register(fastifyCookie)
 app.addHook('onRequest', diContatosEmergencia)

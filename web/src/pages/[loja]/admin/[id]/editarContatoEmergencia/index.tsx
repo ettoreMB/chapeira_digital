@@ -21,7 +21,7 @@ export default function EditarContatoDeEmergencia() {
     } catch (error) {
       router.push(`/${loja}/admin/auth`)
     }
-  }, [id])
+  }, [id, loja, router])
 
   async function handleSubmit({
     contato,

@@ -46,7 +46,7 @@ export default function BarraInformacoes() {
       loadData()
     }
     return () => {}
-  }, [loja])
+  }, [loja, loadData, router.isReady])
 
   const temInformacoes = !erro && !carregando
   const temErro = !carregando && erro
