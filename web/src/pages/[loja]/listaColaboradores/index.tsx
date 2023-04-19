@@ -32,7 +32,7 @@ export default function ColaboradoresLista() {
 
   const temColaboradores = colaboradoresFiltrados.length > 0
   const listaVazia = !carregando && !temColaboradores
-
+  console.log(colaboradoresFiltrados)
   return (
     <>
       <Layout botaoVoltar carregando={carregando} erroCarregar={erro}>
@@ -66,7 +66,6 @@ export default function ColaboradoresLista() {
                 <TableHead
                   head={[
                     { nome: 'Status' },
-                    { nome: 'Brigadista' },
                     { nome: 'Nome' },
                     { nome: 'Ação', textAlign: 'center' },
                   ]}
@@ -84,15 +83,6 @@ export default function ColaboradoresLista() {
                           )}
 
                           <span>{usuario.Status}</span>
-                        </StatusBadge>
-                      </TDiv>
-                      <TDiv width={5} textAlign="center">
-                        <StatusBadge status={usuario.Brigadista}>
-                          {usuario.Brigadista === 'Sim' ? (
-                            <MdCheck size={32} color={'green'} />
-                          ) : (
-                            <MdClose size={32} color={'red'} />
-                          )}
                         </StatusBadge>
                       </TDiv>
                       <TDiv>{usuario.Nome}</TDiv>
