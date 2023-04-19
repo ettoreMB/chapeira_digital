@@ -1,4 +1,4 @@
-import { MdCheck } from 'react-icons/md'
+import { MdCheck, MdClose } from 'react-icons/md'
 import { BsFillCircleFill } from 'react-icons/bs'
 import { FaPlus, FaRegEdit, FaRegTrashAlt } from 'react-icons/fa'
 
@@ -94,9 +94,11 @@ export default function Lista() {
                 <span>{usuario.Status}</span>
               </StatusBadge>
             </TDiv>
-            <TDiv width={5}>
-              {usuario.Brigadista === 'Sim' && (
+            <TDiv width={5} textAlign="center">
+              {usuario.Brigadista === 'Sim' ? (
                 <MdCheck size={32} color={'green'} />
+              ) : (
+                <MdClose size={32} color={'red'} />
               )}
             </TDiv>
             <TDiv width={5}>

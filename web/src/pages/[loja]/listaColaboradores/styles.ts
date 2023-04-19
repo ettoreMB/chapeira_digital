@@ -8,7 +8,7 @@ export const StatusBadge = styled.div<TdProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 1rem;
   font-weight: bold;
   color: ${({ theme }) => theme.colors.neutral[500]};
