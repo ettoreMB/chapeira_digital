@@ -18,18 +18,20 @@ export default function BrigadistasFormados({
   return (
     <Stack>
       <DashBoardCard bgTitulo="danger" titulo="Brigadistas Formados">
-        <Stack direction="horizontal">
-          <span className="col-md-3">Total Loja</span>
-          <ProgressBar className="flex-fill" style={{ height: 32 }}>
+        <div className="row align-items-center">
+          <span className="col md-3">Total Loja</span>
+          <ProgressBar className="flex-fill  col-8" style={{ height: 32 }}>
             <ProgressBar
               variant="danger"
               now={totalBrigadistas}
+              className="flex-fill col-8"
               key={1}
               label={`${calcularPercentual(
                 totalBrigadistas,
                 total,
               )}(${totalNaoBrigadistas} Brigadistas)`}
               max={total}
+              min={0}
             />
             <ProgressBar
               variant="warning"
@@ -40,9 +42,10 @@ export default function BrigadistasFormados({
                 total,
               )}(${totalNaoBrigadistas} Não Brigadistas)`}
               max={total}
+              min={0}
             />
           </ProgressBar>
-        </Stack>
+        </div>
         {data?.map((item: any) => (
           <LinhaAndar
             key={Math.random()}

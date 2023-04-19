@@ -9,9 +9,10 @@ import PresentesAusentes from './components/PresentesAusentes'
 import BrigadistasFormados from './components/BrigadistasFormados'
 import PresentesPorUniverso from './components/PresentesPorUniverso'
 import BrigadistasPresentesPorZona from './components/BrigadistasPresentesPorZona'
-import Stack from 'react-bootstrap/Stack'
+
 import { somaResultados } from '@/utils/somaResultadoLojas'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { DashboadContainer } from './styles'
 
 export default function DashBoard() {
   const router = useRouter()
@@ -41,7 +42,7 @@ export default function DashBoard() {
 
   return (
     <Layout botaoVoltar carregando={carregando} erroCarregar={erro}>
-      <Stack direction="horizontal" gap={3}>
+      <DashboadContainer>
         <PresentesAusentes
           titulo="Colaboradores"
           bg="primary"
@@ -54,7 +55,7 @@ export default function DashBoard() {
           presentes={somaResultados(dados, 'brigadistas_presentes')}
           ausentes={somaResultados(dados, 'brigadistas_ausentes')}
         />
-      </Stack>
+      </DashboadContainer>
 
       <BrigadistasFormados
         totalBrigadistas={somaResultados(dados, 'total_brigadistas')}

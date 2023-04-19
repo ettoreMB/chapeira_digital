@@ -24,6 +24,7 @@ export default function LinhaAndar({
           nFormados > 1 ? 'Brigadistas' : 'Brigadista'
         })`}
         max={total}
+        min={0}
       />
       <ProgressBar
         variant="warning"
@@ -33,6 +34,7 @@ export default function LinhaAndar({
           nFormados > 1 ? 'Não Brigadistas' : 'Não Brigadista'
         })`}
         max={total}
+        min={0}
       />
     </LinhaDashBoard>
   )

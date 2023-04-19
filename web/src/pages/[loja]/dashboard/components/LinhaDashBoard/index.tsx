@@ -1,6 +1,5 @@
 import { ReactNode } from 'react'
 import { ProgressBar } from 'react-bootstrap'
-import Stack from 'react-bootstrap/Stack'
 import NenhumColaborador from '../NenhumColaborador'
 
 interface Props {
@@ -16,14 +15,17 @@ export default function LinhaDashBoard({
   mensagem = 'Não há registros',
 }: Props) {
   return (
-    <Stack direction="horizontal" className="my-2">
-      <span className="col-md-3">{titulo}</span>
+    <div className="row align-items-center">
+      <span className="col-2 my-2">{titulo}</span>
       {total === 0 && <NenhumColaborador mensagem={mensagem} />}
       {total > 0 && (
-        <ProgressBar className="flex-fill rounded" style={{ height: 32 }}>
+        <ProgressBar
+          className="flex-fill rounded col-10 my-2"
+          style={{ height: 32 }}
+        >
           {children}
         </ProgressBar>
       )}
-    </Stack>
+    </div>
   )
 }

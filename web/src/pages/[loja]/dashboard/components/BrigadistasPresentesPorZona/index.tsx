@@ -18,13 +18,13 @@ export default function BrigadistasPresentesPorZona({
   return (
     <Stack>
       <DashBoardCard titulo="Brigadistas presentes por Zona" bgTitulo="danger">
-        <Stack direction="horizontal">
-          <span className="col-md-3">Total Loja</span>
+        <div className="row">
+          <span className="col-2  flex-fill md-3">Total Loja</span>
           {total === 0 ? (
             <NenhumColaborador mensagem="Não há brigadistas Cadastrados" />
           ) : (
             <ProgressBar
-              className="flex-fill"
+              className="flex-fill col-9"
               style={{ height: 32 }}
               max={total}
             >
@@ -47,7 +47,8 @@ export default function BrigadistasPresentesPorZona({
               />
             </ProgressBar>
           )}
-        </Stack>
+        </div>
+
         {data?.map((item: any) => (
           <LinhaZona
             key={Math.random()}
