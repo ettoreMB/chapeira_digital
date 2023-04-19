@@ -50,6 +50,7 @@ export default function BarraInformacoes() {
 
   const temInformacoes = !erro && !carregando
   const temErro = !carregando && erro
+
   return (
     <Container>
       <div className="box">

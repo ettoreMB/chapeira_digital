@@ -9,6 +9,10 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   padding: 0.3rem;
+  @media (max-width: 600px) {
+    overflow: scroll;
+    display: '-webkit-inline-box';
+  }
 
   .box {
     max-width: 1140px;
@@ -18,6 +22,12 @@ export const Container = styled.div`
     align-items: flex-start;
     justify-content: space-between;
     margin: 0 auto;
+
+    @media (max-width: 750px) {
+      overflow: scroll;
+      display: -webkit-inline-box;
+      gap: 0.5rem;
+    }
   }
 `
 export const Loading = styled.div`

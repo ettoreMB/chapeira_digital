@@ -10,6 +10,7 @@ export const Info = styled.div<InfoProps>`
   border-radius: 8px;
   gap: 0.5rem;
   display: flex;
+  align-items: center;
   span {
     color: ${({ theme }) => theme.colors.zinc['zinc-50']};
   }

@@ -40,4 +40,8 @@ export const Container = styled.div`
     width: 250px;
     justify-content: center;
   }
+  @media (max-width: 600px) {
+    width: 500px;
+    justify-content: center;
+  }
 `

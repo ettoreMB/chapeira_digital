@@ -14,4 +14,9 @@ export const Container = styled.div`
     padding: 0 1rem;
     justify-content: center;
   }
+
+  @media (max-width: 600px) {
+    padding: 0 1rem;
+    display: flex;
+  }
 `
