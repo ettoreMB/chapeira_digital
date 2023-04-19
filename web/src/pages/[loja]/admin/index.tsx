@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { Container, LinkContainer } from './styles'
 import { BsGear } from 'react-icons/bs'
 export default function AdminHome() {
-  const { loja } = useRouter().query
+  const { loja, id } = useRouter().query
 
   return (
     <Layout admin>
@@ -39,8 +39,8 @@ export default function AdminHome() {
           <BsGear size={24} />
           <Link
             href={{
-              pathname: `/[loja]/admin/editarLoja`,
-              query: { loja },
+              pathname: `/[loja]/admin/[id]/editarLoja`,
+              query: { loja, id },
             }}
           >
             Informações loja
