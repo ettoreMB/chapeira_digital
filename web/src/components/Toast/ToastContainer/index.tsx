@@ -42,7 +42,7 @@ export default function ToastContainer() {
 
   return (
     <Container>
-      {messages.map((message) => (
+      {messages?.map((message) => (
         <ToastMessage
           key={message.id}
           message={message}

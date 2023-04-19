@@ -1,15 +1,14 @@
 import Layout from '@/layout'
 
 import Lista from './components/Lista'
-import UseListaColaboradores from '../../listaColaboradores/useListaColaboradores'
-import Loader from '@/components/Loader'
+import useListaColaboradores from '../../../../hooks/useListaColaboradores'
 
 export default function ListaColaboradoresAdmin() {
-  const { carregando } = UseListaColaboradores()
+  const { carregando } = useListaColaboradores()
   return (
     <>
-      <Layout botaoVoltar admin>
-        {carregando ? <Loader carregando={carregando} /> : <Lista />}
+      <Layout botaoVoltar admin carregando={carregando}>
+        <Lista />
       </Layout>
     </>
   )

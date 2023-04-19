@@ -1,4 +1,4 @@
-import { DashBoardCoard } from '../DashBoardCard'
+import DashBoardCard from '../DashBoardCard'
 import LinhaDashBoard from '../LinhaDashBoard'
 import { ProgressBar, Stack } from 'react-bootstrap'
 import { somaResultados } from '@/utils/somaResultadoLojas'
@@ -20,7 +20,7 @@ export default function OutrosDashBoard({ data }: Props) {
   }
   return (
     <Stack>
-      <DashBoardCoard titulo="Outros" bgTitulo="dark">
+      <DashBoardCard titulo="Outros" bgTitulo="dark">
         <LinhaDashBoard total={terceiros.total} titulo="TERCEIROS">
           <ProgressBar
             className="flex-fill shadow flex-fill"
@@ -61,7 +61,7 @@ export default function OutrosDashBoard({ data }: Props) {
             max={visitantes.total}
           />
         </LinhaDashBoard>
-      </DashBoardCoard>
+      </DashBoardCard>
     </Stack>
   )
 }

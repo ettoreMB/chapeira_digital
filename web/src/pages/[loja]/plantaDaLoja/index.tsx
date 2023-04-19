@@ -41,7 +41,7 @@ export default function PlantaDaLoja() {
     <Layout botaoVoltar carregando={carregando} erroCarregar={erro}>
       <h1>Planta da loja</h1>
 
-      {images.map((imagem: ImagesProps) => (
+      {images?.map((imagem: ImagesProps) => (
         <ImageContainer key={Math.random()}>
           <span>{!imagem.descricao && 'Planta da Loja'}</span>
           <div className="imageBox">

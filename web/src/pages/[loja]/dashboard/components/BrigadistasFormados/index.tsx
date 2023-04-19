@@ -1,7 +1,7 @@
 import { calcularPercentual } from '@/utils/calculaPorcentagem'
 import { ProgressBar } from 'react-bootstrap'
 import Stack from 'react-bootstrap/Stack'
-import { DashBoardCoard } from '../DashBoardCard'
+import DashBoardCard from '../DashBoardCard'
 import LinhaAndar from './LinhaAndar'
 
 interface dashProps {
@@ -17,7 +17,7 @@ export default function BrigadistasFormados({
   const total = totalBrigadistas + totalNaoBrigadistas
   return (
     <Stack>
-      <DashBoardCoard bgTitulo="danger" titulo="Brigadistas Formados">
+      <DashBoardCard bgTitulo="danger" titulo="Brigadistas Formados">
         <Stack direction="horizontal">
           <span className="col-md-3">Total Loja</span>
           <ProgressBar className="flex-fill" style={{ height: 32 }}>
@@ -43,7 +43,7 @@ export default function BrigadistasFormados({
             />
           </ProgressBar>
         </Stack>
-        {data.map((item: any) => (
+        {data?.map((item: any) => (
           <LinhaAndar
             key={Math.random()}
             titulo={`Zona ${item.Zona} (${item.Andar}º Aandar)`}
@@ -51,7 +51,7 @@ export default function BrigadistasFormados({
             nNaoFormados={item.total_colaboradores_nao_brigadistas}
           />
         ))}
-      </DashBoardCoard>
+      </DashBoardCard>
     </Stack>
   )
 }

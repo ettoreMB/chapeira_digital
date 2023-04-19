@@ -15,7 +15,7 @@ interface LojaProps {
   UF: string
 }
 
-export default function UseEditarLoja() {
+export default function useEditarLoja() {
   const [lojaData, setLojaData] = useState<LojaProps>()
   const router = useRouter()
   const { loja } = router.query

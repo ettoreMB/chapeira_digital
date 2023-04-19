@@ -85,7 +85,7 @@ export default function Home() {
       <h2>Selecione o estado</h2>
       <Select onChange={handleMudarFiltroUF} value={filtroUF}>
         <option value={''}>Escolha o Estado</option>
-        {estados.map((estado) => (
+        {estados?.map((estado) => (
           <option key={estado} value={estado}>
             {estado}
           </option>

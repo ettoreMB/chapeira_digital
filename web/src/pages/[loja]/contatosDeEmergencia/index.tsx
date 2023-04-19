@@ -36,7 +36,7 @@ export default function ContatosDeEmergencia() {
   return (
     <Layout botaoVoltar carregando={carregando} erroCarregar={erro}>
       <>
-        {contatos.map((contato: ContatoProps) => (
+        {contatos?.map((contato: ContatoProps) => (
           <Card key={Math.random()}>
             <h1>{contato.Descricao}</h1>
             <strong>{contato.Telefone}</strong>

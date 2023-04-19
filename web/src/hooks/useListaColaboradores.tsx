@@ -23,7 +23,7 @@ interface ColaboradorCheckInProps {
   universo: string | undefined
 }
 
-export default function UseListaColaboradores() {
+export default function useListaColaboradores() {
   const router = useRouter()
   const { loja, universoId, tipo } = router.query
   const [busca, setBusca] = useState('')

@@ -10,7 +10,7 @@ import BarraDePesquisa from '@/components/BarraDePesquisa'
 
 import { FaRegEdit, FaPlus, FaRegTrashAlt } from 'react-icons/fa'
 import { Table } from './styles'
-import UseUniversos from '../../universos/useUniversos'
+import UseUniversos from '../../../../hooks/useUniversos'
 
 import Modal from '@/components/Modal'
 import { useTheme } from 'styled-components'
@@ -63,7 +63,7 @@ export default function ListaUniversosAdmin() {
                 ]}
               />
               <tbody>
-                {universosFiltrados.map((universo, index) => (
+                {universosFiltrados?.map((universo, index) => (
                   <TRow key={Math.random()} numero={index}>
                     <TDiv>{universo.Universo}</TDiv>
                     <TDiv width={1} textAlign="center">

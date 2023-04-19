@@ -9,7 +9,7 @@ import ListaVazia from '@/components/ListaVazia'
 
 import { MdCheck, MdClose } from 'react-icons/md'
 import { StatusBadge } from './styles'
-import UseListaColaboradores from './useListaColaboradores'
+import useListaColaboradores from '../../../hooks/useListaColaboradores'
 import BarraDePesquisa from '@/components/BarraDePesquisa'
 import CheckInButton from './components/CheckInButton'
 import Modal from '@/components/Modal'
@@ -28,7 +28,7 @@ export default function ColaboradoresLista() {
     handleBusca,
     handleColaboradorStatusFiltro,
     handleFecharModal,
-  } = UseListaColaboradores()
+  } = useListaColaboradores()
 
   const temColaboradores = colaboradoresFiltrados.length > 0
   const listaVazia = !carregando && !temColaboradores
@@ -72,7 +72,7 @@ export default function ColaboradoresLista() {
                 />
 
                 <tbody>
-                  {colaboradoresFiltrados.map((usuario, index) => (
+                  {colaboradoresFiltrados?.map((usuario, index) => (
                     <TRow key={Math.random()} numero={index}>
                       <TDiv width={12}>
                         <StatusBadge status={usuario.Status}>

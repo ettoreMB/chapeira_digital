@@ -103,7 +103,7 @@ export default function ListaContatosDeEmergenciaAdmin() {
               ]}
             />
             <tbody>
-              {contatosFiltrados.map((contato, index) => (
+              {contatosFiltrados?.map((contato, index) => (
                 <TRow key={Math.random()} numero={index}>
                   <TDiv>{contato.Descricao}</TDiv>
                   <TDiv>{contato.Telefone}</TDiv>

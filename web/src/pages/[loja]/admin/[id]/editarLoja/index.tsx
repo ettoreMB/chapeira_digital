@@ -6,9 +6,10 @@ import { StyledInput } from '@/components/StyledInput'
 import Layout from '@/layout'
 
 import { Form } from './styles'
-import UseEditarLoja from './useEditarLoja'
+import useEditarLoja from '../../../../../hooks/useEditarLoja'
 
 export default function Loja() {
+  const use = useEditarLoja()
   const {
     lojaData,
     endereco,
@@ -21,7 +22,7 @@ export default function Loja() {
     handleHorario,
     handleSubmit,
     carregarLoja,
-  } = UseEditarLoja()
+  } = use
   return (
     <Layout botaoVoltar admin>
       <Form>

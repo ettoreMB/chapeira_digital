@@ -10,7 +10,7 @@ import { TDiv } from '@/components/Table/TDiv'
 import { StatusBadge } from './styles'
 import Button from '@/components/Button'
 
-import UseListaColaboradores from '@/pages/[loja]/listaColaboradores/useListaColaboradores'
+import useListaColaboradores from '@/hooks/useListaColaboradores'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import BarraDePesquisa from '@/components/BarraDePesquisa'
@@ -31,7 +31,7 @@ export default function Lista() {
     handleBusca,
     handleColaboradorStatusFiltro,
     handleDelete,
-  } = UseListaColaboradores()
+  } = useListaColaboradores()
 
   return (
     <>
@@ -83,7 +83,7 @@ export default function Lista() {
           ]}
         />
 
-        {colaboradoresFiltrados.map((usuario, index) => (
+        {colaboradoresFiltrados?.map((usuario, index) => (
           <TRow key={Math.random()} numero={index}>
             <TDiv>{usuario.Nome}</TDiv>
             <TDiv width={12}>

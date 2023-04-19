@@ -1,10 +1,10 @@
 import { Botao, UniversosContainer } from './styles'
 
 import Layout from '@/layout'
-import UseUniversos from './useUniversos'
+import useUniversos from '../../../hooks/useUniversos'
 
 export default function Universos() {
-  const { carregando, universos, router, loja, erro } = UseUniversos()
+  const { carregando, universos, router, loja, erro } = useUniversos()
   const temUniversos = !carregando && !erro
   return (
     <>

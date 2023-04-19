@@ -83,7 +83,7 @@ const ColaboradorForm = forwardRef(({ titulo, onSubmit }: Props, ref) => {
           {!universoId && (
             <option value={undefined}>Selecione Um Universo</option>
           )}
-          {universos.map((universo) => (
+          {universos?.map((universo) => (
             <option key={universo.Id} value={universo.Id}>
               {universo.Universo}
             </option>

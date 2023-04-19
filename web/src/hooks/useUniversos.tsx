@@ -12,7 +12,7 @@ interface UniversoProps {
   Universo: string
 }
 
-export default function UseUniversos() {
+export default function useUniversos() {
   const router = useRouter()
 
   const { loja } = router.query

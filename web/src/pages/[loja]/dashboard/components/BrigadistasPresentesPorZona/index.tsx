@@ -1,6 +1,6 @@
 import { ProgressBar } from 'react-bootstrap'
 import Stack from 'react-bootstrap/Stack'
-import { DashBoardCoard } from '../DashBoardCard'
+import DashBoardCard from '../DashBoardCard'
 import NenhumColaborador from '../NenhumColaborador'
 import LinhaZona from './LinhaZona'
 
@@ -17,7 +17,7 @@ export default function BrigadistasPresentesPorZona({
   const total = totalPresentes + totalAusentes
   return (
     <Stack>
-      <DashBoardCoard titulo="Brigadistas presentes por Zona" bgTitulo="danger">
+      <DashBoardCard titulo="Brigadistas presentes por Zona" bgTitulo="danger">
         <Stack direction="horizontal">
           <span className="col-md-3">Total Loja</span>
           {total === 0 ? (
@@ -48,7 +48,7 @@ export default function BrigadistasPresentesPorZona({
             </ProgressBar>
           )}
         </Stack>
-        {data.map((item: any) => (
+        {data?.map((item: any) => (
           <LinhaZona
             key={Math.random()}
             titulo={`Zona ${item.Zona} (${item.Andar}º Aandar)`}
@@ -57,7 +57,7 @@ export default function BrigadistasPresentesPorZona({
             total={item.total_brigadistas}
           />
         ))}
-      </DashBoardCoard>
+      </DashBoardCard>
     </Stack>
   )
 }

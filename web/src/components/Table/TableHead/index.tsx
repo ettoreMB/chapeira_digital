@@ -12,7 +12,7 @@ export default function TableHead({ head }: Props) {
   return (
     <Container>
       <tr>
-        {head.map((h) => (
+        {head?.map((h) => (
           <Th textAlign={h.textAlign} key={h.nome}>
             {h.nome}
           </Th>

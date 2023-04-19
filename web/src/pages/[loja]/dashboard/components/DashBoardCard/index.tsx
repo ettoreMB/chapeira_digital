@@ -9,7 +9,7 @@ interface Props {
   children: ReactNode
 }
 
-export function DashBoardCoard({ titulo, bgTitulo, children }: Props) {
+export default function DashBoardCard({ titulo, bgTitulo, children }: Props) {
   return (
     <Card className="col  my-2">
       <Card.Title

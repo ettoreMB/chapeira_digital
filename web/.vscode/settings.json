@@ -1,8 +1,0 @@
-{
-  "appService.zipIgnorePattern": [
-    "node_modules{,/**}",
-    ".vscode{,/**}"
-  ],
-  "appService.defaultWebAppToDeploy": "/subscriptions/45ab9953-9bd5-4ce6-90dc-2f7d1e896379/resourceGroups/Decathlon/providers/Microsoft.Web/sites/chapeiraFront",
-  "appService.deploySubpath": "."
-}
