@@ -12,5 +12,6 @@ export const Container = styled.div`
 
   @media (max-width: 1180px) {
     padding: 0 1rem;
+    justify-content: center;
   }
 `
