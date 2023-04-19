@@ -30,7 +30,9 @@ export const Botao = styled.button<ButtonProps>`
   padding: 1.28rem 0;
   font-size: 2rem;
   transition: 0.2 ease-in;
-
+  @media (max-width: 400px) {
+    width: 100%;
+  }
   &:hover {
     background: ${({ theme }) => theme.colors.sky['sky-500']};
   }

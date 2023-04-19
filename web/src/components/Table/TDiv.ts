@@ -13,6 +13,9 @@ export const TDiv = styled.td<Props>`
   text-align: ${({ textAlign }) => textAlign || 'left'};
   justify-content: ${({ textAlign }) => textAlign || 'left'};
 
+  @media (max-width: 400px) {
+    padding: 0.3rem 0.8rem;
+  }
   a {
     color: ${({ theme }) => theme.colors.neutral[500]};
   }

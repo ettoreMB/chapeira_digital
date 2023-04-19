@@ -14,6 +14,7 @@ export const Head = styled.header`
   max-width: 1140px;
   margin: 0 auto;
   display: flex;
+  height: 100%;
   div {
     color: white;
     align-items: baseline;
@@ -26,6 +27,9 @@ export const Head = styled.header`
 export const LogoContainer = styled.div`
   h1 {
     font-size: 2.25rem;
+    @media (max-width: 398px) {
+      font-size: 1.8rem;
+    }
   }
   span {
     font-size: 1.5rem;
