@@ -13,13 +13,13 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <ThemeProvider theme={defaultTheme}>
+        <GlobalStyle />
         <ToastContainer />
         <LojaSiglaProvider>
           <AuthProvider>
             <Component {...pageProps} />
           </AuthProvider>
         </LojaSiglaProvider>
-        <GlobalStyle />
       </ThemeProvider>
     </>
   )

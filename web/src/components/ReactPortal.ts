@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 
 interface ReactPotalProps {
@@ -10,26 +10,26 @@ export default function ReactPortal({
   containerId,
   children,
 }: ReactPotalProps) {
-  // if (typeof window === 'undefined') {
-  //   return null
-  // }
-  // let container = document.getElementById(containerId)
-  // if (!container) {
-  //   container = document.createElement('div')
-  //   container.setAttribute('id', containerId)
-  //   document.body.appendChild(container)
-  // }
+  if (typeof window === 'undefined') {
+    return null
+  }
+  let container = document.getElementById(containerId)
+  if (!container) {
+    container = document.createElement('div')
+    container.setAttribute('id', containerId)
+    document.body.appendChild(container)
+  }
 
-  // return createPortal(children, container)
-  const [mounted, setMounted] = useState(false)
+  return createPortal(children, container)
+  // const [mounted, setMounted] = useState(false)
 
-  useEffect(() => {
-    setMounted(true)
+  // useEffect(() => {
+  //   setMounted(true)
 
-    return () => setMounted(false)
-  }, [])
+  //   return () => setMounted(false)
+  // }, [])
 
-  return mounted
-    ? createPortal(children, document.querySelector<any>(`#${containerId}`))
-    : null
+  // return mounted
+  //   ? createPortal(children, document.querySelector<any>(`#${containerId}`))
+  //   : null
 }
