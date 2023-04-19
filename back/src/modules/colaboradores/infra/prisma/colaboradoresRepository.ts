@@ -96,7 +96,7 @@ export class ColaboradoresRepository implements IColaboradorRepository {
       where: {
         Loja_Sigla: sigla,
         Ativo: 'Sim',
-        OR: [{ Tipo: 'Colaborador' }],
+        OR: [{ Tipo: 'Colaborador' }, { Tipo: 'Brigadista' }],
       },
       include: {
         tb_universos: {
