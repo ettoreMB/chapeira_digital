@@ -3,7 +3,7 @@ import { Html, Head, Main, NextScript } from 'next/document'
 export default function Document() {
   return (
     <Html lang="en">
-      <Head></Head>
+      <Head title="chapeira digital" />
 
       <body>
         <div id="loader-root" />
