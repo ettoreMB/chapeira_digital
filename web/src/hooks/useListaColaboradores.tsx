@@ -120,12 +120,10 @@ export default function useListaColaboradores() {
   }
 
   useEffect(() => {
-    if (router.isReady) {
+    if (loja) {
       loadColaboradores()
     }
-
-    return () => {}
-  }, [tipo, universoId, loadColaboradores, router.isReady])
+  }, [tipo, universoId, loadColaboradores, loja])
 
   return {
     loja,

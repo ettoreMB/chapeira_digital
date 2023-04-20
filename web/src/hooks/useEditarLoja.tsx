@@ -60,12 +60,12 @@ export default function useEditarLoja() {
     }
   }
   useEffect(() => {
-    if (router.isReady) {
+    if (loja) {
       carregarLoja()
     }
 
     return () => {}
-  }, [router.isReady, carregarLoja])
+  }, [loja, carregarLoja])
 
   return {
     lojaData,

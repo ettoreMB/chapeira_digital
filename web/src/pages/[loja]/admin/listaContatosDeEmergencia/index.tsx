@@ -68,12 +68,12 @@ export default function ListaContatosDeEmergenciaAdmin() {
     setModalVisivel(false)
   }
   useEffect(() => {
-    if (router.isReady) {
+    if (loja) {
       loadContatos()
     }
 
     return () => {}
-  }, [router.isReady, loja, loadContatos])
+  }, [loja, loadContatos])
   return (
     <>
       <Layout botaoVoltar admin>

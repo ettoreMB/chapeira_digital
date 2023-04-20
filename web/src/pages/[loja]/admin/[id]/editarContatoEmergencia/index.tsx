@@ -41,12 +41,12 @@ export default function EditarContatoDeEmergencia() {
     }
   }
   useEffect(() => {
-    if (router.isReady) {
+    if (loja && id) {
       carregarContato()
     }
 
     return () => {}
-  }, [carregarContato, router.isReady])
+  }, [carregarContato, id, loja])
 
   return (
     <Layout botaoVoltar>

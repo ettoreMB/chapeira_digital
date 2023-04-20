@@ -32,11 +32,11 @@ export default function PlantaDaLoja() {
       }
     }
 
-    if (router.isReady) {
+    if (loja) {
       loadImagens()
     }
     return () => {}
-  }, [router.isReady, loja])
+  }, [loja])
   return (
     <Layout botaoVoltar carregando={carregando} erroCarregar={erro}>
       <h1>Planta da loja</h1>

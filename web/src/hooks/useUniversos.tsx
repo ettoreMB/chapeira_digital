@@ -18,7 +18,7 @@ export default function useUniversos() {
   const { loja } = router.query
 
   const [idParaDeletar, setIdParaDeletar] = useState(0)
-  const [carregando, setCarregando] = useState(false)
+  const [carregando, setCarregando] = useState(true)
   const [universos, setUniversos] = useState<UniversoProps[]>([])
   const [busca, setBusca] = useState('')
   const [erro, setErro] = useState(false)
@@ -35,7 +35,6 @@ export default function useUniversos() {
 
   const loadUniversos = useCallback(async () => {
     try {
-      setCarregando(true)
       const data = await UniversoService.listarUniversos(loja)
       setUniversos(data)
     } catch {
@@ -80,12 +79,10 @@ export default function useUniversos() {
   }
 
   useEffect(() => {
-    if (router.isReady) {
+    if (loja) {
       loadUniversos()
     }
-
-    return () => {}
-  }, [loja, router.isReady, loadUniversos])
+  }, [loja, loadUniversos])
 
   return {
     carregando,

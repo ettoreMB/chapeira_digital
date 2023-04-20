@@ -8,7 +8,7 @@ export default function useCheckToken() {
   useEffect(() => {
     const { loja } = router.query
     const { '@chapeiraDigital_token': token } = parseCookies()
-    if (router.isReady) {
+    if (loja) {
       if (!token) {
         destroyCookie(undefined, '@chapeiraDigital_token')
         destroyCookie(undefined, '@chapeiraDigital_usuario')

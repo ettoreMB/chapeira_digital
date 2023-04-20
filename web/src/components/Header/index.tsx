@@ -17,7 +17,7 @@ export default function Header({ titulo, usuario }: HeaderProps) {
         <LogoContainer>
           <Link href={`/${titulo}`}>
             <div>
-              <h1>CHAPEIRA DIGITAL</h1>
+              <h1>CHAPEIRA</h1>
               <span>{titulo}</span>
             </div>
           </Link>

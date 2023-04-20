@@ -51,26 +51,16 @@ export default function PresentesAusentes({
           <div className="row">
             <div className="border col-10">Ausentes</div>
             <div className="col-1 p-0">
-              <InputGroup.Text className="input-group-text ms-auto border bg-success text-white justify-content-center">
+              <InputGroup.Text className="input-group-text ms-auto border bg-danger text-white justify-content-center">
                 {calcularPercentual(ausentes, total)}
               </InputGroup.Text>
             </div>
             <div className="col-1 p-0">
-              <InputGroup.Text className="input-group-text  border bg-success text-white justify-content-center">
+              <InputGroup.Text className="input-group-text  border bg-danger text-white justify-content-center">
                 {ausentes}
               </InputGroup.Text>
             </div>
           </div>
-
-          {/* <Stack direction="row">
-            <div className="flex-fill p-2 border">Ausentes</div>
-            <InputGroup.Text className="input-group-text ms-auto border bg-light">
-              {calcularPercentual(ausentes, total)}
-            </InputGroup.Text>
-            <InputGroup.Text className="input-group-text  border bg-light">
-              {ausentes}
-            </InputGroup.Text>
-          </Stack> */}
         </Stack>
       </Card.Body>
     </Card>

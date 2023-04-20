@@ -1,11 +1,9 @@
-import { lojaSiglaContext } from '@/contexts/lojaSiglaContext'
 import { api } from '@/services/api'
 import { useRouter } from 'next/router'
 import {
   FormEvent,
   SyntheticEvent,
   useCallback,
-  useContext,
   useEffect,
   useImperativeHandle,
   useState,
@@ -41,7 +39,7 @@ interface UseColaboradorProps {
   onSubmit: (() => Promise<void>) | ((data: any) => Promise<void>)
 }
 
-export default function UseColaboradorForm({
+export default function useColaboradorForm({
   ref,
   onSubmit,
 }: UseColaboradorProps) {
@@ -60,12 +58,12 @@ export default function UseColaboradorForm({
   const [admissaoData, setAdmissaoData] = useState('')
   const [observacao, setObservacao] = useState('')
   const [universos, setUniversos] = useState<UniversoProps[]>([])
-  const { lojaSigla } = useContext(lojaSiglaContext)
+  const { loja } = router.query
 
   const carregarUniversos = useCallback(async () => {
-    const { data } = await api.get(`/universos/${lojaSigla}`)
+    const { data } = await api.get(`/universos/${loja}`)
     setUniversos(data)
-  }, [lojaSigla])
+  }, [loja])
   function handleAdministrador(e: FormEvent<HTMLSelectElement>) {
     setAdministrador(e.currentTarget.value)
   }
@@ -108,7 +106,7 @@ export default function UseColaboradorForm({
   function handleSubmit(e: SyntheticEvent) {
     e.preventDefault()
     onSubmit({
-      lojaSigla,
+      loja,
       nome,
       email,
       universoId,
@@ -160,11 +158,11 @@ export default function UseColaboradorForm({
   )
 
   useEffect(() => {
-    if (lojaSigla) {
+    if (loja) {
       carregarUniversos()
     }
     return () => {}
-  }, [carregarUniversos, router.isReady, lojaSigla])
+  }, [carregarUniversos, loja])
 
   return {
     administrador,

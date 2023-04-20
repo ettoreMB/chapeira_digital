@@ -13,6 +13,7 @@ import useListaColaboradores from '../../../hooks/useListaColaboradores'
 import BarraDePesquisa from '@/components/BarraDePesquisa'
 import CheckInButton from './components/CheckInButton'
 import Modal from '@/components/Modal'
+import { useTheme } from 'styled-components'
 
 export default function ColaboradoresLista() {
   const {
@@ -29,10 +30,10 @@ export default function ColaboradoresLista() {
     handleColaboradorStatusFiltro,
     handleFecharModal,
   } = useListaColaboradores()
-
+  const { colors } = useTheme()
   const temColaboradores = colaboradoresFiltrados.length > 0
   const listaVazia = !carregando && !temColaboradores
-  console.log(colaboradoresFiltrados)
+
   return (
     <>
       <Layout botaoVoltar carregando={carregando} erroCarregar={erro}>
@@ -65,7 +66,7 @@ export default function ColaboradoresLista() {
               <Table>
                 <TableHead
                   head={[
-                    { nome: 'Status' },
+                    { nome: 'Status', textAlign: 'center' },
                     { nome: 'Nome' },
                     { nome: 'Ação', textAlign: 'center' },
                   ]}
@@ -77,9 +78,12 @@ export default function ColaboradoresLista() {
                       <TDiv width={12}>
                         <StatusBadge status={usuario.Status}>
                           {usuario.Status === 'Presente' ? (
-                            <MdCheck size={32} color={'green'} />
+                            <MdCheck
+                              size={30}
+                              color={`${colors.sky['sky-500']}`}
+                            />
                           ) : (
-                            <MdClose size={32} color={'red'} />
+                            <MdClose size={30} color={'red'} />
                           )}
 
                           <span>{usuario.Status}</span>

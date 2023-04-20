@@ -16,7 +16,7 @@ export const Button = styled.button<Props>`
   color: ${({ theme }) => theme.colors.zinc['zinc-50']};
   font-weight: bold;
   background: ${({ status, theme }) =>
-    status === 'Presente' ? theme.colors.red : theme.colors.green};
+    status === 'Presente' ? theme.colors.red : theme.colors.sky['sky-500']};
 
   &[disabled] {
     background: #ccc !important;

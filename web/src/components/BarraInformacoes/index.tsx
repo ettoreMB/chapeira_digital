@@ -1,52 +1,12 @@
-import { api } from '@/services/api'
-import { useRouter } from 'next/router'
-import { useCallback, useEffect, useState } from 'react'
+import useBarraDeInformacoes from '@/hooks/useBarraDeInformacoes'
 import Informacao from '../informacao'
 
 import Spinner from '../Spinner'
 
 import { Container, ErroContainer, Loading } from './styles'
 
-interface DadosProps {
-  brigadistas: number
-  colaboradores: number
-  offline: number
-  terceiros: number
-  visitantes: number
-}
-
 export default function BarraInformacoes() {
-  const [dados, setDados] = useState<DadosProps>({
-    brigadistas: 0,
-    colaboradores: 0,
-    offline: 0,
-    terceiros: 0,
-    visitantes: 0,
-  })
-  const [carregando, setCarregando] = useState(false)
-  const [erro, setErro] = useState(false)
-  const router = useRouter()
-  const { loja } = router.query
-
-  const loadData = useCallback(async () => {
-    try {
-      setCarregando(true)
-      const { data } = await api.get(`/colaboradores/informacoes/${loja}`)
-      setCarregando(false)
-      setDados(data)
-    } catch {
-      setErro(true)
-    } finally {
-      setCarregando(false)
-    }
-  }, [loja])
-
-  useEffect(() => {
-    if (router.isReady) {
-      loadData()
-    }
-    return () => {}
-  }, [loja, loadData, router.isReady])
+  const { dados, erro, carregando } = useBarraDeInformacoes()
 
   const temInformacoes = !erro && !carregando
   const temErro = !carregando && erro
@@ -109,7 +69,7 @@ export default function BarraInformacoes() {
               tipo="servicos"
             />
             <Informacao
-              informacao={{ titulo: 'offline', valor: dados?.offline }}
+              informacao={{ titulo: 'Ausentes', valor: dados?.offline }}
               tipo="offline"
             />
           </>

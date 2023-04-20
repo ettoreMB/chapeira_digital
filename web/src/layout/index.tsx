@@ -15,6 +15,7 @@ interface LayoutProps {
   admin?: boolean
   carregando?: boolean
   erroCarregar?: boolean
+  barraInformacao?: boolean
 }
 
 export default function Layout({
@@ -22,6 +23,7 @@ export default function Layout({
   admin = false,
   carregando = false,
   erroCarregar = false,
+  barraInformacao = false,
   children,
 }: LayoutProps) {
   const router = useRouter()
@@ -30,7 +32,7 @@ export default function Layout({
   const { '@chapeiraDigital_token': token } = parseCookies()
 
   useEffect(() => {
-    if (router.isReady) {
+    if (loja) {
       if (admin && !token) {
         destroyCookie(undefined, '@chapeiraDigital_token')
         router.push({
@@ -55,7 +57,7 @@ export default function Layout({
           ) : (
             <Header titulo={loja} />
           )}
-          <BarraInformacoes />
+          {barraInformacao && <BarraInformacoes />}
           <Container>
             {botaoVoltar && <BotaoVoltar admin={admin} />}
 

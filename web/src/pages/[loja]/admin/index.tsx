@@ -1,13 +1,15 @@
+import { useContext } from 'react'
 import Link from 'next/link'
 import Layout from '@/layout'
 import { useRouter } from 'next/router'
 import { Container, LinkContainer } from './styles'
 import { BsGear } from 'react-icons/bs'
+import { lojaSiglaContext } from '@/contexts/lojaSiglaContext'
 export default function AdminHome() {
-  const { loja, id } = useRouter().query
-
+  const { loja } = useRouter().query
+  const { lojaId } = useContext(lojaSiglaContext)
   return (
-    <Layout admin>
+    <Layout admin barraInformacao>
       <Container>
         <h1>Administração Chapeira Digital</h1>
 
@@ -40,7 +42,7 @@ export default function AdminHome() {
           <Link
             href={{
               pathname: `/[loja]/admin/[id]/editarLoja`,
-              query: { loja, id },
+              query: { loja, id: lojaId },
             }}
           >
             Informações loja

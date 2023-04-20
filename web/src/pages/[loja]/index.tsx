@@ -7,7 +7,7 @@ import Layout from '@/layout'
 import servicosImg from '../../assets/Decatlhon_Servicos.png'
 import visitanteImg from '../../assets/Decathlon_Visitante.png'
 import dashBoardImg from '../../assets/DashBoard.png'
-import relatorioImg from '../../assets/Report.png'
+
 import plantaImg from '../../assets/Planta_Combate_Incendio_Small.png'
 import emergenciaImg from '../../assets/Telefone.jpg'
 import { BsPeopleFill } from 'react-icons/bs'
@@ -17,7 +17,7 @@ export default function Home() {
   const { lojaSigla } = useContext(lojaSiglaContext)
 
   return (
-    <Layout>
+    <Layout barraInformacao>
       <Container>
         <Card
           titulo="Colaboradores Chekin/out"
@@ -39,11 +39,7 @@ export default function Home() {
           img={dashBoardImg}
           link={`${lojaSigla}/dashboard`}
         />
-        <Card
-          titulo="Relátorio"
-          img={relatorioImg}
-          link={`${lojaSigla}/relatorio`}
-        />
+
         <Card
           titulo="Planta da Loja"
           img={plantaImg}

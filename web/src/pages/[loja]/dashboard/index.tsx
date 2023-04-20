@@ -34,11 +34,10 @@ export default function DashBoard() {
 
   useEffect(() => {
     setCarregando(true)
-    if (router.isReady) {
+    if (loja) {
       carregarDados()
     }
-    return () => {}
-  }, [carregarDados, router.isReady])
+  }, [carregarDados, loja])
 
   return (
     <Layout botaoVoltar carregando={carregando} erroCarregar={erro}>

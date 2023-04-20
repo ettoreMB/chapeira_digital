@@ -43,12 +43,12 @@ export default function Colaborador() {
   }
 
   useEffect(() => {
-    if (router.isReady) {
+    if (id) {
       carregarColaborador()
     }
 
     return () => {}
-  }, [carregarColaborador, router.isReady])
+  }, [carregarColaborador, id])
 
   return (
     <Layout botaoVoltar admin carregando={carregando}>

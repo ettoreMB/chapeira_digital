@@ -17,12 +17,12 @@ export default function Universo() {
   }, [id])
 
   useEffect(() => {
-    if (router.isReady) {
+    if (id) {
       carregarUniverso()
     }
 
     return () => {}
-  }, [carregarUniverso, router.isReady])
+  }, [carregarUniverso, id])
 
   async function handleSubmit(universo: CriarUniversoProps) {
     try {

@@ -250,29 +250,33 @@ export class ColaboradoresRepository implements IColaboradorRepository {
       where: {
         Loja_Sigla: loja,
         Ativo: 'Sim',
-        Tipo: 'Colaboradore',
+        Tipo: 'Colaborador',
+        Status: 'Presente',
       },
     })
     const brigadistas = await prisma.tb_Colaboradores.count({
       where: {
         Loja_Sigla: loja,
         Ativo: 'Sim',
-        Tipo: 'Colaboradore',
         Brigadista: 'Sim',
+        Status: 'Presente',
       },
     })
+
     const terceiros = await prisma.tb_Colaboradores.count({
       where: {
         Loja_Sigla: loja,
         Ativo: 'Sim',
         Tipo: 'Terceiro',
+        Status: 'Presente',
       },
     })
     const visitantes = await prisma.tb_Colaboradores.count({
       where: {
         Loja_Sigla: loja,
         Ativo: 'Sim',
-        Tipo: 'Terceiro',
+        Tipo: 'Visitante',
+        Status: 'Presente',
       },
     })
     const offline = await prisma.tb_Colaboradores.count({
