@@ -44,7 +44,7 @@ export const Container = styled.div`
     width: 500px;
     justify-content: center;
   }
-  @media (max-width: 400px) {
+  @media (max-width: 405px) {
     width: 356px;
     justify-content: center;
   }

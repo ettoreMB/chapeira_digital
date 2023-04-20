@@ -13,7 +13,7 @@ export const StatusBadge = styled.div<TdProps>`
   font-weight: bold;
   color: ${({ theme }) => theme.colors.neutral[500]};
 
-  @media (max-width: 400px) {
+  @media (max-width: 405px) {
     gap: 0.2rem;
   }
   div {

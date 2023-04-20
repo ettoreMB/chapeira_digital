@@ -5,7 +5,7 @@ export const Table = styled.table`
   width: 100%;
   text-align: left;
 
-  @media (max-width: 400px) {
+  @media (max-width: 405px) {
     width: min-content;
   }
 `
