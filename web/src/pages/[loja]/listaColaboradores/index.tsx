@@ -15,6 +15,7 @@ import CheckInButton from './components/CheckInButton'
 import Modal from '@/components/Modal'
 import { useTheme } from 'styled-components'
 import { handleData } from '@/utils/tranformarData'
+import Select from '@/components/Select'
 
 export default function ColaboradoresLista() {
   const {
@@ -27,17 +28,21 @@ export default function ColaboradoresLista() {
     colaboradorModal,
     estaSalvando,
     router,
+    universos,
+    universoSelecionado,
+    universoId,
     handleCheckIn,
     handleBusca,
     handleColaboradorStatusFiltro,
     handleFecharModal,
+    handleSelecionarUniverso,
   } = useListaColaboradores()
   const { colors } = useTheme()
   const temColaboradores = colaboradoresFiltrados.length > 0
   const listaVazia = !carregando && !temColaboradores
 
+  const { tipo } = router.query
   const paginaTitulo = () => {
-    const { tipo } = router.query
     if (tipo) {
       if (tipo === 'Terceiro') {
         return 'Serviço'
@@ -47,6 +52,7 @@ export default function ColaboradoresLista() {
 
     return 'Colaborador'
   }
+  console.log(universoId)
   return (
     <>
       <Layout
@@ -61,6 +67,19 @@ export default function ColaboradoresLista() {
           value={busca}
           disabled={!!colaboradorStatus}
         >
+          {universoId && (
+            <Select
+              value={universoSelecionado}
+              onChange={handleSelecionarUniverso}
+            >
+              {universos.map((universo) => (
+                <option key={universo.Id} value={universo.Id}>
+                  {universo.Universo}
+                </option>
+              ))}
+            </Select>
+          )}
+
           <Button
             type="button"
             value="Presente"
@@ -78,6 +97,7 @@ export default function ColaboradoresLista() {
             Ausentes
           </Button>
         </BarraDePesquisa>
+
         {temColaboradores && (
           <>
             {temColaboradores && (

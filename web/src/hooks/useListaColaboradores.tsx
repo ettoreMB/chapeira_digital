@@ -2,6 +2,8 @@ import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import ColaboradorService from '@/services/ColaboradorService'
 import toast from '@/utils/toast'
+import UniversoService from '@/services/UniversoService'
+import { UniversoProps } from './useUniversos'
 
 interface ColaboradoresProps {
   Id: number
@@ -36,6 +38,8 @@ export default function useListaColaboradores() {
     useState<ColaboradorCheckInProps>()
   const [modalVisiviel, setModalVisivel] = useState(false)
   const [estaSalvando, setEstaSalvadno] = useState(false)
+  const [universos, setUniversos] = useState<UniversoProps[]>([])
+  const [universoSelecionado, SetUniversoSelecionado] = useState(universoId)
 
   const colaboradoresFiltrados = useMemo(
     () =>
@@ -57,8 +61,9 @@ export default function useListaColaboradores() {
         universoId,
         tipo,
       )
-
+      const universos = await UniversoService.listarUniversos(loja)
       setColaboradores(colaboradores)
+      setUniversos(universos)
       setErro(false)
     } catch {
       setErro(true)
@@ -109,6 +114,7 @@ export default function useListaColaboradores() {
   }
   function handleFecharModal() {
     setModalVisivel(false)
+    router.back()
   }
   async function handleDelete() {
     try {
@@ -117,6 +123,14 @@ export default function useListaColaboradores() {
     } catch (error) {
       toast({ type: 'danger', text: 'Erro ao desativar colaborador' })
     }
+  }
+
+  function handleSelecionarUniverso(e: FormEvent<HTMLSelectElement>) {
+    SetUniversoSelecionado(e.currentTarget.value)
+    router.replace({
+      pathname: '/[loja]/listaColaboradores',
+      query: { loja, universoId: universoSelecionado },
+    })
   }
 
   useEffect(() => {
@@ -137,6 +151,9 @@ export default function useListaColaboradores() {
     modalVisiviel,
     estaSalvando,
     router,
+    universos,
+    universoSelecionado,
+    universoId,
     setErro,
     handleCheckIn,
     handleBusca,
@@ -144,5 +161,6 @@ export default function useListaColaboradores() {
     handleFecharModal,
     handleAbrirModal,
     handleDelete,
+    handleSelecionarUniverso,
   }
 }

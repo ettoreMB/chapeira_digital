@@ -5,7 +5,7 @@ import UniversoService from '@/services/UniversoService'
 import toast from '@/utils/toast'
 import { isAxiosError } from 'axios'
 
-interface UniversoProps {
+export interface UniversoProps {
   Id: number
   Zona: string
   Andar: string
