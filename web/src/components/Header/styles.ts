@@ -25,16 +25,22 @@ export const Head = styled.header`
 `
 
 export const LogoContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
   h1 {
     font-size: 1.5rem;
-    @media (max-width: 398px) {
-      font-size: 1.8rem;
+    @media (max-width: 500px) {
+      font-size: 1rem;
     }
   }
   span {
     font-size: 1.5rem;
     font-weight: bold;
     text-transform: uppercase;
+    @media (max-width: 500px) {
+      font-size: 1rem;
+    }
   }
 `
 

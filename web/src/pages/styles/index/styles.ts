@@ -8,7 +8,7 @@ export const Container = styled.div`
   align-items: start;
   gap: 20px;
 
-  padding: 16px 0;
+  padding: 16px 8px;
 
   a {
     color: ${({ theme }) => theme.colors.gray[600]};

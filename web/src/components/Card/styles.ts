@@ -45,8 +45,8 @@ export const Container = styled.div`
     justify-content: center;
     flex-wrap: wrap;
   }
-  @media (max-width: 405px) {
-    width: 356px;
+  @media (max-width: 510px) {
+    width: 450px;
     justify-content: center;
   }
 `

@@ -61,25 +61,24 @@ export default function ColaboradoresLista() {
         erroCarregar={erro}
         tituloPagina={`Check In/Out ${paginaTitulo()}`}
       >
+        {!tipo && (
+          <Select
+            value={universoSelecionado}
+            onChange={handleSelecionarUniverso}
+          >
+            <option value={''}>Todos Colaboradores</option>
+            {universos.map((universo) => (
+              <option key={universo.Id} value={universo.Id}>
+                {universo.Universo}
+              </option>
+            ))}
+          </Select>
+        )}
         <BarraDePesquisa
           placeHolder="Digite o nome para realizar a busca"
           onSearch={handleBusca}
           value={busca}
         >
-          {!tipo && (
-            <Select
-              value={universoSelecionado}
-              onChange={handleSelecionarUniverso}
-            >
-              <option value={''}>Todos Colaboradores</option>
-              {universos.map((universo) => (
-                <option key={universo.Id} value={universo.Id}>
-                  {universo.Universo}
-                </option>
-              ))}
-            </Select>
-          )}
-
           <Button
             type="button"
             value="Presente"

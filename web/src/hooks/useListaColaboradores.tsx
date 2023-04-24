@@ -57,7 +57,6 @@ export default function useListaColaboradores() {
   )
 
   const loadColaboradores = useCallback(async () => {
-    setCarregando(true)
     try {
       const colaboradores = await ColaboradorService.listarColaboradores(
         loja,
@@ -116,7 +115,6 @@ export default function useListaColaboradores() {
   }
   function handleFecharModal() {
     setModalVisivel(false)
-    router.back()
   }
   async function handleDelete() {
     try {
