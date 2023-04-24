@@ -67,11 +67,12 @@ export default function ColaboradoresLista() {
           value={busca}
           disabled={!!colaboradorStatus}
         >
-          {universoId && (
+          {!tipo && (
             <Select
               value={universoSelecionado}
               onChange={handleSelecionarUniverso}
             >
+              <option value={''}>Todos Colaboradores</option>
               {universos.map((universo) => (
                 <option key={universo.Id} value={universo.Id}>
                   {universo.Universo}

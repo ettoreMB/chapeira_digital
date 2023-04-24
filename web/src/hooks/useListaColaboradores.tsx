@@ -2,8 +2,7 @@ import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import ColaboradorService from '@/services/ColaboradorService'
 import toast from '@/utils/toast'
-import UniversoService from '@/services/UniversoService'
-import { UniversoProps } from './useUniversos'
+import useUniversos from './useUniversos'
 
 interface ColaboradoresProps {
   Id: number
@@ -38,9 +37,9 @@ export default function useListaColaboradores() {
     useState<ColaboradorCheckInProps>()
   const [modalVisiviel, setModalVisivel] = useState(false)
   const [estaSalvando, setEstaSalvadno] = useState(false)
-  const [universos, setUniversos] = useState<UniversoProps[]>([])
   const [universoSelecionado, SetUniversoSelecionado] = useState(universoId)
 
+  const { universos } = useUniversos()
   const colaboradoresFiltrados = useMemo(
     () =>
       colaboradores.filter((colaborador) => {
@@ -55,22 +54,22 @@ export default function useListaColaboradores() {
   )
 
   const loadColaboradores = useCallback(async () => {
+    setCarregando(true)
     try {
       const colaboradores = await ColaboradorService.listarColaboradores(
         loja,
-        universoId,
+        universoSelecionado,
         tipo,
       )
-      const universos = await UniversoService.listarUniversos(loja)
+
       setColaboradores(colaboradores)
-      setUniversos(universos)
       setErro(false)
     } catch {
       setErro(true)
     } finally {
       setCarregando(false)
     }
-  }, [loja, tipo, universoId])
+  }, [loja, tipo, universoSelecionado])
 
   function handleColaboradorStatusFiltro(e: FormEvent<HTMLButtonElement>) {
     if (colaboradorStatus && colaboradorStatus === e.currentTarget.value) {
@@ -127,17 +126,13 @@ export default function useListaColaboradores() {
 
   function handleSelecionarUniverso(e: FormEvent<HTMLSelectElement>) {
     SetUniversoSelecionado(e.currentTarget.value)
-    router.replace({
-      pathname: '/[loja]/listaColaboradores',
-      query: { loja, universoId: universoSelecionado },
-    })
   }
 
   useEffect(() => {
     if (loja) {
       loadColaboradores()
     }
-  }, [tipo, universoId, loadColaboradores, loja])
+  }, [tipo, universoSelecionado, loadColaboradores, loja])
 
   return {
     loja,

@@ -28,7 +28,7 @@ export default function Universos() {
                 width="49"
                 onClick={(e) => {
                   e.preventDefault()
-                  router.replace({
+                  router.push({
                     pathname: '/[loja]/listaColaboradores',
                     query: { loja, universoId: universo.Id },
                   })

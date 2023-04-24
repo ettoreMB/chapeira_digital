@@ -5,6 +5,9 @@ export const Container = styled.div`
   display: inline-flex;
   gap: 4px;
 
+  @media (max-width: 560px) {
+    flex-direction: column;
+  }
   input {
     width: 100%;
     border: none;
