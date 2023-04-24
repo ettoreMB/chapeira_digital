@@ -16,6 +16,7 @@ interface LayoutProps {
   carregando?: boolean
   erroCarregar?: boolean
   barraInformacao?: boolean
+  tituloPagina?: string
 }
 
 export default function Layout({
@@ -25,6 +26,7 @@ export default function Layout({
   erroCarregar = false,
   barraInformacao = false,
   children,
+  tituloPagina,
 }: LayoutProps) {
   const router = useRouter()
   const { loja } = router.query
@@ -59,7 +61,7 @@ export default function Layout({
           )}
           {barraInformacao && <BarraInformacoes />}
           <Container>
-            {botaoVoltar && <BotaoVoltar admin={admin} />}
+            {botaoVoltar && <BotaoVoltar admin={admin} titulo={tituloPagina} />}
 
             {children}
           </Container>

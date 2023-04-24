@@ -40,7 +40,12 @@ export default function DashBoard() {
   }, [carregarDados, loja])
 
   return (
-    <Layout botaoVoltar carregando={carregando} erroCarregar={erro}>
+    <Layout
+      botaoVoltar
+      carregando={carregando}
+      erroCarregar={erro}
+      tituloPagina="DashBoard"
+    >
       <DashboadContainer>
         <PresentesAusentes
           titulo="Colaboradores"

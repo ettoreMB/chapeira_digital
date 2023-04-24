@@ -34,7 +34,12 @@ export default function ContatosDeEmergencia() {
     return () => {}
   }, [route.isReady, loadContatos])
   return (
-    <Layout botaoVoltar carregando={carregando} erroCarregar={erro}>
+    <Layout
+      botaoVoltar
+      carregando={carregando}
+      erroCarregar={erro}
+      tituloPagina="Cotatos de emergência"
+    >
       <>
         {contatos?.map((contato: ContatoProps) => (
           <Card key={Math.random()}>

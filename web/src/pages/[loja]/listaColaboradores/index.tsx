@@ -37,7 +37,12 @@ export default function ColaboradoresLista() {
 
   return (
     <>
-      <Layout botaoVoltar carregando={carregando} erroCarregar={erro}>
+      <Layout
+        botaoVoltar
+        carregando={carregando}
+        erroCarregar={erro}
+        tituloPagina="CheckIn/Out"
+      >
         <BarraDePesquisa
           placeHolder="Digite o nome para realizar a busca"
           onSearch={handleBusca}
@@ -64,44 +69,46 @@ export default function ColaboradoresLista() {
         {temColaboradores && (
           <>
             {temColaboradores && (
-              <Table>
-                <TableHead
-                  head={[
-                    { nome: 'Status', textAlign: 'center' },
-                    { nome: 'Nome' },
-                    { nome: 'Ação', textAlign: 'center' },
-                  ]}
-                />
+              <>
+                <Table>
+                  <TableHead
+                    head={[
+                      { nome: 'Status', textAlign: 'center' },
+                      { nome: 'Nome' },
+                      { nome: 'Ação', textAlign: 'center' },
+                    ]}
+                  />
 
-                <tbody>
-                  {colaboradoresFiltrados?.map((usuario, index) => (
-                    <TRow key={Math.random()} numero={index}>
-                      <TDiv width={12}>
-                        <StatusBadge status={usuario.Status}>
-                          {usuario.Status === 'Presente' ? (
-                            <MdCheck
-                              size={30}
-                              color={`${colors.sky['sky-500']}`}
-                            />
-                          ) : (
-                            <MdClose size={30} color={'red'} />
-                          )}
+                  <tbody>
+                    {colaboradoresFiltrados?.map((usuario, index) => (
+                      <TRow key={Math.random()} numero={index}>
+                        <TDiv width={12}>
+                          <StatusBadge status={usuario.Status}>
+                            {usuario.Status === 'Presente' ? (
+                              <MdCheck
+                                size={30}
+                                color={`${colors.sky['sky-500']}`}
+                              />
+                            ) : (
+                              <MdClose size={30} color={'red'} />
+                            )}
 
-                          <span>{usuario.Status}</span>
-                        </StatusBadge>
-                      </TDiv>
-                      <TDiv>{usuario.Nome}</TDiv>
-                      <TDiv width={12}>
-                        <CheckInButton
-                          status={usuario?.Status}
-                          estaCarregando={estaSalvando}
-                          onHandleCheckIn={() => handleCheckIn(usuario)}
-                        />
-                      </TDiv>
-                    </TRow>
-                  ))}
-                </tbody>
-              </Table>
+                            <span>{usuario.Status}</span>
+                          </StatusBadge>
+                        </TDiv>
+                        <TDiv>{usuario.Nome}</TDiv>
+                        <TDiv width={12}>
+                          <CheckInButton
+                            status={usuario?.Status}
+                            estaCarregando={estaSalvando}
+                            onHandleCheckIn={() => handleCheckIn(usuario)}
+                          />
+                        </TDiv>
+                      </TRow>
+                    ))}
+                  </tbody>
+                </Table>
+              </>
             )}
           </>
         )}

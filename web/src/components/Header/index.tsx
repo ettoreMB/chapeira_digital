@@ -1,8 +1,16 @@
 import Link from 'next/link'
-import { Container, LogoContainer, Head, AdminContainer } from './styles'
+import {
+  Container,
+  LogoContainer,
+  Head,
+  AdminContainer,
+  MenuContainer,
+} from './styles'
 import { useContext } from 'react'
 import { AuthContext } from '@/contexts/AuthContext'
 import Button from '../Button'
+import { FaHome } from 'react-icons/fa'
+import { useRouter } from 'next/router'
 
 interface HeaderProps {
   titulo: string | string[] | undefined
@@ -10,6 +18,14 @@ interface HeaderProps {
 }
 
 export default function Header({ titulo, usuario }: HeaderProps) {
+  const router = useRouter()
+  const { loja } = router.query
+  function VoltarLink() {
+    if (usuario) {
+      return router.push(`/${loja}/admin`)
+    }
+    return router.push(`/${loja}`)
+  }
   const { signOut } = useContext(AuthContext)
   return (
     <Container>
@@ -22,13 +38,18 @@ export default function Header({ titulo, usuario }: HeaderProps) {
             </div>
           </Link>
         </LogoContainer>
-        {usuario && (
+        {usuario ? (
           <AdminContainer>
             <span>{usuario}</span>
             <Button danger onClick={signOut}>
               Logout
             </Button>
           </AdminContainer>
+        ) : (
+          <MenuContainer onClick={VoltarLink}>
+            <FaHome size={20} />
+            Menu
+          </MenuContainer>
         )}
       </Head>
     </Container>

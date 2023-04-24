@@ -26,7 +26,7 @@ export const Head = styled.header`
 
 export const LogoContainer = styled.div`
   h1 {
-    font-size: 2.25rem;
+    font-size: 1.5rem;
     @media (max-width: 398px) {
       font-size: 1.8rem;
     }
@@ -34,6 +34,7 @@ export const LogoContainer = styled.div`
   span {
     font-size: 1.5rem;
     font-weight: bold;
+    text-transform: uppercase;
   }
 `
 
@@ -41,4 +42,10 @@ export const AdminContainer = styled.div`
   span {
     margin-right: 4px;
   }
+`
+
+export const MenuContainer = styled.div`
+  align-items: baseline;
+  font-size: 1.25rem;
+  cursor: pointer;
 `

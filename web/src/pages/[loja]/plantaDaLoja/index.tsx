@@ -38,7 +38,12 @@ export default function PlantaDaLoja() {
     return () => {}
   }, [loja])
   return (
-    <Layout botaoVoltar carregando={carregando} erroCarregar={erro}>
+    <Layout
+      botaoVoltar
+      carregando={carregando}
+      erroCarregar={erro}
+      tituloPagina="Planta da loja"
+    >
       <h1>Planta da loja</h1>
 
       {images?.map((imagem: ImagesProps) => (

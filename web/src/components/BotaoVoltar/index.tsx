@@ -1,12 +1,12 @@
 import { Container } from './styles'
 import { useRouter } from 'next/router'
 
-import { FaHome } from 'react-icons/fa'
 import { RiHomeGearFill } from 'react-icons/ri'
 interface Props {
   admin: boolean
+  titulo?: string
 }
-export default function BotaoVoltar({ admin }: Props) {
+export default function BotaoVoltar({ admin, titulo }: Props) {
   const router = useRouter()
   const { loja } = router.query
 
@@ -20,8 +20,8 @@ export default function BotaoVoltar({ admin }: Props) {
   return (
     <Container onClick={() => VoltarLink()}>
       {/* <Image src={Arrow} alt="" width={24} height={32} /> */}
-      {admin ? <RiHomeGearFill size={26} /> : <FaHome size={26} />}
-      MENU
+      {admin ? <RiHomeGearFill size={26} /> : null}
+      {titulo && titulo}
     </Container>
   )
 }
