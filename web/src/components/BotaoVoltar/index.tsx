@@ -22,7 +22,7 @@ export default function BotaoVoltar({ admin }: Props) {
     <Container onClick={() => VoltarLink()}>
       {/* <Image src={Arrow} alt="" width={24} height={32} /> */}
       {admin ? <RiHomeGearFill size={26} /> : <FaHome size={26} />}
-      INÍCIO
+      MENU
     </Container>
   )
 }
