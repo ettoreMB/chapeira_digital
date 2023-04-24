@@ -54,7 +54,7 @@ export default function Home() {
         {!carregando && erro && <ErroCarregarPagina />}
         {lojasFiltradas?.map((loja: LojaProps) => (
           <Link key={loja.sigla} href={`/${loja.pastaWEB}`}>
-            <span>{loja.loja}</span>
+            <span>{loja.loja.toLocaleUpperCase()}</span>
           </Link>
         ))}
       </Container>

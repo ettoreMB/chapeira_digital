@@ -11,7 +11,7 @@ export const Container = styled.div`
   padding: 16px 0;
 
   a {
-    color: ${({ theme }) => theme.colors.sky['sky-400']};
+    color: ${({ theme }) => theme.colors.gray[600]};
     text-decoration: none;
     font-size: 1rem;
     transition: ease-in 0.2;
@@ -23,6 +23,10 @@ export const Container = styled.div`
     &:hover {
       color: ${({ theme }) => theme.colors.sky['sky-600']};
       transform: scale(1.2);
+    }
+
+    &:visited {
+      color: none;
     }
   }
 `

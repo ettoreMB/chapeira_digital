@@ -1,7 +1,6 @@
 import { Container } from './styles'
 import { useRouter } from 'next/router'
-import { useContext } from 'react'
-import { lojaSiglaContext } from '@/contexts/lojaSiglaContext'
+
 import { FaHome } from 'react-icons/fa'
 import { RiHomeGearFill } from 'react-icons/ri'
 interface Props {
@@ -9,13 +8,13 @@ interface Props {
 }
 export default function BotaoVoltar({ admin }: Props) {
   const router = useRouter()
-  const { lojaSigla } = useContext(lojaSiglaContext)
+  const { loja } = router.query
 
   function VoltarLink() {
     if (admin) {
-      return router.push(`/${lojaSigla}/admin`)
+      return router.push(`/${loja}/admin`)
     }
-    return router.push(`/${lojaSigla}`)
+    return router.push(`/${loja}`)
   }
 
   return (
