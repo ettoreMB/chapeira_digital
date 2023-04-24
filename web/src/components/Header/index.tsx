@@ -30,26 +30,38 @@ export default function Header({ titulo, usuario }: HeaderProps) {
   return (
     <Container>
       <Head>
-        <LogoContainer>
-          <Link href={`/${titulo}`}>
-            <div>
-              <h1>CHAPEIRA</h1>
-              <span>{titulo}</span>
-            </div>
-          </Link>
-        </LogoContainer>
-        {usuario ? (
-          <AdminContainer>
-            <span>{usuario}</span>
-            <Button danger onClick={signOut}>
-              Logout
-            </Button>
-          </AdminContainer>
+        {!loja ? (
+          <LogoContainer>
+            <Link href={`/${titulo}`}>
+              <div>
+                <h1>CHAPEIRA</h1>
+              </div>
+            </Link>
+          </LogoContainer>
         ) : (
-          <MenuContainer onClick={VoltarLink}>
-            <FaHome size={20} />
-            Menu
-          </MenuContainer>
+          <>
+            <LogoContainer>
+              <Link href={`/${titulo}`}>
+                <div>
+                  <h1>CHAPEIRA</h1>
+                  <span>{titulo}</span>
+                </div>
+              </Link>
+            </LogoContainer>
+            {usuario ? (
+              <AdminContainer>
+                <span>{usuario}</span>
+                <Button danger onClick={signOut}>
+                  Logout
+                </Button>
+              </AdminContainer>
+            ) : (
+              <MenuContainer onClick={VoltarLink}>
+                <FaHome size={20} />
+                Menu
+              </MenuContainer>
+            )}
+          </>
         )}
       </Head>
     </Container>

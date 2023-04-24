@@ -20,7 +20,7 @@ export default function BotaoVoltar({ admin, titulo }: Props) {
   return (
     <Container onClick={() => VoltarLink()}>
       {/* <Image src={Arrow} alt="" width={24} height={32} /> */}
-      {admin ? <RiHomeGearFill size={26} /> : null}
+      {admin && <RiHomeGearFill size={26} />}
       {titulo && titulo}
     </Container>
   )

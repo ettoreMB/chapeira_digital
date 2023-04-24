@@ -100,10 +100,15 @@ class UniversoService {
     await this.httpClient.put(`/colaboradores/desativar/${id}`)
   }
 
-  async auth(email: string, senha: string) {
+  async auth(
+    email: string,
+    senha: string,
+    loja: string | string[] | undefined,
+  ) {
     const { data } = await this.httpClient.post('/auth', {
       email,
       senha,
+      loja,
     })
 
     return data

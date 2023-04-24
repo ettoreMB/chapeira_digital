@@ -136,6 +136,7 @@ export default function useListaColaboradores() {
     colaboradorModal,
     modalVisiviel,
     estaSalvando,
+    router,
     setErro,
     handleCheckIn,
     handleBusca,

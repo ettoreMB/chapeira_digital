@@ -26,6 +26,7 @@ export default function ColaboradoresLista() {
     modalVisiviel,
     colaboradorModal,
     estaSalvando,
+    router,
     handleCheckIn,
     handleBusca,
     handleColaboradorStatusFiltro,
@@ -35,13 +36,24 @@ export default function ColaboradoresLista() {
   const temColaboradores = colaboradoresFiltrados.length > 0
   const listaVazia = !carregando && !temColaboradores
 
+  const paginaTitulo = () => {
+    const { tipo } = router.query
+    if (tipo) {
+      if (tipo === 'Terceiro') {
+        return 'Serviço'
+      }
+      return tipo
+    }
+
+    return 'Colaborador'
+  }
   return (
     <>
       <Layout
         botaoVoltar
         carregando={carregando}
         erroCarregar={erro}
-        tituloPagina="CheckIn/Out"
+        tituloPagina={`Check In/Out ${paginaTitulo()}`}
       >
         <BarraDePesquisa
           placeHolder="Digite o nome para realizar a busca"
@@ -116,8 +128,8 @@ export default function ColaboradoresLista() {
           <ListaVazia
             mensagem={
               colaboradorStatus === ''
-                ? `Nehum Colaborador nesta lista`
-                : `Nehum Colaborador ${colaboradorStatus}`
+                ? `Nehum ${paginaTitulo()} nesta lista`
+                : `Nehum ${paginaTitulo()} ${colaboradorStatus}`
             }
           />
         )}

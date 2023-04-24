@@ -31,7 +31,7 @@ export default function Auth() {
       })
     }
     try {
-      await signIn({ email, senha })
+      await signIn({ email, senha, loja })
       router.push(`/${loja}/admin`)
     } catch (error) {
       if (error instanceof AxiosError) {

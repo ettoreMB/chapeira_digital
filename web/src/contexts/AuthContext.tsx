@@ -6,6 +6,7 @@ import { ReactNode, createContext, useEffect, useState } from 'react'
 type CredenciaisProps = {
   email: string
   senha: string
+  loja: string | string[] | undefined
 }
 export type AuthContextData = {
   signIn(credenciais: CredenciaisProps): Promise<void>
@@ -28,9 +29,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setNomeUsuario(cookies['@chapeiraDigital_usuario'])
   }, [cookies])
 
-  async function signIn({ email, senha }: CredenciaisProps) {
+  async function signIn({ email, senha, loja }: CredenciaisProps) {
     try {
-      const { token, nome } = await ColaboradorService.auth(email, senha)
+      const { token, nome } = await ColaboradorService.auth(email, senha, loja)
 
       setCookie(undefined, '@chapeiraDigital_token', token, {
         path: '/',
