@@ -6,6 +6,7 @@ export const Table = styled.table`
   text-align: left;
 
   @media (max-width: 405px) {
-    width: min-content;
+    /* width: min-content; */
+    flex: 1;
   }
 `

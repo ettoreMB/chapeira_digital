@@ -10,5 +10,11 @@ export const Container = styled.button`
   color: ${({ theme }) => theme.colors.sky['sky-500']};
   border: none;
   background-color: transparent;
+`
+export const VoltarContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: uppercase;
   cursor: pointer;
 `

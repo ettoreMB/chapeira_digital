@@ -58,7 +58,7 @@ export default function Header({ titulo, usuario }: HeaderProps) {
             ) : (
               <MenuContainer onClick={VoltarLink}>
                 <FaHome size={20} />
-                Menu
+                Inicio
               </MenuContainer>
             )}
           </>

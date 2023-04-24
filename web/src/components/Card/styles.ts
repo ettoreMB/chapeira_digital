@@ -49,4 +49,12 @@ export const Container = styled.div`
     width: 450px;
     justify-content: center;
   }
+  @media (max-width: 510px) {
+    width: 450px;
+    justify-content: center;
+  }
+  @media (max-width: 375px) {
+    width: 350px;
+    justify-content: center;
+  }
 `

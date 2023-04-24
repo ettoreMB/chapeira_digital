@@ -1,8 +1,8 @@
-import { Container } from './styles'
+import { Container, VoltarContainer } from './styles'
 import { useRouter } from 'next/router'
 
 import { RiHomeGearFill } from 'react-icons/ri'
-
+// import { AiOutlineArrowLeft } from 'react-icons/ai'
 interface Props {
   admin: boolean
   titulo?: string
@@ -19,8 +19,17 @@ export default function BotaoVoltar({ admin, titulo }: Props) {
   }
 
   return (
-    <Container onClick={() => VoltarLink()}>
-      {admin && <RiHomeGearFill size={26} />}
+    <Container>
+      {/* <VoltarContainer onClick={() => router.back()}>
+        <AiOutlineArrowLeft width={24} />
+        Voltar
+      </VoltarContainer> */}
+      {admin && (
+        <VoltarContainer onClick={() => VoltarLink()}>
+          <RiHomeGearFill size={26} />
+          Menu
+        </VoltarContainer>
+      )}
       {titulo && titulo}
     </Container>
   )
