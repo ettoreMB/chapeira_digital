@@ -40,9 +40,10 @@ export const Container = styled.div`
     width: 250px;
     justify-content: center;
   }
-  @media (max-width: 600px) {
+  @media (max-width: 664px) {
     width: 500px;
     justify-content: center;
+    flex-wrap: wrap;
   }
   @media (max-width: 405px) {
     width: 356px;

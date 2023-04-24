@@ -3,15 +3,23 @@ import styled from 'styled-components'
 export const Container = styled.div`
   flex-wrap: wrap;
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   gap: 1rem;
   margin: 0 auto;
   justify-content: space-between;
 
   @media (max-width: 1180px) {
-    padding: 0 1rem;
+    justify-content: flex-start;
+  }
+  @media (max-width: 1090px) {
+    justify-content: flex-start;
+  }
+  @media (max-width: 1080px) {
+    justify-content: space-between;
+  }
+  @media (max-width: 815px) {
     justify-content: center;
   }
 

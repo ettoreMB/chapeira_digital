@@ -11,6 +11,7 @@ export const Info = styled.div<InfoProps>`
   gap: 0.5rem;
   display: flex;
   align-items: center;
+
   span {
     color: ${({ theme }) => theme.colors.zinc['zinc-50']};
   }

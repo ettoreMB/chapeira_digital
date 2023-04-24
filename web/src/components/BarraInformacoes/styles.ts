@@ -23,7 +23,7 @@ export const Container = styled.div`
     justify-content: space-between;
     margin: 0 auto;
 
-    @media (max-width: 750px) {
+    @media (max-width: 850px) {
       overflow: scroll;
       display: -webkit-inline-box;
       gap: 0.5rem;
