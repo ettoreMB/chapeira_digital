@@ -2,6 +2,7 @@ import { Container } from './styles'
 import { useRouter } from 'next/router'
 
 import { RiHomeGearFill } from 'react-icons/ri'
+
 interface Props {
   admin: boolean
   titulo?: string
@@ -19,7 +20,6 @@ export default function BotaoVoltar({ admin, titulo }: Props) {
 
   return (
     <Container onClick={() => VoltarLink()}>
-      {/* <Image src={Arrow} alt="" width={24} height={32} /> */}
       {admin && <RiHomeGearFill size={26} />}
       {titulo && titulo}
     </Container>

@@ -7,13 +7,13 @@ import Layout from '@/layout'
 
 import ListaVazia from '@/components/ListaVazia'
 
-import { MdCheck, MdClose } from 'react-icons/md'
-import { StatusBadge } from './styles'
+// import { MdCheck, MdClose } from 'react-icons/md'
+// import { StatusBadge } from './styles'
 import useListaColaboradores from '../../../hooks/useListaColaboradores'
 import BarraDePesquisa from '@/components/BarraDePesquisa'
 import CheckInButton from './components/CheckInButton'
 import Modal from '@/components/Modal'
-import { useTheme } from 'styled-components'
+// import { useTheme } from 'styled-components'
 import { handleData } from '@/utils/tranformarData'
 import Select from '@/components/Select'
 
@@ -37,7 +37,7 @@ export default function ColaboradoresLista() {
     handleFecharModal,
     handleSelecionarUniverso,
   } = useListaColaboradores()
-  const { colors } = useTheme()
+  // const { colors } = useTheme()
   const temColaboradores = colaboradoresFiltrados.length > 0
   const listaVazia = !carregando && !temColaboradores
 
@@ -104,7 +104,7 @@ export default function ColaboradoresLista() {
                 <Table>
                   <TableHead
                     head={[
-                      { nome: 'Status', textAlign: 'center' },
+                      // { nome: 'Status', textAlign: 'center' },
                       { nome: 'Nome' },
                       { nome: 'Ação', textAlign: 'center' },
                     ]}
@@ -113,7 +113,7 @@ export default function ColaboradoresLista() {
                   <tbody>
                     {colaboradoresFiltrados?.map((usuario, index) => (
                       <TRow key={Math.random()} numero={index}>
-                        <TDiv width={12}>
+                        {/* <TDiv width={12}>
                           <StatusBadge status={usuario.Status}>
                             {usuario.Status === 'Presente' ? (
                               <MdCheck
@@ -126,7 +126,7 @@ export default function ColaboradoresLista() {
 
                             <span>{usuario.Status}</span>
                           </StatusBadge>
-                        </TDiv>
+                        </TDiv> */}
                         <TDiv>{usuario.Nome}</TDiv>
                         <TDiv width={12}>
                           <CheckInButton
