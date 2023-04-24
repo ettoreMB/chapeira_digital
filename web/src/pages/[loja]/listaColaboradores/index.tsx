@@ -14,6 +14,7 @@ import BarraDePesquisa from '@/components/BarraDePesquisa'
 import CheckInButton from './components/CheckInButton'
 import Modal from '@/components/Modal'
 import { useTheme } from 'styled-components'
+import { handleData } from '@/utils/tranformarData'
 
 export default function ColaboradoresLista() {
   const {
@@ -128,7 +129,7 @@ export default function ColaboradoresLista() {
         } Realizado com sucesso`}</h3>
         <p>{colaboradorModal?.nome}</p>
         <p>{colaboradorModal?.universo}</p>
-        <p>{colaboradorModal?.data}</p>
+        <p>{handleData.criarData()}</p>
       </Modal>
     </>
   )

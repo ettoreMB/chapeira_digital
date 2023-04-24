@@ -18,6 +18,7 @@ export const Form = styled.form`
   flex-direction: column;
   gap: 1rem;
   margin: 0 auto;
+  padding: 1rem;
 
   .spanLink {
     font-size: 0.8rem;
