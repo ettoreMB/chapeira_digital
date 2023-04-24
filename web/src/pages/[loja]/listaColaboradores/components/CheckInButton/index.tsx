@@ -17,9 +17,9 @@ export default function CheckInButton({
       {estaCarregando ? (
         <Spinner size={16} />
       ) : status === 'Presente' ? (
-        'CheckOut'
+        'Sair'
       ) : (
-        'CheckIn'
+        'Entrar'
       )}
       {}
     </Button>
