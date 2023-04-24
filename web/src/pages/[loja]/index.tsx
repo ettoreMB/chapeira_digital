@@ -1,5 +1,3 @@
-import { useContext } from 'react'
-
 import { Container } from './styles'
 import Card from '../../components/Card'
 
@@ -11,10 +9,13 @@ import dashBoardImg from '../../assets/DashBoard.png'
 import plantaImg from '../../assets/Planta_Combate_Incendio_Small.png'
 import emergenciaImg from '../../assets/Telefone.jpg'
 import { BsPeopleFill } from 'react-icons/bs'
-import { lojaSiglaContext } from '@/contexts/lojaSiglaContext'
+
+import { useRouter } from 'next/router'
 
 export default function Home() {
-  const { lojaSigla } = useContext(lojaSiglaContext)
+  const router = useRouter()
+
+  const { loja } = router.query
 
   return (
     <Layout barraInformacao>
@@ -22,33 +23,33 @@ export default function Home() {
         <Card
           titulo="Colaboradores Chekin/out"
           icon={<BsPeopleFill size={116} />}
-          link={`${lojaSigla}/universos`}
+          link={`${loja}/universos`}
         />
         <Card
           titulo="Serviços Chekin/out"
           img={servicosImg}
-          link={`${lojaSigla}/listaColaboradores?tipo=Terceiro`}
+          link={`${loja}/listaColaboradores?tipo=Terceiro`}
         />
         <Card
           titulo="visitantes Chekin/out"
           img={visitanteImg}
-          link={`${lojaSigla}/listaColaboradores?tipo=Visitante`}
+          link={`${loja}/listaColaboradores?tipo=Visitante`}
         />
         <Card
           titulo="DashBoard"
           img={dashBoardImg}
-          link={`${lojaSigla}/dashboard`}
+          link={`${loja}/dashboard`}
         />
 
         <Card
           titulo="Planta da Loja"
           img={plantaImg}
-          link={`${lojaSigla}/plantaDaLoja`}
+          link={`${loja}/plantaDaLoja`}
         />
         <Card
           titulo="Contatos de emergência"
           img={emergenciaImg}
-          link={`${lojaSigla}/contatosDeEmergencia`}
+          link={`${loja}/contatosDeEmergencia`}
         />
       </Container>
     </Layout>
