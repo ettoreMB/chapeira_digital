@@ -65,7 +65,6 @@ export default function ColaboradoresLista() {
           placeHolder="Digite o nome para realizar a busca"
           onSearch={handleBusca}
           value={busca}
-          disabled={!!colaboradorStatus}
         >
           {!tipo && (
             <Select

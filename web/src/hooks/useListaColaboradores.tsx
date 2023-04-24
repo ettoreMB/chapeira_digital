@@ -44,7 +44,10 @@ export default function useListaColaboradores() {
     () =>
       colaboradores.filter((colaborador) => {
         if (colaboradorStatus) {
-          return colaborador.Status === colaboradorStatus
+          return (
+            colaborador.Status === colaboradorStatus &&
+            colaborador.Nome.toLowerCase().includes(busca.toLocaleLowerCase())
+          )
         }
         return colaborador.Nome.toLowerCase().includes(
           busca.toLocaleLowerCase(),
