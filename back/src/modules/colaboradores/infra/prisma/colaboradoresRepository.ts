@@ -159,10 +159,14 @@ export class ColaboradoresRepository implements IColaboradorRepository {
     return colaborador
   }
 
-  async buscarPorEmail(email: string): Promise<tb_Colaboradores | null> {
+  async buscarPorEmail(
+    email: string,
+    loja: string,
+  ): Promise<tb_Colaboradores | null> {
     const colaborador = await this.db.findFirst({
       where: {
         Email: email,
+        Loja_Sigla: loja,
       },
     })
     return colaborador

@@ -22,7 +22,7 @@ export interface IColaboradorRepository {
     | null
     | any
   >
-  buscarPorEmail(email: string): Promise<tb_Colaboradores | null>
+  buscarPorEmail(email: string, loja: string): Promise<tb_Colaboradores | null>
   criar(data: CriarColaboradorInputDTO): Promise<tb_Colaboradores>
   checkIn(id: number, data: ColaboradorCheckInInputDto): Promise<void>
   listarColaboradoresPorTipoOuUniverso(

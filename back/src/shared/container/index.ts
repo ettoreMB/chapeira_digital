@@ -408,8 +408,8 @@ export function diColaboradores(
   })
   request.diScope.register({
     authUsecase: asFunction(
-      ({ colaboradoresRepository }: any) => {
-        return new AuthUsecase(colaboradoresRepository)
+      ({ colaboradoresRepository, lojasRepository }: any) => {
+        return new AuthUsecase(colaboradoresRepository, lojasRepository)
       },
       {
         lifetime: Lifetime.SCOPED,
