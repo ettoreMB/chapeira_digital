@@ -75,6 +75,7 @@ class UniversoService {
     id: string | string[] | undefined,
     colaborador: ColaboradorInputProps,
   ) {
+    console.log(colaborador)
     await this.httpClient.put(`/colaboradores/editar/${id}`, {
       nome: colaborador.nome,
       email: colaborador.email,

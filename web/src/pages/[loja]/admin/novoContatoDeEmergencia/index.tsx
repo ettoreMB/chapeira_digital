@@ -4,6 +4,7 @@ import { lojaSiglaContext } from '@/contexts/lojaSiglaContext'
 import Layout from '@/layout'
 import ContatoDeEmergenciaService from '@/services/ContatoDeEmergenciaService'
 import toast from '@/utils/toast'
+import { useRouter } from 'next/router'
 
 import { useContext, useRef } from 'react'
 
@@ -16,8 +17,16 @@ interface ContatoDeEmergenciaProps {
 
 export default function NovoContatoDeEmergencia() {
   const { lojaSigla } = useContext(lojaSiglaContext)
+  const router = useRouter()
+
   const contatoFormRef = useRef<any>()
   async function handleSubmit(contatoData: ContatoDeEmergenciaProps) {
+    if (!contatoData.contato || !contatoData.telefone) {
+      return toast({
+        text: 'Preencha os camps do contato',
+        type: 'danger',
+      })
+    }
     try {
       await ContatoDeEmergenciaService.criar({
         lojaSigla,
@@ -26,8 +35,14 @@ export default function NovoContatoDeEmergencia() {
         descricao: contatoData.descricao,
       })
       contatoFormRef.current.resetarCampos()
+      toast({ text: 'Contato salvo com sucesso', type: 'success' })
+      router.back()
     } catch (error) {
-      toast({ text: 'Erro ao cadastrar Contato de emergência', type: 'danger' })
+      console.log(error)
+      toast({
+        text: 'Erro ao cadastrar Contato de emergência',
+        type: 'danger',
+      })
     }
   }
   return (

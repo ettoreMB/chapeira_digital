@@ -163,7 +163,7 @@ export default function ColaboradoresLista() {
         onOk={handleFecharModal}
       >
         <h3>{`${
-          colaboradorModal?.status === 'Presente' ? 'Sair' : 'Entrar'
+          colaboradorModal?.status === 'Presente' ? 'Check Out' : 'Check In'
         } Realizado com sucesso`}</h3>
         <p>{colaboradorModal?.nome}</p>
         <p>{colaboradorModal?.universo}</p>

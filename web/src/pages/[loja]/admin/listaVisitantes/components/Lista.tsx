@@ -1,5 +1,3 @@
-import { MdCheck, MdClose } from 'react-icons/md'
-import { BsFillCircleFill } from 'react-icons/bs'
 import { FaPlus, FaRegEdit, FaRegTrashAlt } from 'react-icons/fa'
 
 import TableHead from '@/components/Table/TableHead'
@@ -7,7 +5,6 @@ import { Table } from '@/components/Table/Table'
 import { TRow } from '@/components/Table/TRow'
 import { TDiv } from '@/components/Table/TDiv'
 
-import { StatusBadge } from './styles'
 import Button from '@/components/Button'
 
 import useListaColaboradores from '@/hooks/useListaColaboradores'
@@ -24,12 +21,12 @@ export default function Lista() {
     colaboradoresFiltrados,
     busca,
     loja,
-
+    colaboradorStatus,
     modalVisiviel,
     handleFecharModal,
     handleAbrirModal,
     handleBusca,
-
+    handleColaboradorStatusFiltro,
     handleDelete,
   } = useListaColaboradores()
 
@@ -40,6 +37,24 @@ export default function Lista() {
         placeHolder="Digite o nome para realizar a busca"
         value={busca}
       >
+        <Button
+          type="button"
+          width={16}
+          value="Presente"
+          active={colaboradorStatus === 'Presente'}
+          onClick={handleColaboradorStatusFiltro}
+        >
+          Presentes
+        </Button>
+        <Button
+          width={16}
+          danger
+          value="Ausente"
+          active={colaboradorStatus === 'Ausente'}
+          onClick={handleColaboradorStatusFiltro}
+        >
+          Ausentes
+        </Button>
         <Button
           width={16}
           onClick={() =>
@@ -57,9 +72,6 @@ export default function Lista() {
         <TableHead
           head={[
             { nome: 'Nome' },
-            { nome: 'Status' },
-            { nome: 'Brigadista' },
-            { nome: 'ADM' },
             { nome: 'Universo' },
             { nome: 'Acao', textAlign: 'center' },
           ]}
@@ -68,26 +80,6 @@ export default function Lista() {
         {colaboradoresFiltrados?.map((usuario, index) => (
           <TRow key={Math.random()} numero={index}>
             <TDiv>{usuario.Nome}</TDiv>
-            <TDiv width={12}>
-              <StatusBadge status={usuario.Status}>
-                <BsFillCircleFill
-                  color={usuario.Status === 'Presente' ? 'green' : 'red'}
-                />
-                <span>{usuario.Status}</span>
-              </StatusBadge>
-            </TDiv>
-            <TDiv width={5} textAlign="center">
-              {usuario.Brigadista === 'Sim' ? (
-                <MdCheck size={32} color={'green'} />
-              ) : (
-                <MdClose size={32} color={'red'} />
-              )}
-            </TDiv>
-            <TDiv width={5}>
-              {usuario.Administrador === 'Sim' && (
-                <MdCheck size={32} color={'green'} />
-              )}
-            </TDiv>
             <TDiv width={25}>
               {usuario.tb_universos
                 ? usuario.tb_universos?.Universo

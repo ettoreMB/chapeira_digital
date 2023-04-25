@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  width: 305px;
+  min-width: 305px;
   height: 250px;
   border-radius: 8px;
   margin-top: 1rem;
@@ -37,24 +37,19 @@ export const Container = styled.div`
   }
 
   @media (max-width: 1180px) {
-    width: 250px;
     justify-content: center;
   }
+
   @media (max-width: 664px) {
-    width: 500px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  @media (max-width: 510px) {
-    width: 450px;
     justify-content: center;
   }
   @media (max-width: 510px) {
-    width: 450px;
     justify-content: center;
   }
+  @media (max-width: 440px) {
+  }
+
   @media (max-width: 375px) {
-    width: 350px;
     justify-content: center;
   }
 `

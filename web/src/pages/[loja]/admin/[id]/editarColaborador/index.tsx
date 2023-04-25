@@ -38,6 +38,7 @@ export default function Colaborador() {
 
       router.back()
     } catch (error) {
+      console.log(error)
       toast({ type: 'danger', text: 'Erro ao editar colaborador' })
     }
   }

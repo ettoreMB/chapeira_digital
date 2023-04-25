@@ -25,9 +25,10 @@ class ContatoDeEmergenciaService {
   }
 
   async criar(contatoDeEmergencia: CriarContatoDeEmergenciaProps) {
+    console.log(contatoDeEmergencia)
     await this.httpClient.post('/contatosEmergencia/', {
       lojaSigla: contatoDeEmergencia.lojaSigla,
-      contato: contatoDeEmergencia.contato,
+      nomeContato: contatoDeEmergencia.contato,
       telefone: contatoDeEmergencia.telefone,
       descricao: contatoDeEmergencia.descricao,
     })

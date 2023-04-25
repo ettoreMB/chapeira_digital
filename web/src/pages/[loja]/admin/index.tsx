@@ -6,10 +6,12 @@ import { Container, LinkContainer } from './styles'
 import { BsGear } from 'react-icons/bs'
 import { lojaSiglaContext } from '@/contexts/lojaSiglaContext'
 export default function AdminHome() {
-  const { loja } = useRouter().query
+  const router = useRouter()
+  const { loja } = router.query
   const { lojaId } = useContext(lojaSiglaContext)
+
   return (
-    <Layout admin barraInformacao>
+    <Layout admin>
       <Container>
         <h1>Administração Chapeira Digital</h1>
 
@@ -34,6 +36,29 @@ export default function AdminHome() {
             }}
           >
             Colaboradores
+          </Link>
+        </LinkContainer>
+        <LinkContainer>
+          <BsGear size={24} />
+          <Link
+            href={{
+              pathname: `/[loja]/admin/listaColaboradores`,
+              query: { loja, tipo: 'Visitante' },
+            }}
+          >
+            Visitantes
+          </Link>
+        </LinkContainer>
+
+        <LinkContainer>
+          <BsGear size={24} />
+          <Link
+            href={{
+              pathname: `/[loja]/admin/listaColaboradores`,
+              query: { loja, tipo: 'Terceiro' },
+            }}
+          >
+            Terceiros
           </Link>
         </LinkContainer>
 

@@ -8,7 +8,6 @@ interface CardProps {
   link?: string | any
   icon?: any
 }
-
 export default function Card({ titulo, img, link, icon }: CardProps) {
   return (
     <Link href={link} prefetch={false}>

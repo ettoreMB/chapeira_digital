@@ -120,8 +120,11 @@ export default function useListaColaboradores() {
     try {
       await ColaboradorService.deletar(idParadeletar)
       toast({ type: 'success', text: 'Colaborador desativado com sucesso' })
+      loadColaboradores()
+      setModalVisivel(false)
     } catch (error) {
       toast({ type: 'danger', text: 'Erro ao desativar colaborador' })
+      setModalVisivel(false)
     }
   }
 

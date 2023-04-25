@@ -16,8 +16,9 @@ export const Container = styled.div`
   @media (max-width: 1090px) {
     justify-content: flex-start;
   }
-  @media (max-width: 1080px) {
-    justify-content: space-between;
+
+  @media (max-width: 969px) {
+    justify-content: center;
   }
   @media (max-width: 815px) {
     justify-content: center;
