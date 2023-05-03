@@ -63,7 +63,7 @@ const ColaboradorForm = forwardRef(({ titulo, onSubmit }: Props, ref) => {
           <Select onChange={handleTipo} value={tipo}>
             <option value="Colaborador">Colaborador</option>
             <option value="Terceiro">Terceiro</option>
-            <option value="Vistante">Visitante</option>
+            <option value="Visitante">Visitante</option>
           </Select>
         </FormGroup>
       </div>

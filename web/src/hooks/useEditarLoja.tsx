@@ -55,6 +55,7 @@ export default function useEditarLoja() {
         telefone,
       })
       toast({ type: 'success', text: 'Informações editadas com sucesso' })
+      router.back()
     } catch (error) {
       toast({ type: 'danger', text: 'Erro ao atualizar informações' })
     }

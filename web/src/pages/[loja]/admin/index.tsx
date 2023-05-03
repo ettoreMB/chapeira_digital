@@ -85,6 +85,17 @@ export default function AdminHome() {
             Contatos de emergência
           </Link>
         </LinkContainer>
+        <LinkContainer>
+          <BsGear size={24} />
+          <Link
+            href={{
+              pathname: `/[loja]/admin/imagensLoja`,
+              query: { loja },
+            }}
+          >
+            Plantas da loja
+          </Link>
+        </LinkContainer>
       </Container>
     </Layout>
   )
