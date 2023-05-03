@@ -572,7 +572,7 @@ model tb_Lojas_Horarios {
 }
 
 model tb_Lojas_Imagens {
-  Id          Decimal   @db.Decimal(18, 0)
+  Id          Int       @id @default(autoincrement())
   Loja_Sigla  String    @db.NVarChar(16)
   Titulo      String?   @db.NVarChar(64)
   Descricao   String?   @db.NVarChar(Max)
@@ -584,8 +584,6 @@ model tb_Lojas_Imagens {
   Update_Date DateTime? @db.DateTime
   Update_User String?   @db.NVarChar(256)
   tb_Lojas    tb_Lojas  @relation(fields: [Loja_Sigla], references: [Loja_Sigla], onUpdate: NoAction, map: "FK_tb_Lojas_Imagens_tb_Lojas")
-
-  @@id([Id, Loja_Sigla], map: "PK_tb_Lojas_Imagens")
 }
 
 model tb_Mensagens {

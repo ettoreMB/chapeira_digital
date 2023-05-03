@@ -20,7 +20,6 @@ export interface IColaboradorRepository {
         } | null
       })
     | null
-    | any
   >
   buscarPorEmail(email: string, loja: string): Promise<tb_Colaboradores | null>
   criar(data: CriarColaboradorInputDTO): Promise<tb_Colaboradores>

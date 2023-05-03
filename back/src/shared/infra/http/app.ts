@@ -44,6 +44,7 @@ app.register(fastifyJwt, {
   decode: { complete: true },
 })
 app.register(fastifyCookie)
+app.register(multer.contentParser)
 app.addHook('onRequest', diContatosEmergencia)
 app.addHook('onRequest', diImagens)
 app.addHook('onRequest', diLojas)
@@ -51,7 +52,6 @@ app.addHook('onRequest', diUniversos)
 app.addHook('onRequest', diColaboradores)
 app.addHook('onRequest', diInvoices)
 
-app.register(multer.contentParser)
 app.register(contatosEmergenciaRoutes, { prefix: 'contatosEmergencia' })
 app.register(imagensRoutes, { prefix: 'imagens' })
 app.register(lojasRoutes, { prefix: 'lojas' })

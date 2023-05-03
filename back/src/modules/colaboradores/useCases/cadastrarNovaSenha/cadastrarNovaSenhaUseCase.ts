@@ -15,6 +15,7 @@ export class CadastrarNovaSenhaUseCase {
 
     const colaborador = await this.colaboradoresRepository.buscarPorEmail(
       decodedToken.sub,
+      lojaSigla,
     )
     const loja = await this.lojaRepository.buscarPorSiglaOuNome(lojaSigla)
 

@@ -2,6 +2,7 @@ import { IColaboradorRepository } from '@modules/colaboradores/repositories/ICol
 import { ILojaInterface } from '@modules/lojas/repositories/IlojaRepository'
 import { IMailProvider } from '@shared/container/providers/MailProvider/IMailProvider'
 import { AppErrors } from '@shared/errors/AppErros'
+import { env } from 'env'
 import path from 'node:path'
 
 export class EnviarEmailPerdaSenhaUsecase {
@@ -16,7 +17,10 @@ export class EnviarEmailPerdaSenhaUsecase {
     lojaSigla: string,
     token: string,
   ): Promise<void> {
-    const colaborador = await this.colaboradorRepository.buscarPorEmail(email)
+    const colaborador = await this.colaboradorRepository.buscarPorEmail(
+      email,
+      lojaSigla,
+    )
     const loja = await this.lojaRepository.buscarPorSiglaOuNome(lojaSigla)
 
     if (!colaborador) {
@@ -38,7 +42,7 @@ export class EnviarEmailPerdaSenhaUsecase {
       nome: colaborador.Nome,
       token,
       lojaSigla,
-      link: `http://localhost:3000/${loja.Pasta_WEB}/recuperarSenha/${token}`,
+      link: `${env.FRONT_URL}/${loja.Pasta_WEB}/recuperarSenha/${token}`,
     }
     await this.mailProvider.enviarEmail(
       email,

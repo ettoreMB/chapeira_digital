@@ -36,18 +36,19 @@ describe('Editar Colaborador Usecase', () => {
       admin: 'Nao',
       admissao: '',
       brigadista: 'Sim',
+      tipo: 'Visitante',
       email: 'teste@teste.com',
       endereco: 'rua teste',
       formacao: '',
       funcao: 'funcao',
-      nome: 'testeNome',
+      nome: 'testeNomes',
       observacao: 'observacao',
       telefone: '1234',
       universoId: 2,
       empresa: '',
     })
-
-    expect(colaborador.Email).toEqual('teste@teste.com')
+    expect(colaborador.Nome).toEqual('testeNomes')
+    // expect(colaborador.Email).toEqual('teste@teste.com')
   })
 
   it('Não Deve Editar um colaborador inexistente', async () => {
@@ -57,6 +58,7 @@ describe('Editar Colaborador Usecase', () => {
         admin: 'Nao',
         admissao: '',
         brigadista: 'Sim',
+        tipo: 'Visitante',
         email: 'teste@teste.com',
         endereco: 'rua teste',
         formacao: '',

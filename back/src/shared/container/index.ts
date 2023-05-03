@@ -36,6 +36,7 @@ import { EditarColaboradorUseCase } from '@modules/colaboradores/useCases/editar
 import { EthrealMailProvider } from './providers/MailProvider/nodemailer/EthrealProvider'
 
 import { CadastrarNovaSenhaUseCase } from '@modules/colaboradores/useCases/cadastrarNovaSenha/cadastrarNovaSenhaUseCase'
+import { SalvarImagemUsecase } from '@modules/imagens/useCases/salvarImagem/salvarImagemUsecase'
 
 diContainer.register({
   contatosEmergenciaRepository: asClass(ContatosEmergenciaRepository, {
@@ -166,6 +167,17 @@ export function diImagens(
     buscarImagensUseCase: asFunction(
       ({ imagensRepository }: any) => {
         return new BuscarImagensUseCase(imagensRepository)
+      },
+      {
+        lifetime: Lifetime.SCOPED,
+        dispose: (module: any) => module.dispose(),
+      },
+    ),
+  })
+  request.diScope.register({
+    salvarImagensUseCase: asFunction(
+      ({ lojasRepository, imagensRepository }: any) => {
+        return new SalvarImagemUsecase(lojasRepository, imagensRepository)
       },
       {
         lifetime: Lifetime.SCOPED,
@@ -464,26 +476,3 @@ export function diInvoices(
 
   done()
 }
-
-// export function diMail(
-//   request: FastifyRequest,
-//   reply: FastifyReply,
-//   done: DoneFuncWithErrOrRes,
-// ) {
-//   request.diScope.register({
-//     enviarEmailPerdaSenhaUsecase: asFunction(
-//       ({ colaboradoresRepository, ethrealMailProvider }: any) => {
-//         return new EnviarEmailPerdaSenhaUsecase(
-//           colaboradoresRepository,
-//           ethrealMailProvider,
-//         )
-//       },
-//       {
-//         lifetime: Lifetime.SCOPED,
-//         dispose: (module: any) => module.dispose(),
-//       },
-//     ),
-//   })
-
-//   done()
-// }

@@ -42,8 +42,8 @@ export async function colaboradoresRoutes(app: FastifyInstance) {
   app.put('/editar/:id', editarColaborador)
   app.post(
     '/recuperarSenha',
-    { onRequest: verificarJwt },
+
     enviarEmailPerdaSenha,
   )
-  app.post('/novaSenha/:loja', cadastrarNovaSenha)
+  app.post('/novaSenha/:loja', { onRequest: verificarJwt }, cadastrarNovaSenha)
 }

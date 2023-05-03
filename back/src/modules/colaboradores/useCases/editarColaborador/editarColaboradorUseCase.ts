@@ -5,6 +5,7 @@ interface ColaboradorRequestProps {
   id: number
   nome: string
   admin: string
+  tipo: string
   universoId: number
   brigadista: string
   formacao: string | null
@@ -28,7 +29,7 @@ export class EditarColaboradorUseCase {
     }
 
     colaborador.Nome = data.nome
-    colaborador.Administrador = data.admin
+    colaborador.Tipo = data.tipo
     colaborador.Id_Universo = data.universoId
     colaborador.Brigadista = data.brigadista
     colaborador.Formacao_Data = data.formacao

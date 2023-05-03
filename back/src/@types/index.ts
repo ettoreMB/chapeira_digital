@@ -21,6 +21,7 @@ import { EditarContatoDeEmergenciaUsecase } from '@modules/contatosDeEmergencia/
 import { BuscarContatosContatosUseCase } from '@modules/contatosDeEmergencia/useCases/GetContatosPorLoja/BuscarContatosUseCase'
 import { ImagensRepository } from '@modules/imagens/infra/prisma/repositories/ImagenRepository'
 import { BuscarImagensUseCase } from '@modules/imagens/useCases/buscarImagens/buscarImagensUseCase'
+import { SalvarImagemUsecase } from '@modules/imagens/useCases/salvarImagem/salvarImagemUsecase'
 import { InvoiceRepository } from '@modules/invoice/infra/prisma/InvoiceRepository'
 import { IInvoiceRepository } from '@modules/invoice/repositories/IInvoiceRepository'
 import { ImportarInvoiceUseCase } from '@modules/invoice/useCases/importarInvoice/importarInvoiceUsecase'
@@ -77,6 +78,7 @@ declare module '@fastify/awilix' {
     ethrealMailProvider: EthrealMailProvider
     enviarEmailPerdaSenhaUsecase: EnviarEmailPerdaSenhaUsecase
     cadastrarNovaSenhaUsecase: CadastrarNovaSenhaUseCase
+    salvarImagensUseCase: SalvarImagemUsecase
   }
   interface RequestCradle {
     contatosEmergenciaRepository: ContatosEmergenciaRepository

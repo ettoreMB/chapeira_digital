@@ -22,6 +22,7 @@ export class ColaboradoresRepository implements IColaboradorRepository {
     Brigadista,
     Formacao_Data,
     Admissao_Data,
+    Tipo,
     Email,
     Telefone,
     Funcao,
@@ -41,6 +42,7 @@ export class ColaboradoresRepository implements IColaboradorRepository {
         Senha,
         Email,
         Telefone,
+        Tipo,
         Funcao,
         Endereco,
         Observacao,
@@ -97,6 +99,9 @@ export class ColaboradoresRepository implements IColaboradorRepository {
         Loja_Sigla: sigla,
         Ativo: 'Sim',
         OR: [{ Tipo: 'Colaborador' }, { Tipo: 'Brigadista' }],
+      },
+      orderBy: {
+        Nome: 'asc',
       },
       include: {
         tb_universos: {

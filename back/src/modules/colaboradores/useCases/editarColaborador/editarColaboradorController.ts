@@ -15,7 +15,7 @@ export async function editarColaborador(
     tipo: z.string(),
     endereco: z.string().nullable(),
     telefone: z.string().nullable(),
-    universoId: z.number(),
+    universoId: z.coerce.number(),
     funcao: z.string(),
     empresa: z.string().nullable(),
     administrador: z.string(),
@@ -30,6 +30,7 @@ export async function editarColaborador(
   )
 
   const { id } = reqParamsSchema.parse(req.params)
+
   const data = reqBodySchema.parse(req.body)
 
   await editarColaboradorUsecase.execute({
@@ -38,6 +39,7 @@ export async function editarColaborador(
     admin: data.administrador,
     admissao: data.admissaoData,
     brigadista: data.brigadista,
+    tipo: data.tipo,
     email: data.email,
     empresa: data.empresa,
     endereco: data.endereco,
