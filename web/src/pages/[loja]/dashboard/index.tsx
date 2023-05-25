@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+// import { useState } from 'react'
+// import { useRouter } from 'next/router'
 
-import { api } from '@/services/api'
+// import { api } from '@/services/api'
 import Layout from '@/layout'
 
 // import OutrosDashBoard from './components/OutrosDashBoard'
@@ -15,11 +15,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 // import { DashboadContainer } from './styles'
 
 export default function DashBoard() {
-  const router = useRouter()
-  const { loja } = router.query
+  // const router = useRouter()
+  // const { loja } = router.query
   // const [dados, setDados] = useState([])
-  const [carregando, setCarregando] = useState(true)
-  const [erro, setErro] = useState(false)
+  // const [carregando, setCarregando] = useState(true)
+  // const [erro, setErro] = useState(false)
 
   // const carregarDados = useCallback(async () => {
   //   try {
@@ -42,8 +42,8 @@ export default function DashBoard() {
   return (
     <Layout
       botaoVoltar
-      carregando={carregando}
-      erroCarregar={erro}
+      carregando={false}
+      erroCarregar={false}
       tituloPagina="DashBoard"
     >
       {/* <DashboadContainer>
