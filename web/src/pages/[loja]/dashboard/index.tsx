@@ -4,40 +4,40 @@ import { useRouter } from 'next/router'
 import { api } from '@/services/api'
 import Layout from '@/layout'
 
-import OutrosDashBoard from './components/OutrosDashBoard'
-import PresentesAusentes from './components/PresentesAusentes'
-import BrigadistasFormados from './components/BrigadistasFormados'
-import PresentesPorUniverso from './components/PresentesPorUniverso'
-import BrigadistasPresentesPorZona from './components/BrigadistasPresentesPorZona'
+// import OutrosDashBoard from './components/OutrosDashBoard'
+// import PresentesAusentes from './components/PresentesAusentes'
+// import BrigadistasFormados from './components/BrigadistasFormados'
+// import PresentesPorUniverso from './components/PresentesPorUniverso'
+// import BrigadistasPresentesPorZona from './components/BrigadistasPresentesPorZona'
 
-import { somaResultados } from '@/utils/somaResultadoLojas'
+// import { somaResultados } from '@/utils/somaResultadoLojas'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { DashboadContainer } from './styles'
+// import { DashboadContainer } from './styles'
 
 export default function DashBoard() {
   const router = useRouter()
   const { loja } = router.query
-  const [dados, setDados] = useState([])
+  // const [dados, setDados] = useState([])
   const [carregando, setCarregando] = useState(true)
   const [erro, setErro] = useState(false)
 
-  const carregarDados = useCallback(async () => {
-    try {
-      const { data } = await api.get(`/lojas/dashBoard/${loja}`)
-      setDados(data)
-    } catch {
-      setErro(true)
-    } finally {
-      setCarregando(false)
-    }
-  }, [loja])
+  // const carregarDados = useCallback(async () => {
+  //   try {
+  //     const { data } = await api.get(`/lojas/dashBoard/${loja}`)
+  //     setDados(data)
+  //   } catch {
+  //     setErro(true)
+  //   } finally {
+  //     setCarregando(false)
+  //   }
+  // }, [loja])
 
-  useEffect(() => {
-    setCarregando(true)
-    if (loja) {
-      carregarDados()
-    }
-  }, [carregarDados, loja])
+  // useEffect(() => {
+  //   setCarregando(true)
+  //   if (loja) {
+  //     carregarDados()
+  //   }
+  // }, [carregarDados, loja])
 
   return (
     <Layout
@@ -46,7 +46,7 @@ export default function DashBoard() {
       erroCarregar={erro}
       tituloPagina="DashBoard"
     >
-      <DashboadContainer>
+      {/* <DashboadContainer>
         <PresentesAusentes
           titulo="Colaboradores"
           bg="primary"
@@ -85,7 +85,8 @@ export default function DashBoard() {
         data={dados}
       />
 
-      <OutrosDashBoard data={dados} />
+      <OutrosDashBoard data={dados} /> */}
+      <h1>Em manutenção</h1>
     </Layout>
   )
 }

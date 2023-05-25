@@ -5,6 +5,7 @@ const nextConfig = {
     styledComponents: true,
   },
   pageExtensions: ['.ts', 'tsx'],
+  output: 'standalone',
 }
 
 module.exports = nextConfig
