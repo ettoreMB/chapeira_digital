@@ -3,8 +3,6 @@ import DashBoardCard from '../DashBoardCard'
 import LinhaUniverso from './LinhaUniveso'
 
 interface dashProps {
-  totalBrigadistas: number
-  totalNaoBrigadistas: number
   data: any
 }
 export default function PresentesPorUniverso({ data }: dashProps) {
